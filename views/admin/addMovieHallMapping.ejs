@@ -1,0 +1,47 @@
+<h1>Add Movie Hall Mapping</h1>
+
+<% if (mappings.length === 0) { %>
+  <p>No movie hall mappings found.</p>
+<% } else { %>
+  <table>
+    <tr>
+      <th>Movie ID</th>
+      <th>Movie Title</th>
+      <th>Hall ID</th>
+      <th>Hall Name</th>
+      <th>Screening Date & Time</th>
+    </tr>
+    <% mappings.forEach((mapping) => { %>
+      <tr>
+        <td><%= mapping.movieId %></td>
+        <td><%= mapping.movieTitle %></td>
+        <td><%= mapping.hallId %></td>
+        <td><%= mapping.hallName %></td>
+        <td><%= mapping.screeningDateTime.toString() %></td> <!-- Format the date and time -->
+      </tr>
+    <% }); %>
+  </table>
+<% } %>
+
+<h2>Add New Movie Hall Mapping</h2>
+
+<form action="/add-movie-hall-mapping" method="POST">
+  <label for="movieId">Select Movie:</label>
+  <select id="movieId" name="movieId">
+    <% movies.forEach((movie) => { %>
+      <option value="<%= movie.id %>"><%= movie.title %></option>
+    <% }); %>
+  </select>
+
+  <label for="hallId">Select Hall:</label>
+  <select id="hallId" name="hallId">
+    <% halls.forEach((hall) => { %>
+      <option value="<%= hall.id %>"><%= hall.name %></option>
+    <% }); %>
+  </select>
+
+  <label for="screeningDateTime">Screening Date & Time:</label>
+  <input type="datetime-local" id="screeningDateTime" name="screeningDateTime"> <!-- Use datetime-local input type -->
+
+  <button type="submit">Add Mapping</button>
+</form>

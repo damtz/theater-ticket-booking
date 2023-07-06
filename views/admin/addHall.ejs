@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Movie Hall</title>
+  </head>
+  <body>
+    <!-- admin/addHall.ejs -->
+    <h1>Add Movie Hall</h1>
+
+    <% if (errorMessage) { %>
+      <p style="color: red;"><%= errorMessage %></p>
+    <% } %>
+
+    <% if (typeof errors !== "undefined" && Object.keys(errors).length > 0) { %>
+      <div role="alert">
+        <ul>
+          <% Object.values(errors).forEach((error) => { %>
+            <li style="color: red;"><%= error.msg %></li>
+          <% }); %>
+        </ul>
+      </div>
+    <% } %>
+
+    <form action="/add-hall" method="POST">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" />
+      </div>
+      <div>
+        <label for="normalCapacity">Normal Capacity:</label>
+        <input type="number" id="normalCapacity" name="normalCapacity" />
+      </div>
+      <div>
+        <label for="vipCapacity">VIP Capacity:</label>
+        <input type="number" id="vipCapacity" name="vipCapacity" />
+      </div>
+      <div>
+        <label for="normalRate">Normal Rate:</label>
+        <input type="number" id="normalRate" name="normalRate" />
+      </div>
+      <div>
+        <label for="vipRate">VIP Rate:</label>
+        <input type="number" id="vipRate" name="vipRate" />
+      </div>
+      <button type="submit">Add Movie Hall</button>
+    </form>
+
+    <h1>Available Hall</h1>
+    <!-- Assuming this is the content of the addHall.ejs file -->
+
+
+<!-- This part will be rendered if there is an error -->
+<% if (errorMessage) { %>
+  <div class="error">
+    <%= errorMessage %>
+  </div>
+<% } %>
+
+
+<!-- The rest of your HTML content goes here -->
+
+
+<!-- Example usage of halls array (assuming it contains hall objects) -->
+<% halls.forEach((hall) => { %>
+  <div>
+    <h3>Hall Name: <%= hall.name %></h3>
+    <p>Hall Capacity: <%= hall.normal_capacity %></p>
+    <p>Hall VIP Seats: <%= hall.vip_capacity %></p>
+    <p>Hall Normal rate: <%= hall.normal_rate %></p>
+    <p>Hall Vip rate: <%= hall.vip_rate %></p>
+    <br><br><hr>
+
+    <!-- Display other hall details here -->
+  </div>
+<% }) %>
+
+  </body>
+</html>

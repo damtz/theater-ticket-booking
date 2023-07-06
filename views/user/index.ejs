@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Hall Ticket Management</title>
+    <!-- Add any necessary CSS styles or external CSS files -->
+    <style>
+      /* Add your CSS styles here */
+    </style>
+  </head>
+  <body>
+    <h1>Movie Hall Ticket Management</h1>
+
+    <select name="hall" id="hall-select" onchange="getHallDetails(this.value)">
+      <% Halls.forEach(function(hall) { %>
+      <option value="<%= hall.name %>"><%= hall.name %></option>
+      <% }) %>
+    </select>
+
+    <div id="hall-details-container">
+      <h2>Hall Details</h2>
+      <p id="hall-name"></p>
+      <p id="hall-location"></p>
+      <p id="hall-seating-capacity"></p>
+      <div id="movie-list"></div>
+    </div>
+
+    <div id="movies-container">
+      <!-- Movies will be dynamically added here -->
+    </div>
+
+    <% if(currentUser){ %> <%= currentUser.name %>
+    <a href="/logout">Logout</a> <br />
+    <a href="/addHall">Add Hall</a> <br />   
+    <a href="/add-language">Add Language</a> <br />
+    <a href="/addMovie">addMovie</a><br>
+    <a href="/addMovieHallMapping">addMoviehallMapping</a>
+
+    <% }else{ %>
+    <a href="register">Register Now</a><br />
+    <a href="login">Login</a><br>
+    <a href="/forgot-password">Forget Password</a> <br />
+
+
+    <% } %>
+
+    <!-- Add any necessary JavaScript code or external JS files -->
+    <script>
+      function getHallDetails(hallName) {
+        // Make an AJAX request to the server
+        fetch('/hall-details', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ hallName: hallName }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Update the hall details in the container
+            const hallNameElement = document.getElementById('hall-name');
+            const hallLocationElement =
+              document.getElementById('hall-location');
+            const hallSeatingCapacityElement = document.getElementById(
+              'hall-seating-capacity'
+            );
+            const movieListElement = document.getElementById('movie-list');
+
+            hallNameElement.textContent = 'Name: ' + data.name;
+            hallLocationElement.textContent = 'Location: ' + data.location;
+            hallSeatingCapacityElement.textContent =
+              'Seating Capacity: ' + data.capacity;
+
+            // Display the movies
+            movieListElement.innerHTML = '';
+            data.movies.forEach((movie) => {
+              const movieElement = document.createElement('div');
+              movieElement.classList.add('movie-item');
+              movieElement.setAttribute('data-movie-id', movie.id);
+              movieElement.innerHTML =
+                '<p>Movie Title: ' + movie.title + '</p>';
+              movieListElement.appendChild(movieElement);
+            });
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+
+      // Add an event listener to the movie list container
+      const movieListContainer = document.getElementById('movie-list');
+      movieListContainer.addEventListener('click', (event) => {
+        // Check if the clicked element or its parent has the movie item class
+        const movieItem = event.target.closest('.movie-item');
+        if (movieItem) {
+          // Retrieve the movie ID
+          const movieId = movieItem.getAttribute('data-movie-id');
+          // Redirect to the movie details page passing the movie ID
+          window.location.href = '/movie-details?movieId=' + movieId;
+        }
+      });
+    </script>
+  </body>
+</html>
