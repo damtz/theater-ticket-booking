@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .seating-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Adjust the gap between rows */
+      }
+
+      .row {
+        display: flex;
+        gap: 10px; /* Adjust the gap between seats */
+      }
+
+      .seat {
+        width: 30px; /* Adjust seat width */
+        height: 30px; /* Adjust seat height */
+        background-color: #d11e1e; /* Adjust seat color */
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      /* Add additional styles for reserved or booked seats */
+      .seat.reserved {
+        background-color: #f7d23a; /* Reserved seat color */
+      }
+
+      .seat.booked {
+        background-color: #e74c3c; /* Booked seat color */
+      }
+
+      /* Add styles for selected seat */
+      .seat.selected {
+        border: 2px solid #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>This is Details Page</h2>
+    <p><%= movie.title %></p>
+    <h4>Hall Details</h4>
+    <p><%= hall.name %></p>
+    <p>SUMMAY: <%= movie.summary %></p>
+    <p>GENRE: <%= movie.genre %></p>
+    <p>CASTS: <%= movie.casts %></p>
+    <p>STATUS: <%= movie.status %></p>
+    <img src="/images/<%= movie.image %>" alt="<%= movie.title %>" />
+    <form action="">
+      <input type="date" name="" id="" />
+      <button type="submit">check</button>
+    </form>
+
+    <div class="seating-container" id="seatingContainer">
+      <% for (let i = 1; i <= hall.capacity; i++) { %> <% const seatNumber =
+      i.toString(); %> <% if (!bookedSeats.includes(seatNumber)) { %>
+      <div class="row">
+        <div class="seat available" onclick="bookSeat('<%= seatNumber %>')">
+          <p style="color: aliceblue; margin-left: 10px; margin-top: -0.01px">
+            <%= seatNumber %>
+          </p>
+        </div>
+      </div>
+      <% } %> <% } %>
+    </div>
+
+    <script>
+      function bookSeat(seatNumber) {
+        const movieId = <%= movie.id %>;
+        const hallId = <%= hall.id %>;
+
+        // Construct the URL with seat, hall, and movie data
+        const url = `/booking?seat=${seatNumber}&hall=${hallId}&movie=${movieId}`;
+
+        // Redirect the user to the new page
+        window.location.href = url;
+      }
+    </script>
+  </body>
+</html>

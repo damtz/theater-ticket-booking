@@ -1,49 +1,241 @@
+<!-- @format -->
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Movie Hall Ticket Management</title>
-    <!-- Add any necessary CSS styles or external CSS files -->
-    <style>
-      /* Add your CSS styles here */
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="/user/assets/css/home.css" />
   </head>
   <body>
-    <h1>Movie Hall Ticket Management</h1>
+    <!-- ===================================Navbar============================================ -->
 
-    <select name="hall" id="hall-select" onchange="getHallDetails(this.value)">
-      <% Halls.forEach(function(hall) { %>
-      <option value="<%= hall.name %>"><%= hall.name %></option>
-      <% }) %>
-    </select>
+    <section class="hero-banner">
+      <nav class="navbar navbar-expand-lg navbar-dark p-4">
+        <div class="container">
+          <a class="navbar-brand" href="#">FlickTix</a>
 
-    <div id="hall-details-container">
-      <h2>Hall Details</h2>
-      <p id="hall-name"></p>
-      <p id="hall-location"></p>
-      <p id="hall-seating-capacity"></p>
-      <div id="movie-list"></div>
+          <div
+            class="collapse navbar-collapse justify-content-center"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="home.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Now Showing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Upcoming</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <div class="search-container">
+              <input type="text" class="search-input" placeholder="Search" />
+              <button class="btn search-icon">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+
+          <button
+            class="navbar-toggler position-absolute top-0 end-0 m-4"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <% if(currentUser){ %>
+          <p style="color: #fff"><%= currentUser.name %></p>
+          <a href="/logout">Logout</a>
+          <a href="/addHall">Add Hall</a> <br />
+          <a href="/addMovie">addMovie</a> <br>
+          <a href="/abookings">Bookings</a> <br>
+          <a href="/createMapping">CreateMovieMapping</a>
+          <% }else{ %>
+            <a href="register">Register Now</a><br /> <a href="register">Register Now</a><br />
+          <a
+            type="button"
+            class="btn btn-outline-warning"
+            id="Signin"
+            href="/login"
+          >
+            Sign In
+          </a>
+          <% } %>
+        </div>
+      </nav>
+
+      <!-- ======================================== Hero banner ========================================================== -->
+      <div class="container">
+        <div class="button-container mt-5">
+          <button type="button" class="btn btn-primary mt-5">Darma</button>
+          <button type="button" class="btn btn-secondary mt-5">
+            Short Flim
+          </button>
+        </div>
+        <div class="row text-container mt-3">
+          <span class="text"><h5 class="fs-3">Silent Walls</h5></span>
+          <span
+            ><i class="fas fa-clock fa-2x" style="color: #ffe36d"></i>2HRS 30
+            MINS</span
+          >
+          <div class="container d-flex justify-content-start">
+            <div class="description">
+              <span>
+                <p class="mt-4">
+                  A deaf girl finds her life beginning to rapidly
+                  <br />
+                  narrow and deteriorate when she gets locked
+                  <br />
+                  up by her over-protective father owning to her puberty.
+                </p>
+              </span>
+            </div>
+          </div>
+          <div class="book-button">
+            <button type="button" class="btn btn-secondary mt-3">
+              BOOK NOW
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====================================Movie selection================================ -->
+    <div class="movie-selection">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 d-flex justify-content-start">
+            <div class="dropdown">
+              <button
+                class="btn btn-primary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
+                Select a movie hall
+              </button>
+              <!-- <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">City Cinema</a></li>
+                <li><a class="dropdown-item" href="#">Trowa Theater</a></li>
+                <li><a class="dropdown-item" href="#">Lugar Theater</a></li>
+              </ul> -->
+              <select
+                name="hall"
+                id="hall-select"
+                onchange="getHallDetails(this.value)"
+              >
+                <option value="select">Select Hall</option>
+                <% Halls.forEach(function(hall) { %>
+
+                <option value="<%= hall.name %>"><%= hall.name %></option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 d-flex justify-content-end movie">
+            <span class="m-2">ALL</span>
+            <span class="m-2">ACTION</span>
+            <span class="m-2">COMEDY</span>
+            <span class="m-2">ROMANCE</span>
+            <span class="m-2">HORROR</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===============================movie list========================================== -->
+                <div id="movie-list"></div>
+       
+
+    <!-- =========================================image============================================ -->
+
+    <div>
+      <div class="main-container">
+        <div class="right-div d-flex justify-content-start">
+          <img
+            src="/user/images/watching.jpg"
+            alt="Right Image"
+            style="height: 400px; width: 700px"
+          />
+        </div>
+        <div class="left-div">
+          <img src="/user/images/popcron.png" alt="Left Image" />
+          <span class="overlay-text"
+            ><h5>ENJOY THE SHOW WITH</h5>
+            <a class="navbar-brand" href="#">FlickTix</a></span
+          >
+        </div>
+      </div>
     </div>
 
-    <div id="movies-container">
-      <!-- Movies will be dynamically added here -->
-    </div>
+    <!-- ==============================Footer======================================= -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-4">
+            <div class="d-flex justify-content-start">
+              <a class="navbar logo" href="#">FlickTix</a>
+            </div>
+          </div>
 
-    <% if(currentUser){ %> <%= currentUser.name %>
-    <a href="/logout">Logout</a> <br />
-    <a href="/addHall">Add Hall</a> <br />   
-    <a href="/add-language">Add Language</a> <br />
-    <a href="/addMovie">addMovie</a><br>
-    <a href="/addMovieHallMapping">addMoviehallMapping</a>
+          <div class="col-md-4 link">
+            <div class="d-flex justify-content-between">
+              <a href="#" class="footer-link">Home</a>
+              <a href="#" class="footer-link">Now Showing</a>
+              <a href="#" class="footer-link">Upcoming</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="d-flex justify-content-end icon">
+              <a href="#" class="social-icon me-4"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" class="social-icon me-4"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="social-icon me-4"
+                ><i class="fab fa-twitter"></i
+              ></a>
+            </div>
+          </div>
+        </div>
 
-    <% }else{ %>
-    <a href="register">Register Now</a><br />
-    <a href="login">Login</a><br>
-    <a href="/forgot-password">Forget Password</a> <br />
-
-
-    <% } %>
-
-    <!-- Add any necessary JavaScript code or external JS files -->
+        <div class="d-flex justify-content-center mt-4">
+          <p style="color: #fff">Copyright 2023 All Right Reserved</p>
+        </div>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"
+    ></script>
     <script>
       function getHallDetails(hallName) {
         // Make an AJAX request to the server
@@ -56,19 +248,7 @@
         })
           .then((response) => response.json())
           .then((data) => {
-            // Update the hall details in the container
-            const hallNameElement = document.getElementById('hall-name');
-            const hallLocationElement =
-              document.getElementById('hall-location');
-            const hallSeatingCapacityElement = document.getElementById(
-              'hall-seating-capacity'
-            );
             const movieListElement = document.getElementById('movie-list');
-
-            hallNameElement.textContent = 'Name: ' + data.name;
-            hallLocationElement.textContent = 'Location: ' + data.location;
-            hallSeatingCapacityElement.textContent =
-              'Seating Capacity: ' + data.capacity;
 
             // Display the movies
             movieListElement.innerHTML = '';
@@ -76,8 +256,20 @@
               const movieElement = document.createElement('div');
               movieElement.classList.add('movie-item');
               movieElement.setAttribute('data-movie-id', movie.id);
-              movieElement.innerHTML =
-                '<p>Movie Title: ' + movie.title + '</p>';
+
+              // Create an image element
+              const imageElement = document.createElement('img');
+              imageElement.classList.add('p-3');
+              imageElement.src = '/images/' + movie.image; // Set the image source to the URL of the movie image
+              imageElement.alt = movie.title; // Set the alt attribute to the movie title
+              movieElement.appendChild(imageElement); // Append the image element to the movie element
+
+              // Create a paragraph element for the movie title
+              const titleElement = document.createElement('p');
+              titleElement.textContent = 'Movie Title: ' + movie.title;
+              movieElement.appendChild(titleElement); // Append the title element to the movie element
+
+              // Append the movie element to the movie list container
               movieListElement.appendChild(movieElement);
             });
           })
@@ -88,6 +280,11 @@
 
       // Add an event listener to the movie list container
       const movieListContainer = document.getElementById('movie-list');
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      selectedDate = `${year}-${month}-${day}`;
       movieListContainer.addEventListener('click', (event) => {
         // Check if the clicked element or its parent has the movie item class
         const movieItem = event.target.closest('.movie-item');
@@ -95,9 +292,21 @@
           // Retrieve the movie ID
           const movieId = movieItem.getAttribute('data-movie-id');
           // Redirect to the movie details page passing the movie ID
-          window.location.href = '/movie-details?movieId=' + movieId;
+          window.location.href =
+            '/movie-details?movieId=' + movieId + '&date=' + selectedDate;
         }
       });
+
+      // Load the hall details and movies for the first hall in the select list
+      const hallSelect = document.getElementById('hall-select');
+      const firstHall = hallSelect.value;
+      if (firstHall === 'select') {
+        // Display all movies
+        getHallDetails('');
+      } else {
+        // Load the details for the selected hall
+        getHallDetails(firstHall);
+      }
     </script>
   </body>
 </html>

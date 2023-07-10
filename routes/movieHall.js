@@ -9,35 +9,24 @@ const movieHallValidation = require('../validation/movieHallValidation');
 router.use(express.json());
 
 router.get('/addHall', function (req, res) {
-  // Retrieve the hall details from the database and pass it to the render method
-  connection.query(`SELECT * FROM movie_halls`, (error, results) => {
-    if (error) {
-      console.error('Error executing the query: ', error);
-      return;
-    }
-    const halls = results; // Assuming the result contains an array of halls
-
-    res.render('admin/addHall', { halls,errorMessage:'' });
-  });
+  res.render('admin/addHall');
 });
+
 const error = [];
 
 router.post('/add-hall', movieHallValidation, function (req, res) {
   try {
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
       var errMsg = errors.mapped();
       var inputData = matchedData(req);
       res.render('admin/addHall', {
-        halls,
         errors: errMsg,
         inputData: inputData,
         error: error,
-        errorMessage:'error message',
       });
     } else {
-      const { name, normalCapacity, vipCapacity, normalRate, vipRate } = req.body;
+      const { name, location, capacity } = req.body;
 
       // Check for duplicate hall name
       const checkQuery = `SELECT COUNT(*) AS count FROM movie_halls WHERE name = '${name}'`;
@@ -46,27 +35,21 @@ router.post('/add-hall', movieHallValidation, function (req, res) {
           console.error('Error executing the query: ', error);
           return;
         }
-        const halls = results; // Assuming the result contains an array of halls
         const hallCount = results[0].count;
         if (hallCount > 0) {
           console.log('Hall name already exists.');
-          res.render('admin/addHall', {halls,
+          res.render('admin/addHall', {
             errorMessage: 'Hall name already exists.',
           });
-          console.log('error executing the query ');
-
         } else {
-          const query = `INSERT INTO movie_halls 
-                        (name, normal_capacity, vip_capacity, normal_rate, vip_rate) 
-                        VALUES ('${name}', ${normalCapacity}, ${vipCapacity}, ${normalRate}, ${vipRate})`;
+          const query = `INSERT INTO movie_halls (name, location, capacity) VALUES ('${name}', '${location}', '${capacity}')`;
           connection.query(query, (error, results) => {
             if (error) {
               console.error('Error executing the query: ', error);
-              console.log('error executing the query ');
               return;
             }
             console.log('Hall added successfully.');
-            res.redirect('/addHall');
+            res.redirect('/');
           });
         }
       });
@@ -77,48 +60,96 @@ router.post('/add-hall', movieHallValidation, function (req, res) {
   }
 });
 
+// router.post('/hall-details', function (req, res) {
+//   const hallName = req.body.hallName;
 
+//   // Retrieve the hall details from the database based on the hall name
+//   const query = `SELECT * FROM movie_halls WHERE name = '${hallName}'`;
+//   connection.query(query, (error, results) => {
+//     if (error) {
+//       console.error('Error executing the query: ', error);
+//       return res.status(500).json({ error: 'Internal server error' });
+//     }
+
+//     // Check if a hall with the given name exists
+//     if (results.length === 0) {
+//       return res.status(404).json({ error: 'Hall not found' });
+//     }
+//     const hallDetails = results[0];
+
+//     const movieQuery = `SELECT * FROM movies WHERE hall_id = '${hallDetails.id}'`;
+
+//     connection.query(movieQuery, (error, movieResults) => {
+//       if (error) {
+//         console.error('Error executing the query: ', error);
+//         return res.status(500).json({ error: 'Internal server error' });
+//       }
+
+//       // Add the movie results to the `hallDetails` object
+//       hallDetails.movies = movieResults;
+
+//       // Send the hall details with movie data as a JSON response
+//       res.json(hallDetails);
+//     });
+
+//     // Send the hall details as a JSON response
+//     // res.json(hallDetails);
+//   });
+// });
 
 router.post('/hall-details', function (req, res) {
   const hallName = req.body.hallName;
 
-  // Retrieve the hall details from the database based on the hall name
-  const query = `SELECT * FROM movie_halls WHERE name = '${hallName}'`;
-  connection.query(query, (error, results) => {
-    if (error) {
-      console.error('Error executing the query: ', error);
-      return res.status(500).json({ error: 'Internal server error' });
-    }
+  if (!hallName) {
+    // Retrieve all movies if no hallName is specified
+    const query = 'SELECT * FROM movies';
 
-    // Check if a hall with the given name exists
-    if (results.length === 0) {
-      return res.status(404).json({ error: 'Hall not found' });
-    }
-    const hallDetails = results[0];
-
-    const movieQuery = `SELECT * FROM movies WHERE hall_id = '${hallDetails.id}'`;
-
-    connection.query(movieQuery, (error, movieResults) => {
+    connection.query(query, (error, movieResults) => {
       if (error) {
         console.error('Error executing the query: ', error);
         return res.status(500).json({ error: 'Internal server error' });
       }
 
-      // Add the movie results to the `hallDetails` object
-      hallDetails.movies = movieResults;
-
-      // Send the hall details with movie data as a JSON response
-      res.json(hallDetails);
+      // Send the movie results as a JSON response
+      res.json({ movies: movieResults });
     });
+  } else {
+    // Retrieve the hall details from the database based on the hall name
+    const query = `SELECT * FROM movie_halls WHERE name = '${hallName}'`;
+    connection.query(query, (error, results) => {
+      if (error) {
+        console.error('Error executing the query: ', error);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
 
-    // Send the hall details as a JSON response
-    // res.json(hallDetails);
-  });
+      // Check if a hall with the given name exists
+      if (results.length === 0) {
+        return res.status(404).json({ error: 'Hall not found' });
+      }
+      const hallDetails = results[0];
+
+      const movieQuery = `SELECT * FROM movies WHERE hall_id = '${hallDetails.id}'`;
+
+      connection.query(movieQuery, (error, movieResults) => {
+        if (error) {
+          console.error('Error executing the query: ', error);
+          return res.status(500).json({ error: 'Internal server error' });
+        }
+
+        // Add the movie results to the `hallDetails` object
+        hallDetails.movies = movieResults;
+
+        // Send the hall details with movie data as a JSON response
+        res.json(hallDetails);
+      });
+    });
+  }
 });
 
 // Define the route for movie details page
 router.get('/movie-details', function (req, res) {
   const movieId = req.query.movieId;
+  const selectedDate = req.query.date; // Retrieve the selected date from the query parameters
 
   // Retrieve the movie details from the database based on the movieId
   const movieQuery = `SELECT * FROM movies WHERE id = '${movieId}'`;
@@ -150,11 +181,33 @@ router.get('/movie-details', function (req, res) {
 
       const hallDetails = hallResults[0];
 
-      // Render the movie details page and pass the movie and hall details as data
-      res.render('user/movieDetail', {
-        movie: movieDetails,
-        hall: hallDetails,
-      });
+      // Query the database to retrieve the booked seats for the movie, hall, and selected date
+      const bookingsQuery =
+        'SELECT seat_number FROM bookings WHERE movie_id = ? AND hall_id = ? AND date = ?';
+      connection.query(
+        bookingsQuery,
+        [movieId, hallDetails.id, selectedDate],
+        (bookingsError, bookingsResults) => {
+          if (bookingsError) {
+            console.error(
+              'Error executing the bookings query: ',
+              bookingsError
+            );
+            return res.status(500).json({ error: 'Internal server error' });
+          }
+
+          // Extract the seat numbers from the query results
+          const bookedSeats = bookingsResults.map((row) => row.seat_number);
+
+          // Render the movie details page and pass the movie, hall, selected date, and booked seats as data
+          res.render('user/movieDetail', {
+            movie: movieDetails,
+            hall: hallDetails,
+            selectedDate: selectedDate,
+            bookedSeats: bookedSeats,
+          });
+        }
+      );
     });
   });
 });
