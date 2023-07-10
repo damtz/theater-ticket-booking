@@ -17,25 +17,25 @@
 // });
 
 // module.exports = connection;
-const mysql = require('mysql');
-const bcrypt = require('bcrypt');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const mysql = require("mysql");
+const bcrypt = require("bcrypt");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'movie_booking',
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "TBMS",
   connectionLimit: 10,
 });
 
 connection.connect((err) => {
   if (err) {
-    console.error('Error connecting to the database: ', err);
+    console.error("Error connecting to the database: ", err);
     return;
   }
-  console.log('Connected to the database');
+  console.log("Connected to the database");
 });
 
 // Table creation query
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS movie_halls (
 
 connection.query(createMovieHallsTable, (err) => {
   if (err) {
-    console.error('Error creating movie_halls table: ', err);
+    console.error("Error creating movie_halls table: ", err);
     return;
   }
 });
@@ -74,26 +74,26 @@ connection.query(createMovieHallsTable, (err) => {
 passport.use(
   new LocalStrategy(
     {
-      usernameField: 'email',
-      passwordField: 'password',
+      usernameField: "email",
+      passwordField: "password",
     },
     (email, password, done) => {
       // Check if the email and password match the user in the MySQL database
-      const query = 'SELECT * FROM users WHERE email = ?';
+      const query = "SELECT * FROM users WHERE email = ?";
       connection.query(query, [email], (error, results) => {
         if (error) {
           return done(error);
         }
 
         if (results.length === 0) {
-          return done(null, false, { message: 'Invalid credentials' });
+          return done(null, false, { message: "Invalid credentials" });
         }
 
         const user = results[0];
         const passwordMatch = bcrypt.compareSync(password, user.password);
 
         if (!passwordMatch) {
-          return done(null, false, { message: 'Invalid credentials' });
+          return done(null, false, { message: "Invalid credentials" });
         }
 
         // If the authentication is successful, pass the user object to the done callback
@@ -110,7 +110,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((email, done) => {
   // Fetch the user from the MySQL database using the id
-  const query = 'SELECT * FROM users WHERE email = ?';
+  const query = "SELECT * FROM users WHERE email = ?";
   connection.query(query, [email], (error, results) => {
     if (error) {
       return done(error);
