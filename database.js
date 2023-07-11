@@ -26,7 +26,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'Damber123.',
-  database: 'movie_bookings',
+  database: 'movie_booking',
   connectionLimit: 10,
 });
 
@@ -96,6 +96,7 @@ connection.query(createHallMapping, (err) => {
 const createMovies = `CREATE TABLE IF NOT EXISTS movies (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
+  time VARCHAR(255) NOT NULL,
   summary TEXT NOT NULL,
   casts VARCHAR(255) NOT NULL,
   status VARCHAR(50) NOT NULL,
