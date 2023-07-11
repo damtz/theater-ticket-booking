@@ -24,7 +24,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const connection = mysql.createConnection({
   host: '10.70.91.60',
-  port: 3306,
+  port: 12345,
   user: 'root',
   password: 'Damber123.',
   database: 'movie_bookings',
