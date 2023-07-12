@@ -1,37 +1,128 @@
+<!DOCTYPE html>
 <html>
-  <form action="/add-movie" method="POST" enctype="multipart/form-data">
-    <label for="movieTitle">Movie Title:</label>
-    <input type="text" id="movieTitle" name="movieTitle" required />
+  <head>
+    <title>Add Movies</title>
+    <!-- Add your CSS and other required scripts here -->
+  </head>
+  <body>
 
-    <label for="time">Movie Time:</label>
-    <input type="text" id="time" name="time" required />
+    <h2>Add Movie</h2>
+    <form action="/add-movie" method="POST" enctype="multipart/form-data">
+      <label for="movieTitle">Title:</label>
+      <input
+        type="text"
+        id="movieTitle"
+        name="movieTitle"
+        placeholder="Enter movie title"
+        required/>
 
-    <label for="movieHall">Movie Hall:</label>
+      <label for="movieTrailer">Trailer URL:</label>
+      <input
+        type="text"
+        id="movieTrailer"
+        name="movieTrailer"
+        placeholder="Enter trailer URL"
+        required
+      />
 
-    <label for="summary">Summary:</label>
-    <textarea id="summary" name="summary" required></textarea>
+      <label for="movieSummary">Summary:</label>
+      <textarea
+        id="movieSummary"
+        name="movieSummary"
+        placeholder="Enter movie summary"
+        rows="4"
+        required
+      ></textarea>
 
-    <label for="casts">Casts:</label>
-    <input type="text" id="casts" name="casts" required />
+      <label for="casts">Casts:</label>
+      <input
+        type="text"
+        id="casts"
+        name="casts"
+        placeholder="Enter casts"
+        required
+      />
 
-    <label for="status">Status:</label>
-    <select id="status" name="status" required>
-      <option value="new">New</option>
-      <option value="ongoing">Ongoing</option>
-      <option value="closed">Closed</option>
-    </select>
-
-    <label for="genre">Genre:</label>
+      <label for="status">Status:</label>
+      <select id="status" name="status" required>
+        <option value="">Select status</option>
+        <option value="Released">Released</option>
+        <option value="Coming Soon">Coming Soon</option>
+      </select>
+      <label for="genre">Genre:</label>
     <select id="genre" name="genre" required>
-      <option value="action">Action Movie</option>
       <option value="adventure">Adventure</option>
+      <option value="action">Action</option>
+      <option value="action/adventure">Action/Adventure</option>
+      <option value="action thriller">Action Thriller</option>
+      <option value="animation">Animation</option>
+      <option value="Biographical">Biographical</option>
+      <option value="comedy">Comedy</option>
+      <option value="documentary">Documentary</option>
+      <option value="drama">Drama</option>
+      <option value="horror">Horror</option>
+      <option value="mystery">Mystery</option>
+      <option value="romance">Romance</option>
+      <option value="romantic comedy">Romantic comedy</option>
+      <option value="science fiction">Science fiction</option>
       <option value="thriller">Thriller</option>
-      <!-- Add more genre options as needed -->
+      <option value="war">War</option>
     </select>
 
-    <label for="image">Movie Image:</label>
-    <input type="file" id="image" name="image" accept="image/*" required />
+      <label for="duration">duration:</label>
+      <input
+        id="duration"
+        name="duration"
+        placeholder="Enter movie duartion"
+        required
+      ></input>
 
-    <button type="submit">Add Movie</button>
-  </form>
+      <label for="images">Upload a picture:</label>
+      <input
+      type="file"
+      name="image"
+      class="form-control"
+      id="image"
+      accept=".jpg,.jpeg,.png"
+      required
+    />
+    <label class="form-label" for="customFile"
+      >(Accepted file: jpg, jpeg, png)</label
+    >
+
+      <label for="languageId">Language:</label>
+      <select id="languageId" name="languageId" required>
+        <% languages.forEach(function(language) { %>
+        <option value="<%= language.id %>"><%= language.name %></option>
+        <% }); %>
+      </select>
+
+      <button type="submit">Add Movie</button>
+    </form>
+
+    <hr />
+
+    <h2>Existing Movies</h2>
+    <% if (movies.length > 0) { %>
+    <ul>
+      <% movies.forEach(function(movie) { %>
+      <li>
+        <h3><%= movie.title %></h3>
+        <img src="/images/<%= movie.image %>" id="main_product_image" class="img-fluid mt-4" height="100px" width="100px">
+        <p>Summary:<%= movie.summary %></p>
+        <p>Genre:<%= movie.genre %></p>
+        <p>Status:<%= movie.status %></p>
+        <p>Casts:<%= movie.casts %></p>
+        <p>Duration:<%= movie.duration %></p>
+        <p>Language: <%= movie.languageName %></p>
+        <a href="<%= movie.trailer %>">Watch Trailer</a><br>
+        <a href="/movie/<%= movie.id %>">Give Review</a>
+
+      </li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p>No movies found.</p>
+    <% } %>
+  </body>
 </html>

@@ -1,22 +1,3 @@
-// const mysql = require('mysql');
-
-// const connection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: '',
-//   database: 'movie_booking',
-//   connectionLimit: 10,
-// });
-
-// connection.connect((err) => {
-//   if (err) {
-//     console.error('Error connecting to the database: ', err);
-//     return;
-//   }
-//   console.log('Connected to the database');
-// });
-
-// module.exports = connection;
 const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
@@ -39,6 +20,24 @@ connection.connect((err) => {
 });
 
 // Table creation query
+const createUserTable = `CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  role VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  reset_token VARCHAR(255),
+  assigned_theater_id INT,
+  FOREIGN KEY (assigned_theater_id) REFERENCES movie_halls(id)
+)`;
+
+connection.query(createUserTable, (err) => {
+  if (err) {
+    console.error('Error creating users table: ', err);
+    return;
+  }
+});
+
 const createMovieHallsTable = `CREATE TABLE IF NOT EXISTS movie_halls (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -75,33 +74,70 @@ connection.query(createHallMapping, (err) => {
   console.log('Mapping table created.');
 });
 
-// const createBooking = `CREATE TABLE Bookings (
-//   booking_id INT PRIMARY KEY AUTO_INCREMENT,
-//   hall_id INT,
-//   seat_number INT,
-//   movie_id INT,
-//   is_booked BOOLEAN,
-//   FOREIGN KEY (hall_id) REFERENCES movie_halls(id),
-//   FOREIGN KEY (movie_id) REFERENCES movies(id)
-// )`;
+const createBooking = `CREATE TABLE IF NOT EXISTS Bookings (
+    booking_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    hall_id INT,
+    seat_number VARCHAR(10),
+    movie_id INT,
+    screening_date DATE,
+    screening_time TIME,
+    is_booked BOOLEAN,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (hall_id) REFERENCES movie_halls(id),
+    FOREIGN KEY (movie_id) REFERENCES movies(id)
+  )`;
 
-// connection.query(createBooking, (err) => {
-//   if (err) {
-//     console.error('Error creating movie_halls table: ', err);
-//     return;
-//   }
-//   console.log('Booking table created.');
-// });
+connection.query(createBooking, (err) => {
+  if (err) {
+    console.error('Error creating movie_halls table: ', err);
+    return;
+  }
+  console.log('Booking table created.');
+});
+
+const createlanguages = `CREATE TABLE IF NOT EXISTS languages (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL
+)`;
+
+connection.query(createlanguages, (err) => {
+if (err) {
+  console.error('Error creating movie_halls table: ', err);
+  return;
+}
+console.log('Booking table created.');
+});
+const createreviews = `CREATE TABLE IF NOT EXISTS movie_review (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  FOREIGN KEY (movie_id) REFERENCES movies(id)
+  review VARCHAR(255) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+
+
+)`;
+
+connection.query(createreviews, (err) => {
+if (err) {
+  console.error('Error creating movie_halls table: ', err);
+  return;
+}
+console.log('Booking table created.');
+});
 
 const createMovies = `CREATE TABLE IF NOT EXISTS movies (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  time VARCHAR(255) NOT NULL,
+  trailer VARCHAR(255) NOT NULL,
   summary TEXT NOT NULL,
   casts VARCHAR(255) NOT NULL,
   status VARCHAR(50) NOT NULL,
   genre VARCHAR(50) NOT NULL,
-  image VARCHAR(255) NOT NULL
+  duration VARCHAR(50) NOT NULL,
+  image VARCHAR(255) NOT NULL,
+  FOREIGN KEY (language_id) REFERENCES languages(id)
+
+
 );
 `;
 

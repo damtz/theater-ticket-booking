@@ -70,12 +70,27 @@
           <% if(currentUser){ %>
           <p style="color: #fff"><%= currentUser.name %></p>
           <a href="/logout">Logout</a>
-          <a href="/addHall">Add Hall</a> <br />
-          <a href="/addMovie">addMovie</a> <br>
-          <a href="/abookings">Bookings</a> <br>
+          <li class="nav-item">
+          <a href="/addHall">AddHall</a>
+          </li>
+          <li class="nav-item">
+          <a href="/addMovie">addMovie</a> 
+        </li>
+          <li class="nav-item">
+          <a href="/abookings">Bookings</a> 
+        </li>
+          <li class="nav-item">
           <a href="/createMapping">CreateMovieMapping</a>
+        </li>
+          <li class="nav-item">
+          <a href="/addUser">Add-Admin</a>
+        </li>
+        <li class="nav-item">
+          <a href="/add-language">Add-Language</a>
+        </li>
           <% }else{ %>
-            <a href="register">Register Now</a><br /> <a href="register">Register Now</a><br />
+          <!-- <a href="register">Register Now</a><br />
+          <a href="register">Register Now</a><br /> -->
           <a
             type="button"
             class="btn btn-outline-warning"
@@ -136,22 +151,11 @@
               >
                 Select a movie hall
               </button>
-              <!-- <ul class="dropdown-menu dropdown-menu-end">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="#">City Cinema</a></li>
                 <li><a class="dropdown-item" href="#">Trowa Theater</a></li>
                 <li><a class="dropdown-item" href="#">Lugar Theater</a></li>
-              </ul> -->
-              <select
-                name="hall"
-                id="hall-select"
-                onchange="getHallDetails(this.value)"
-              >
-                <option value="select">Select Hall</option>
-                <% Halls.forEach(function(hall) { %>
-
-                <option value="<%= hall.name %>"><%= hall.name %></option>
-                <% }) %>
-              </select>
+              </ul>
             </div>
           </div>
           <div class="col-md-6 d-flex justify-content-end movie">
@@ -165,8 +169,58 @@
       </div>
 
       <!-- ===============================movie list========================================== -->
-                <div id="movie-list"></div>
-       
+
+      <div class="container mt-5">
+        <div class="row d-flex">
+          <!-- Upper Div -->
+          <div class="col-md-12">
+            <div class="image-container d-flex justify-content-between">
+              <% movies.forEach(function(movie) { %>
+              <div class="col-md-3">
+                <a href="/movie-details?movieId=<%= movie.id %>">
+                  <img
+                    src="/images/<%= movie.image %>"
+                    alt="Image 1"
+                    class="p-3"
+                  />
+                </a>
+                <a href="/movie/<%= movie.id %>">Give Review</a>
+              </div>
+
+              <% }) %>
+              <!-- <div class="col-md-3">
+                <img src="/user/images/movie/2.jpg" alt="Image 2" class="p-3" />
+              </div>
+              <div class="col-md-3">
+                <img src="/user/images/movie/3.jpg" alt="Image 3" class="p-3" />
+              </div>
+              <div class="col-md-3">
+                <img src="/user/images/movie/4.jpg" alt="Image 4" class="p-3" />
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+        
+          <div class="col-md-12">
+            <div class="image-container">
+              <div class="col-md-3">
+                <img src="/user/images/movie/5.jpg" alt="Image 5" class="p-3" />
+              </div>
+              <div class="col-md-3">
+                <img src="/user/images/movie/6.jpg" alt="Image 6" class="p-3" />
+              </div>
+              <div class="col-md-3">
+                <img src="/user/images/movie/7.jpg" alt="Image 7" class="p-3" />
+              </div>
+              <div class="col-md-3">
+                <img src="/user/images/movie/8.jpg" alt="Image 8" class="p-3" />
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
 
     <!-- =========================================image============================================ -->
 
@@ -236,77 +290,5 @@
       integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
       crossorigin="anonymous"
     ></script>
-    <script>
-      function getHallDetails(hallName) {
-        // Make an AJAX request to the server
-        fetch('/hall-details', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ hallName: hallName }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            const movieListElement = document.getElementById('movie-list');
-
-            // Display the movies
-            movieListElement.innerHTML = '';
-            data.movies.forEach((movie) => {
-              const movieElement = document.createElement('div');
-              movieElement.classList.add('movie-item');
-              movieElement.setAttribute('data-movie-id', movie.id);
-
-              // Create an image element
-              const imageElement = document.createElement('img');
-              imageElement.classList.add('p-3');
-              imageElement.src = '/images/' + movie.image; // Set the image source to the URL of the movie image
-              imageElement.alt = movie.title; // Set the alt attribute to the movie title
-              movieElement.appendChild(imageElement); // Append the image element to the movie element
-
-              // Create a paragraph element for the movie title
-              const titleElement = document.createElement('p');
-              titleElement.textContent = 'Movie Title: ' + movie.title;
-              movieElement.appendChild(titleElement); // Append the title element to the movie element
-
-              // Append the movie element to the movie list container
-              movieListElement.appendChild(movieElement);
-            });
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
-      }
-
-      // Add an event listener to the movie list container
-      const movieListContainer = document.getElementById('movie-list');
-      const today = new Date();
-      const year = today.getFullYear();
-      const month = String(today.getMonth() + 1).padStart(2, '0');
-      const day = String(today.getDate()).padStart(2, '0');
-      selectedDate = `${year}-${month}-${day}`;
-      movieListContainer.addEventListener('click', (event) => {
-        // Check if the clicked element or its parent has the movie item class
-        const movieItem = event.target.closest('.movie-item');
-        if (movieItem) {
-          // Retrieve the movie ID
-          const movieId = movieItem.getAttribute('data-movie-id');
-          // Redirect to the movie details page passing the movie ID
-          window.location.href =
-            '/movie-details?movieId=' + movieId + '&date=' + selectedDate;
-        }
-      });
-
-      // Load the hall details and movies for the first hall in the select list
-      const hallSelect = document.getElementById('hall-select');
-      const firstHall = hallSelect.value;
-      if (firstHall === 'select') {
-        // Display all movies
-        getHallDetails('');
-      } else {
-        // Load the details for the selected hall
-        getHallDetails(firstHall);
-      }
-    </script>
   </body>
 </html>

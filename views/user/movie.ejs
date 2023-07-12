@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Details</title>
+  <!-- Add your CSS and other dependencies here -->
+</head>
+<body>
+  <h1>Movie Details</h1>
+  
+  <h2><%= movie.title %></h2>
+  <img src="/images/<%= movie.image %>" id="main_product_image" class="img-fluid mt-4" height="100px" width="100px">
+<br>
+  <p><%= movie.casts %></p>
+  <p><%= movie.summary %></p>
+
+
+  <h3>Reviews</h3>
+  <% if (reviews.length === 0) { %>
+    <p>No reviews available.</p>
+  <% } else { %>
+    <ul>
+      <% reviews.forEach((review) => { %>
+        <li>
+          <%= review.review %>
+          - 
+          <% var reviewer = users.find(user => user.id === review.user_id); %>by
+          @<%= reviewer.username %> <!-- Assuming the user's name is stored as `name` in the user object -->
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+
+  <h3>Add Review</h3>
+  <form method="POST" action="/addReview">
+    <input type="hidden" name="movieId" value="<%= movie.id %>">
+    <label>
+      Review:
+      <textarea name="review" required></textarea>
+    </label>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>

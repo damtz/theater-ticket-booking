@@ -38,9 +38,22 @@
   </head>
   <body>
     <h2>This is Details Page</h2>
-    <p><%= movie.title %></p>
+    <h3><%= movie.title %></h3>
     <h4>Hall Details</h4>
+    <% halls.forEach((hall) => { %>
     <p><%= hall.name %></p>
+    <p>Location: <%= hall.location %></p>
+    <h5>Screening Dates and Times:</h5>
+    <% hall.screenings.forEach((screening) => { %>
+    <p>
+      <a
+        href="/seat-availability?hallId=<%= hall.id %>&movieId=<%= movie.id %>&date=<%= screening.screening_date %>&time=<%= screening.screening_time %>"
+      >
+        <%= screening.screening_date %> <%= screening.screening_time %>
+      </a>
+    </p>
+    <% }) %> <% }) %>
+
     <p>SUMMAY: <%= movie.summary %></p>
     <p>GENRE: <%= movie.genre %></p>
     <p>CASTS: <%= movie.casts %></p>
@@ -55,120 +68,5 @@
       <input type="date" name="date" id="date" />
       <button type="submit">Check Availability</button>
     </form>
-
-    <h3>Normal Seats</h3>
-    <div class="seating-container" id="seatingContainer">
-      <% for (let i = 1; i <= hall.normal_capacity; i++) { %> <% if
-      (bookedSeats.includes(i)) { %>
-      <div class="row">
-        <div class="seat booked">
-          <p
-            style="
-              color: rgb(192, 216, 238);
-              margin-left: 10px;
-              margin-top: -0.01px;
-            "
-          >
-            <%= i %>
-          </p>
-        </div>
-      </div>
-      <% } else { %>
-      <div class="row">
-        <div
-          class="seat available"
-          data-seat="<%= i %>"
-          onclick="toggleSeatSelection('<%= i %>')"
-        >
-          <p style="color: aliceblue; margin-left: 10px; margin-top: -0.01px">
-            <%= i %>
-          </p>
-        </div>
-      </div>
-      <% } %> <% } %>
-    </div>
-
-    <h3>VIP Seats</h3>
-    <div class="seating-container" id="seatingContainer">
-      <% const vipSeatStartNumber = hall.normal_capacity + 1; %> <% for (let i =
-      vipSeatStartNumber; i <= vipSeatStartNumber + hall.vip_capacity - 1; i++)
-      { %> <% if (bookedSeats.includes(i)) { %>
-      <div class="row">
-        <div class="seat booked">
-          <p
-            style="
-              color: rgb(192, 216, 238);
-              margin-left: 10px;
-              margin-top: -0.01px;
-            "
-          >
-            <%= i %>
-          </p>
-        </div>
-      </div>
-      <% } else { %>
-      <div class="row">
-        <div
-          class="seat available"
-          data-seat="<%= i %>"
-          onclick="toggleSeatSelection('<%= i %>')"
-        >
-          <p style="color: aliceblue; margin-left: 10px; margin-top: -0.01px">
-            <%= i %>
-          </p>
-        </div>
-      </div>
-      <% } %> <% } %>
-    </div>
-
-    <script>
-      const selectedSeats = []; // Array to store selected seats
-
-      function toggleSeatSelection(seatNumber) {
-        const seatElement = document.querySelector(
-          `.seat.available[data-seat="${seatNumber}"]`
-        );
-
-        if (selectedSeats.includes(seatNumber)) {
-          // Seat already selected, deselect it
-          const seatIndex = selectedSeats.indexOf(seatNumber);
-          selectedSeats.splice(seatIndex, 1);
-          seatElement.classList.remove('selected');
-        } else {
-          // Seat not selected, select it
-          selectedSeats.push(seatNumber);
-          seatElement.classList.add('selected');
-        }
-      }
-
-      function bookSeats() {
-        const movieId = '<%= movie.id %>';
-        const hallId = '<%= hall.id %>';
-        const dateElement = document.getElementById('date');
-        let selectedDate = dateElement.value; // Get the selected date
-
-        if (!selectedDate) {
-          // No date selected, use today's date
-          const today = new Date();
-          const year = today.getFullYear();
-          const month = String(today.getMonth() + 1).padStart(2, '0');
-          const day = String(today.getDate()).padStart(2, '0');
-          selectedDate = `${year}-${month}-${day}`;
-        }
-
-        if (selectedSeats.length > 0) {
-          // Seats selected, proceed to booking
-          const url = `/booking?seats=${selectedSeats.join(
-            ','
-          )}&hall=${hallId}&movie=${movieId}&date=${selectedDate}`;
-          window.location.href = url;
-        } else {
-          // No seats selected, display an error message or take appropriate action
-          alert('Please select at least one seat.');
-        }
-      }
-    </script>
-
-    <button onclick="bookSeats()">Book Selected Seats</button>
   </body>
 </html>

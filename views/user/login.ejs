@@ -1,27 +1,3 @@
-<!-- login.html -->
-<!DOCTYPE html>
-<!-- <html>
-  <head>
-    <title>Login</title>
-  </head>
-  <body>
-    <h1>Login</h1>
-    <% if (errorMessage) { %>
-    <p><%= errorMessage %></p>
-    <% } %>
-    <form method="POST" action="/login">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required />
-      <br />
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required />
-      <br />
-      <input type="submit" value="Login" />
-    </form>
-  </body>
-</html> -->
-<!-- @format -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -97,6 +73,9 @@
     <div class="wrapper d-flex justify-content-center">
       <div class="card">
         <form action="/login" method="post" class="d-flex flex-column">
+          <% if (typeof successMessage !== "undefined") { %>
+          <p style="color: #fad027" role="alert"><%= successMessage %></p>
+          <% } %>
           <div class="h3 text-center login">Login To My Account</div>
           <div class="d-flex align-items-center input-field my-3 mb-4">
             <span class="fas fa-envelope p-2" style="color: #ffe36d"></span>
@@ -133,7 +112,7 @@
               </label>
             </div>
             <div class="mt-sm-0 mt-3">
-              <a href="forgotpass.html" class="Forgot-pass">Forgot password?</a>
+              <a href="/forgot-password" class="Forgot-pass">Forgot password?</a>
             </div>
           </div>
 

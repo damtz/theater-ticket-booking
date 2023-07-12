@@ -1,0 +1,14 @@
+<h1>All Languages</h1>
+<ul>
+  <% Languages.forEach(function(language) { %>
+    <li><%= language.name %></li>
+  <% }); %>
+</ul>
+<h1>Add Language</h1>
+<form action="/add-language" method="POST">
+  <label for="languageName">Language Name:</label>
+  <input type="text" name="languageName" id="languageName" required>
+  <br>
+  <button type="submit">Add Language</button>
+</form>
+

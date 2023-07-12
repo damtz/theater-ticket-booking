@@ -13,6 +13,7 @@
         <option value="<%= movie.id %>"><%= movie.title %></option>
         <% }) %></select
       ><br />
+
       <label for="movieHallId">Movie Hall:</label>
       <select id="movieHallId" name="movieHallId" required>
         <option value="">Select a Movie Hall</option>
@@ -20,13 +21,16 @@
         <option value="<%= movieHall.id %>"><%= movieHall.name %></option>
         <% }) %></select
       ><br />
-      <label for="screeningDate">Screening Date:</label>
-      <input
-        type="date"
-        id="screeningDate"
-        name="screeningDate"
-        required
-      /><br />
+
+      <label for="screeningDates">Screening Dates:</label>
+      <select id="screeningDates" name="screeningDates" multiple required>
+        <% for (let i = 0; i < 7; i++) { %> <% const currentDate = new Date();
+        %> <% currentDate.setDate(currentDate.getDate() + i); %> <% const
+        formattedDate = currentDate.toISOString().split('T')[0]; %>
+        <option value="<%= formattedDate %>"><%= formattedDate %></option>
+        <% } %></select
+      ><br />
+
       <label for="screeningTime">Screening Time:</label>
       <input
         type="time"
@@ -34,6 +38,7 @@
         name="screeningTime"
         required
       /><br />
+
       <input type="submit" value="Submit" />
     </form>
   </body>

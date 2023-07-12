@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Seat Availability</title>
+    <style>
+      .seat-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .seat {
+        width: 30px;
+        height: 30px;
+        background-color: #d11e1e;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .seat.available {
+        background-color: #f7d23a;
+      }
+
+      .seat.booked {
+        background-color: #eb3f2c;
+      }
+
+      .seat.selected {
+        border: 2px solid #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>TITLE: <%= movie.title %></h2>
+    <p>SUMMAY: <%= movie.summary %></p>
+    <p>GENRE: <%= movie.genre %></p>
+    <p>CASTS: <%= movie.casts %></p>
+    <p>STATUS: <%= movie.status %></p>
+
+    <img src="/images/<%= movie.image %>" alt="<%= movie.title %>" />
+    <h4>Hall Details</h4>
+    <h3><%= hall.name %></h3>
+    <form action="/book-seats" method="POST">
+      <!-- Pass necessary data as hidden input fields -->
+      <input type="hidden" name="movieId" value="<%= movie.id %>" />
+      <input type="hidden" name="hallId" value="<%= hall.id %>" />
+      <input type="hidden" name="date" value="<%= selectedDate %>" />
+      <input type="hidden" name="time" value="<%= selectedTime %>" />
+      <input type="hidden" name="selectedSeats" id="selectedSeatsInput" />
+
+      <h3>Normal Seats</h3>
+      <div class="seat-container" id="seatingContainer">
+        <% for (let i = 1; i <= hall.normal_capacity; i++) { %> <% const
+        seatNumber = 'N' + i; %> <% if (bookedSeats.includes(seatNumber)) { %>
+        <div class="row">
+          <div class="seat booked">
+            <p
+              style="
+                color: rgb(192, 216, 238);
+                margin-left: 10px;
+                margin-top: -0.01px;
+              "
+            >
+              <%= seatNumber %>
+            </p>
+          </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+          <div
+            class="seat available"
+            data-seat="<%= seatNumber %>"
+            onclick="toggleSeatSelection('<%= seatNumber %>')"
+          >
+            <p style="color: aliceblue; margin-left: 10px; margin-top: -0.01px">
+              <%= seatNumber %>
+            </p>
+          </div>
+        </div>
+        <% } %> <% } %>
+      </div>
+
+      <h3>VIP Seats</h3>
+      <div class="seat-container" id="seatingContainer">
+        <% const vipSeatStartNumber = hall.normal_capacity + 1; %> <% for (let i
+        = vipSeatStartNumber; i <= vipSeatStartNumber + hall.vip_capacity - 1;
+        i++) { %> <% const seatNumber = 'V' + (i - vipSeatStartNumber + 1); %>
+        <% if (bookedSeats.includes(seatNumber)) { %>
+        <div class="row">
+          <div class="seat booked">
+            <p
+              style="
+                color: rgb(192, 216, 238);
+                margin-left: 10px;
+                margin-top: -0.01px;
+              "
+            >
+              <%= seatNumber %>
+            </p>
+          </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+          <div
+            class="seat available"
+            data-seat="<%= seatNumber %>"
+            onclick="toggleSeatSelection('<%= seatNumber %>')"
+          >
+            <p style="color: aliceblue; margin-left: 10px; margin-top: -0.01px">
+              <%= seatNumber %>
+            </p>
+          </div>
+        </div>
+        <% } %> <% } %>
+      </div>
+
+      <button type="submit">Book Selected Seats</button>
+    </form>
+
+    <script>
+      const selectedSeats = []; // Array to store selected seats
+
+      function toggleSeatSelection(seatNumber) {
+        const seatElement = document.querySelector(
+          `.seat.available[data-seat="${seatNumber}"]`
+        );
+
+        if (selectedSeats.includes(seatNumber)) {
+          // Seat already selected, deselect it
+          const seatIndex = selectedSeats.indexOf(seatNumber);
+          selectedSeats.splice(seatIndex, 1);
+          seatElement.classList.remove('selected');
+        } else {
+          // Seat not selected, select it
+          selectedSeats.push(seatNumber);
+          seatElement.classList.add('selected');
+        }
+
+        // Update the selected seats in the hidden input field
+        const selectedSeatsInput =
+          document.getElementById('selectedSeatsInput');
+        selectedSeatsInput.value = selectedSeats.join(',');
+      }
+
+      // Add event listener to the form submission
+      document
+        .querySelector('form')
+        .addEventListener('submit', function (event) {
+          const selectedSeatsInput =
+            document.getElementById('selectedSeatsInput');
+          if (selectedSeats.length === 0) {
+            event.preventDefault();
+            alert('Please select at least one seat.');
+          } else {
+            selectedSeatsInput.value = selectedSeats.join(',');
+          }
+        });
+    </script>
+  </body>
+</html>

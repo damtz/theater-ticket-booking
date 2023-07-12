@@ -1,15 +1,19 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-require('dotenv').config();
 const session = require('express-session');
+const multer = require('multer')
 
-const userRoute = require('./routes/user');
-const movieHallRoute = require('./routes/movieHall');
-const movieRoute = require('./routes/addMovie');
-const bookingRoute = require('./routes/booking');
-const mappingRoute = require('./routes/movieHallMapping');
+
+const userRoute = require('./controller/user');
+const reviewRoute =  require('./controller/moviereview')
+const movieHallRoute = require('./controller/movieHall');
+const movieRoute = require('./controller/addMovie');
+const bookingRoute = require('./controller/booking');
+const mappingRoute = require('./controller/movieHallMapping');
+const addUserRoute = require('./controller/addUser');
+const addlanguageRoute = require('./controller/addlanguage');
+
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,6 +32,10 @@ app.use('/', movieHallRoute);
 app.use('/', movieRoute);
 app.use('/', bookingRoute);
 app.use('/', mappingRoute);
+app.use('/', addUserRoute);
+app.use('/', reviewRoute);
+app.use('/', addlanguageRoute);
+
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('App running on port 3000 ..');
