@@ -6,8 +6,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'Damber123.',
-  database: 'movie_booking',
+  password: '',
+  database: 'movie_booking2',
   connectionLimit: 10,
 });
 
@@ -79,6 +79,7 @@ const createMovies = `CREATE TABLE IF NOT EXISTS movies (
   genre VARCHAR(50) NOT NULL,
   duration VARCHAR(50) NOT NULL,
   image VARCHAR(255) NOT NULL,
+  language_id INT,
   FOREIGN KEY (language_id) REFERENCES languages(id)
 
 
@@ -134,15 +135,16 @@ connection.query(createBooking, (err) => {
 });
 const createreviews = `CREATE TABLE IF NOT EXISTS movie_review (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  FOREIGN KEY (movie_id) REFERENCES movies(id)
-  review VARCHAR(255) NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id),
-
-
+  movie_id INT,
+  FOREIGN KEY (movie_id) REFERENCES movies(id),
+  review VARCHAR(255),
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES users(id)
 )`;
+
 connection.query(createreviews, (err) => {
 if (err) {
-  console.error('Error creating movie_halls table: ', err);
+  console.error('Error creating review table: ', err);
   return;
 }
 console.log('review table created.');
