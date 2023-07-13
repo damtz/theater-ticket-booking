@@ -19,6 +19,24 @@ connection.connect((err) => {
   console.log('Connected to the database');
 });
 
+const createMovieHallsTable = `CREATE TABLE IF NOT EXISTS movie_halls (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  location VARCHAR(255) NOT NULL,
+  normal_capacity INT NOT NULL,
+  vip_capacity INT NOT NULL,
+  normal_rate DECIMAL(10, 2) NOT NULL,
+  vip_rate DECIMAL(10, 2) NOT NULL
+);
+`;
+
+connection.query(createMovieHallsTable, (err) => {
+  if (err) {
+    console.error('Error creating movie_halls table: ', err);
+    return;
+  }
+});
+
 // Table creation query
 const createUserTable = `CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -38,22 +56,41 @@ connection.query(createUserTable, (err) => {
   }
 });
 
-const createMovieHallsTable = `CREATE TABLE IF NOT EXISTS movie_halls (
+const createlanguages = `CREATE TABLE IF NOT EXISTS languages (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL
+)`;
+
+connection.query(createlanguages, (err) => {
+if (err) {
+  console.error('Error creating movie_halls table: ', err);
+  return;
+}
+console.log('Language table created.');
+});
+
+const createMovies = `CREATE TABLE IF NOT EXISTS movies (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  location VARCHAR(255) NOT NULL,
-  normal_capacity INT NOT NULL,
-  vip_capacity INT NOT NULL,
-  normal_rate DECIMAL(10, 2) NOT NULL,
-  vip_rate DECIMAL(10, 2) NOT NULL
+  title VARCHAR(255) NOT NULL,
+  trailer VARCHAR(255) NOT NULL,
+  summary TEXT NOT NULL,
+  casts VARCHAR(255) NOT NULL,
+  status VARCHAR(50) NOT NULL,
+  genre VARCHAR(50) NOT NULL,
+  duration VARCHAR(50) NOT NULL,
+  image VARCHAR(255) NOT NULL,
+  FOREIGN KEY (language_id) REFERENCES languages(id)
+
+
 );
 `;
 
-connection.query(createMovieHallsTable, (err) => {
+connection.query(createMovies, (err) => {
   if (err) {
     console.error('Error creating movie_halls table: ', err);
     return;
   }
+  console.log('Movie table');
 });
 
 const createHallMapping = `CREATE TABLE IF NOT EXISTS movie_hall_mapping (
@@ -95,19 +132,6 @@ connection.query(createBooking, (err) => {
   }
   console.log('Booking table created.');
 });
-
-const createlanguages = `CREATE TABLE IF NOT EXISTS languages (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(255) NOT NULL
-)`;
-
-connection.query(createlanguages, (err) => {
-if (err) {
-  console.error('Error creating movie_halls table: ', err);
-  return;
-}
-console.log('Booking table created.');
-});
 const createreviews = `CREATE TABLE IF NOT EXISTS movie_review (
   id INT PRIMARY KEY AUTO_INCREMENT,
   FOREIGN KEY (movie_id) REFERENCES movies(id)
@@ -116,37 +140,12 @@ const createreviews = `CREATE TABLE IF NOT EXISTS movie_review (
 
 
 )`;
-
 connection.query(createreviews, (err) => {
 if (err) {
   console.error('Error creating movie_halls table: ', err);
   return;
 }
-console.log('Booking table created.');
-});
-
-const createMovies = `CREATE TABLE IF NOT EXISTS movies (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  trailer VARCHAR(255) NOT NULL,
-  summary TEXT NOT NULL,
-  casts VARCHAR(255) NOT NULL,
-  status VARCHAR(50) NOT NULL,
-  genre VARCHAR(50) NOT NULL,
-  duration VARCHAR(50) NOT NULL,
-  image VARCHAR(255) NOT NULL,
-  FOREIGN KEY (language_id) REFERENCES languages(id)
-
-
-);
-`;
-
-connection.query(createMovies, (err) => {
-  if (err) {
-    console.error('Error creating movie_halls table: ', err);
-    return;
-  }
-  console.log('Movie table');
+console.log('review table created.');
 });
 
 // Configure the LocalStrategy for username and password authentication
