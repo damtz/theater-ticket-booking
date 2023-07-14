@@ -4,7 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 const connection = mysql.createConnection({
-  host: 'host.docker.internal',
+  host: 'localhost',
   user: 'root',
   password: 'Damber123.',
   database: 'movie_booking',
