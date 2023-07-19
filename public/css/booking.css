@@ -46,10 +46,10 @@ body {
 }
 
 
-.fa-couch{
+.material-icons{
   width: 18px;
   height: 18px;
-  padding: 3px;
+  padding: 10px;
 }
 
 .available{
@@ -60,6 +60,7 @@ body {
 .booked {
   color: #ffe36d;
   cursor: pointer;
+
 }
 .seat-container {
   display: flex;
