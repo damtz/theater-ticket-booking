@@ -1,0 +1,196 @@
+
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600&family=Open+Sans:wght@300&family=Roboto+Flex:wght@100;200;300&family=Roboto:wght@100;300;400;500&display=swap");
+
+body {
+  background-color: #eee;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(to top, #2c2b2b 10%, rgba(0, 0, 0, 100) 90%);
+}
+
+/* =======================================Table============================================== */
+
+.main-datatable {
+  padding: 10px;
+  border-bottom: 0;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+}
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card_body {
+  background-color: #2c2b2b;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  color: #fff;
+}
+.main-datatable .row {
+  margin: 0;
+}
+.searchInput {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: flex-end;
+  margin: 20px 0px;
+  padding: 0px 4px;
+}
+.searchInput input {
+  border: 1px solid #e5e5e5;
+  border-radius: 50px;
+  margin-left: 8px;
+  height: 34px;
+  width: 100%;
+  padding: 0px 25px 0px 10px;
+  transition: all 0.6s ease;
+}
+.searchInput label {
+  color: #767676;
+  font-weight: normal;
+}
+.searchInput input:placeholder-shown {
+  width: 13%;
+}
+.searchInput:hover input:placeholder-shown {
+  width: 100%;
+  cursor: pointer;
+}
+.searchInput:after {
+  font-family: "FontAwesome";
+  color: #d4d4d4;
+  position: relative;
+  content: "\f002";
+  right: 25px;
+}
+
+.add_flex {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 0px;
+}
+.main-datatable .dataTable.no-footer {
+  border-bottom: 1px solid #2c2b2b;
+}
+
+.main-datatable .cust-datatable > thead > tr > th {
+  border-bottom-width: 0;
+  color: #443f3f;
+  font-weight: 600;
+  padding: 16px 15px;
+  vertical-align: middle;
+  padding-left: 18px;
+  text-align: center;
+  height: 50px;
+  background-color: #ffe36d;
+}
+
+
+
+.main-datatable .cust-datatable > tbody td {
+  padding: 10px 15px 10px 18px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  /* border-color: #eee; */
+  text-align: center;
+  vertical-align: middle;
+  height: 50px;
+  background-color: transparent;
+}
+.main-datatable .cust-datatable > tbody tr {
+  border-top: none;
+}
+.main-datatable .table > tbody > tr:nth-child(even) {
+  background: transparent;
+  color: #fff;
+}
+
+.main-datatable .table > tbody > tr:nth-child(even):hover {
+  background: #544f3b;
+  border-bottom: 1px solid #ffe36d;
+}
+
+.main-datatable .table > tbody > tr:nth-child(odd) {
+  background: transparent;
+}
+
+.main-datatable .table > tbody > tr:nth-child(odd):hover {
+  background:  #544f3b;
+  border-bottom: 2px solid #ffe36d;
+}
+
+
+.clearfix{
+  background-color: #544f3b;
+  height: 80px;
+
+}
+
+
+.pagination{
+  float:right;
+}
+
+
+.pagination .disabled{
+  margin: 25px;
+
+}
+
+.pagination  li a{
+  border:none;
+  font-size:13px;
+  min-width:30px;
+  min-height:30px;
+  color:#999;
+  margin: 25px;
+  line-height:30px;
+  border-radius:2px!important;
+  text-align:center;
+  padding:0 6px;
+}
+
+.pagination  li a:hover{
+  color:#666;
+}
+
+
+.pagination li.disabled i{
+  color:#ccc;
+  
+}
+
+.pagination li i{
+  font-size:16px;
+  padding-top:6px;
+}
+
+.hint-text{
+  float:left;
+  font-size:13px;
+  margin: 30px;
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .overflow-x {
+    overflow-x: scroll;
+  }
+  .overflow-x::-webkit-scrollbar {
+    width: 5px;
+    height: 6px;
+  }
+  .overflow-x::-webkit-scrollbar-thumb {
+    background-color: #888;
+  }
+  .overflow-x::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+}
+
+

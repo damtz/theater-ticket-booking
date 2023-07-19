@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@10/swiper-bundle.min.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+
+    <link rel="stylesheet" href="css/details.css" />
+  </head>
+  <body>
+   <%- include('header1') %>
+    <!-- =============================================Image Slider========================================= -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-4 right-div">
+          <img src="./img/7.jpg" alt="Movie Image" />
+          <div class="container movie-name px-5">
+            <p class="text-white  mt-4"><b>Meto Pema</b></p>
+            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+
+            <div class="row category">
+              <div class="col">
+                <p class="text text-white">Title</p>
+              </div>
+              <div class="col">
+                <p class="text text-white fw-light">Meto Pema</p>
+              </div>
+            </div>
+            <div class="row category">
+              <div class="col">
+                <p class="text text-white">Duration</p>
+              </div>
+              <div class="col">
+                <p class="text text-white fw-light">2hrs 3mins</p>
+              </div>
+            </div>
+            <div class="row category">
+              <div class="col">
+                <p class="text text-white">Genre</p>
+              </div>
+              <div class="col">
+                <p class="text text-white fw-light">Drama</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+<!-- ===============================left div====================================== -->
+          <div class="col leftdiv d-flex justify-content-end">
+            <div class="container movie-details p-5">
+              <h4 class="text-white mb-4">Booking Summary</h4>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Movie Title:</span>
+                  Meto Pema
+                </h6>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Duration:</span>
+                  2hrs 3mins
+                </h6>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Genre:</span>
+                  Drama
+                </h6>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Cast:</span>
+                  Dechen, Pema, Bikram, Nar, Tandin
+                </h6>
+                <h6 class="text-white mt-3 ">
+                  <span class="movie-title">Description:</span>
+                  A deaf girl finds her life beginning to rapidly narrow and 
+                  deteriorate when she gets locked up by her over-proctetive
+                  father owning to her beauty.
+                </h6>
+              <div>
+              </div>
+              <hr class="mb-5">
+      <!-- =================================Booking the seat accronding to hall==================================== -->
+            <div class="row">
+              <div class="col-md-6 hall-1">
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Screening Date:</span>
+                  <div class="dropdown d-flex justify-content-end">
+                  <button class="btn btn-outline-warning">
+                    <input type="date" id="date" name="date" />
+                  </button>
+                </div>
+                </h6>
+                 
+                <h6 class="text-white mt-3 ">
+                  <span class="movie-title">Screening Hall:</span>
+                  City Cinema
+                </h6>
+
+                <h6 class="text-white mt-3 ">
+                  <span class="movie-title">Screening Time:</span>
+                  6:30 PM
+                </h6>
+                <div class="container mb-4">
+            <div class="booked-button d-flex justify-content-end">
+              <button onclick="location.href='booking.html'" type="button" class="btn btn-outline-warning">
+                BOOK
+              </button>
+            </div>
+          </div>
+          </div>
+                <div class="col-md-6 hall-1">
+                  <h6 class="text-white mt-3">
+                    <span class="movie-title">Screening Date:</span>
+                    <div class="dropdown d-flex justify-content-end">
+                      <button class="btn btn-outline-warning">
+                        <input type="date" id="date" name="date" />
+                      </button>
+                    </div>
+                  </h6>
+                   
+                  <h6 class="text-white mt-3 ">
+                    <span class="movie-title">Screening Hall:</span>
+                    Lugar Theater
+                  </h6>
+  
+                  <h6 class="text-white mt-3 ">
+                    <span class="movie-title">Screening Time:</span>
+                    6:30 PM
+                  </h6>
+                  <div class="container mb-4">
+              <div class="booked-button d-flex justify-content-end">
+                <button onclick="location.href='booking.html'" type="button" class="btn btn-outline-warning">
+                  BOOK
+                </button>
+              </div>
+            </div>
+          </div>
+              </div>
+         </div>    
+      </div>
+    </div>
+
+    <%- include('footer') %>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/js/all.min.js"></script>
+
+    <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
+
+  
+<script src="seat.js"></script>
+
+
+    <script>
+      const swiper = new Swiper(".swiper", {
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        loop: true,
+      });
+    </script>
+  </body>
+</html>

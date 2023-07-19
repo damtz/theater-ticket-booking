@@ -1,0 +1,223 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@10/swiper-bundle.min.css" />
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+    <link rel="stylesheet" href="css/bookinghistory.css" />
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.14/css/jquery.dataTables.min.css">
+
+  </head>
+  <body>
+    <%- include('header1') %>
+    <!-- ====================================SummaryReport================================ -->
+  
+    <div class="container">
+      <div class="row">
+          <div class="col-md-12 main-datatable">
+              <div class="card_body">
+                  <div class="row d-flex">
+                      <div class="col-sm-4 createSegment"> 
+                      <h5 class="text-white">Booking History</h5>
+                      </div>
+                      <div class="col-sm-8 add_flex">
+                          <div class="form-group searchInput">
+                              <label for="email">Search:</label>
+                              <input type="search" class="form-control" id="filterbox" placeholder=" ">
+                          </div>
+                      </div> 
+                  </div>
+                  <div class="overflow-x">
+                      <table class="table cust-datatable dataTable no-footer table-hover">
+                          <thead>
+                              <tr>
+                                  <th>Ticket No</th>
+                                  <th>Booking Date</th>
+                                  <th>Booking Time</th>
+                                  <th>Movie Name</th>
+                                  <th>Hall Name</th>
+                                  <th>Location</th>
+                                  <th>Seat Number</th>
+                                  <th>Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>1</td>
+                              <td>Tue July 16</td>
+                              <td>6:60 PM</td>
+                              <td>Meto Pema</td>
+                              <td>Trowa Theater</td>
+                              <td>Changjiji</td>
+                              <td>V1</td>
+                              <td>     
+                                <a href="#editEmployeeModal">
+                                <i class="fas fa-download" style="color: #ffe36d;" ></i>
+                              
+                              </a>
+                              </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td>Tue July 16</td>
+                            <td>6:60 PM</td>
+                            <td>Meto Pema</td>
+                            <td>Trowa Theater</td>
+                            <td>Changjiji</td>
+                            <td>V1</td>
+                            <td>     
+                              <a href="#editEmployeeModal">
+                              <i class="fas fa-download" style="color: #ffe36d;" ></i>
+                            
+                            </a>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Tue July 16</td>
+                          <td>6:60 PM</td>
+                          <td>Meto Pema</td>
+                          <td>Trowa Theater</td>
+                          <td>Changjiji</td>
+                          <td>V1</td>
+                          <td>     
+                            <a href="#editEmployeeModal">
+                            <i class="fas fa-download" style="color: #ffe36d;" ></i>
+                          
+                          </a>
+                          </td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>Tue July 16</td>
+                        <td>6:60 PM</td>
+                        <td>Meto Pema</td>
+                        <td>Trowa Theater</td>
+                        <td>Changjiji</td>
+                        <td>V1</td>
+                        <td>     
+                          <a href="#editEmployeeModal">
+                          <i class="fas fa-download" style="color: #ffe36d;" ></i>
+                        
+                        </a>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>Tue July 16</td>
+                      <td>6:60 PM</td>
+                      <td>Meto Pema</td>
+                      <td>Trowa Theater</td>
+                      <td>Changjiji</td>
+                      <td>V1</td>
+                      <td>     
+                        <a href="#editEmployeeModal">
+                        <i class="fas fa-download" style="color: #ffe36d;" ></i>
+                      
+                      </a>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>Tue July 16</td>
+                    <td>6:60 PM</td>
+                    <td>Meto Pema</td>
+                    <td>Trowa Theater</td>
+                    <td>Changjiji</td>
+                    <td>V1</td>
+                    <td>     
+                      <a href="#editEmployeeModal">
+                      <i class="fas fa-download" style="color: #ffe36d;" ></i>
+                    
+                    </a>
+                    </td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Tue July 16</td>
+                  <td>6:60 PM</td>
+                  <td>Meto Pema</td>
+                  <td>Trowa Theater</td>
+                  <td>Changjiji</td>
+                  <td>V1</td>
+                  <td>     
+                    <a href="#editEmployeeModal">
+                    <i class="fas fa-download" style="color: #ffe36d;" ></i>
+                  </a>
+                  </td>
+              </tr>
+            </tbody>
+            </table>
+            </div>
+                  <div class="clearfix">
+                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                    <ul class="pagination">
+                      <li class="page-item disabled"><a href="#">Previous</a></li>
+                      <li class="page-item"><a href="#" class="page-link">1</a></li>
+                      <li class="page-item"><a href="#" class="page-link">2</a></li>
+                      <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                      <li class="page-item"><a href="#" class="page-link">4</a></li>
+                      <li class="page-item"><a href="#" class="page-link">5</a></li>
+                      <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                    </ul>
+                  </div>
+              </div>
+          </div>
+      </div> 
+  </div>
+<%- include('footer') %>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper(".swiper", {
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        loop: true,
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var rows = document.querySelectorAll("tbody tr");
+        for (var i = 0; i < rows.length; i++) {
+          rows[i].addEventListener("click", function () {
+            if (this.classList.contains("selected")) {
+              this.classList.remove("selected");
+            } else {
+              this.classList.add("selected");
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
