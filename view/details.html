@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@10/swiper-bundle.min.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+
+    <link rel="stylesheet" href="./css/details.css" />
+  </head>
+  <body>
+    <!-- ===================================Navbar============================================ -->
+    <nav class="navbar navbar-expand-lg navbar-dark p-4">
+      <div class="container">
+        <a class="navbar-brand" href="#">FlickTix</a>
+
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="newrelease.html">New Release </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="upcomig.html">Upcoming</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search" />
+            <button class="btn search-icon">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+
+        <button
+          class="navbar-toggler collapsed d-flex d-lg-none flex-column justify-content-around"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="toggler-icon top-bar"></span>
+          <span class="toggler-icon middle-bar"></span>
+          <span class="toggler-icon bottom-bar"></span>
+        </button>
+        <div class="navbar-item dropdown has-divider">
+          <a class="navbar-link" href="#" id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="d-flex justify-content-end account-setting mt-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" style="color: #ffe36d" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+              </svg>
+            </div>
+          </a>
+
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" style="margin-right: 10px;">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+            </svg>User Name</a></li>
+            <hr>
+            <li><a class="dropdown-item" href="#"><img src="./img/bookinghistory.png" style="margin-right: 10px;">Booking History</a></li>
+            <hr>
+            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket" style="margin-right: 10px;"></i>Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- =============================================Image Slider========================================= -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-4 right-div">
+          <img src="./img/7.jpg" alt="Movie Image" />
+          <div class="container movie-name px-5">
+            <p class="text-white  mt-4"><b>Meto Pema</b></p>
+            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+
+            <div class="row category">
+              <div class="col">
+                <p class="text text-white">Title</p>
+              </div>
+              <div class="col">
+                <p class="text text-white fw-light">Meto Pema</p>
+              </div>
+            </div>
+            <div class="row category">
+              <div class="col">
+                <p class="text text-white">Duration</p>
+              </div>
+              <div class="col">
+                <p class="text text-white fw-light">2hrs 3mins</p>
+              </div>
+            </div>
+            <div class="row category">
+              <div class="col">
+                <p class="text text-white">Genre</p>
+              </div>
+              <div class="col">
+                <p class="text text-white fw-light">Drama</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+<!-- ===============================left div====================================== -->
+          <div class="col leftdiv d-flex justify-content-end">
+            <div class="container movie-details p-5">
+              <h4 class="text-white mb-4">Booking Summary</h4>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Movie Title:</span>
+                  Meto Pema
+                </h6>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Duration:</span>
+                  2hrs 3mins
+                </h6>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Genre:</span>
+                  Drama
+                </h6>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Cast:</span>
+                  Dechen, Pema, Bikram, Nar, Tandin
+                </h6>
+                <h6 class="text-white mt-3 ">
+                  <span class="movie-title">Description:</span>
+                  A deaf girl finds her life beginning to rapidly narrow and 
+                  deteriorate when she gets locked up by her over-proctetive
+                  father owning to her beauty.
+                </h6>
+              <div>
+              </div>
+              <hr class="mb-5">
+      <!-- =================================Booking the seat accronding to hall==================================== -->
+            <div class="row">
+              <div class="col-md-6 hall-1">
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Screening Date:</span>
+                  <div class="dropdown d-flex justify-content-end">
+                  <button class="btn btn-outline-warning">
+                    <input type="date" id="date" name="date" />
+                  </button>
+                </div>
+                </h6>
+                 
+                <h6 class="text-white mt-3 ">
+                  <span class="movie-title">Screening Hall:</span>
+                  City Cinema
+                </h6>
+
+                <h6 class="text-white mt-3 ">
+                  <span class="movie-title">Screening Time:</span>
+                  6:30 PM
+                </h6>
+                <div class="container mb-4">
+            <div class="booked-button d-flex justify-content-end">
+              <button onclick="location.href='booking.html'" type="button" class="btn btn-outline-warning">
+                BOOK
+              </button>
+            </div>
+          </div>
+          </div>
+                <div class="col-md-6 hall-1">
+                  <h6 class="text-white mt-3">
+                    <span class="movie-title">Screening Date:</span>
+                    <div class="dropdown d-flex justify-content-end">
+                      <button class="btn btn-outline-warning">
+                        <input type="date" id="date" name="date" />
+                      </button>
+                    </div>
+                  </h6>
+                   
+                  <h6 class="text-white mt-3 ">
+                    <span class="movie-title">Screening Hall:</span>
+                    Lugar Theater
+                  </h6>
+  
+                  <h6 class="text-white mt-3 ">
+                    <span class="movie-title">Screening Time:</span>
+                    6:30 PM
+                  </h6>
+                  <div class="container mb-4">
+              <div class="booked-button d-flex justify-content-end">
+                <button onclick="location.href='booking.html'" type="button" class="btn btn-outline-warning">
+                  BOOK
+                </button>
+              </div>
+            </div>
+          </div>
+              </div>
+         </div>    
+      </div>
+    </div>
+
+    <!-- ==============================Footer======================================= -->
+    <footer>
+      <div class="col-md-12">
+        <footer class="footer">
+          <div class="container">
+            <div class="row footer-container">
+              <div class="col-md-4">
+                <div class="footer-title text-white">
+                  <a href="home.html" class="logo"><b>FlickTix</b></a>
+                </div>
+              </div>
+
+              <div
+                class="col-md-4 d-flex justify-content-center d-flex justify-content-around">
+                <div class="footer-link">
+                  <div class="footer-title">
+                    <a href="home.html" class="text-white" style="text-decoration: none"
+                      >Home</a
+                    >
+                  </div>
+                </div>
+                <div class="footer-link">
+                  <div class="footer-title text-white">
+                    <a href="newrelease.html" class="text-white" style="text-decoration: none">
+                      NewRelease</a
+                    >
+                  </div>
+                </div>
+
+                <div class="footer-link">
+                  <div class="footer-title m-t-5 m-b-20 p-b-8 text-white">
+                    <a href="upcomig.html" class="text-white" style="text-decoration: none"
+                      >Upcoming</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 d-flex justify-content-end">
+                <div class="footer-social-links">
+                  <li>
+                    <a href="#">
+                      <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#">
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#">
+                      <i class="fab fa-instagram"></i>
+                    </a>
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="footer-bottom text-white d-flex justify-content-center mb-5">
+            Copyright © 2023, All Rights Reserved
+          </div>
+        </footer>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/js/all.min.js"></script>
+
+    <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
+
+  
+<script src="seat.js"></script>
+
+
+    <script>
+      const swiper = new Swiper(".swiper", {
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        loop: true,
+      });
+    </script>
+  </body>
+</html>
