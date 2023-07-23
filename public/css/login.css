@@ -4,10 +4,9 @@
 
 body {
   background-color: #eee;
-  /* max-height: 140vh; */
   font-family: "Inter", sans-serif;
-  background: linear-gradient(to top, #4d4c4c 10%, rgba(0, 0, 0, 100) 90%)
-    no-repeat;
+  background-color: #49484A;
+ 
 }
 
 /* ============================================login========================================= */
@@ -165,30 +164,37 @@ body {
 
 /* ================================================Responsiveness for Mobile=============================================================== */
 
-@media screen and (max-width: 576px) {
-  .navbar {
+@media screen and (max-width: 678px) {
+  /* .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: none;
     margin-bottom: -40px;
-  }
+  } */
 
-  .search-container {
+
+  .nav-conatiner{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  /* .search-container {
     display: flex;
     justify-content: center;
     transform: translate(-2%, -110%);
     margin-left: 95px;
-  }
+  } */
 
   .search-input {
     width: 160px;
+    height: 50px;
   }
 
-  .navbar-toggler {
+  /* .navbar-toggler {
     order: 1;
     transform: translate(80%, -360%);
-  }
+  } */
   .bi-person-circle {
     display: none;
   }

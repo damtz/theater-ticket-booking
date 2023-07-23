@@ -23,6 +23,10 @@ app.get("", (req, res) => {
   res.render("index");
 });
 
+app.get("/navbar", (req, res) => {
+  res.render("nabar");
+});
+
 app.get("/home", (req, res) => {
   res.render("home");
 });
@@ -74,6 +78,9 @@ app.get("/rating", (req, res) => {
 });
 app.get("/moviedetails", (req, res) => {
   res.render("moviedetails");
+});
+app.get("/upcomingdetails", (req, res) => {
+  res.render("upcomingMdetails");
 });
 
 

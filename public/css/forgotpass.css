@@ -6,8 +6,7 @@ body {
   /* background-color: #eee; */
   height: 100vh;
   font-family: "Inter", sans-serif;
-  background: linear-gradient(to top, #4d4c4c 10%, rgba(0, 0, 0, 100) 90%)
-    no-repeat;
+  background-color: #49484A;
 }
 
 .btn-outline-warning {

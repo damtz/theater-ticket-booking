@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>home</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
@@ -19,36 +19,35 @@
       rel="stylesheet"
       href="https://unpkg.com/swiper@10/swiper-bundle.min.css" />
 
-    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-
-    <%- include('header1') %> 
-
-    <!-- =============================================Image Slider========================================= -->
+    <%- include('header1') %>
     <div class="swiper mt-2">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <img src="./img/herobanner.jpg" />
+
           <div class="container main-section">
             <div class="row text-container mt-5">
               <div class="col-md-6">
                 <div class="button-container mb-4">
-                  <button type="button" class="btn btn-primary mt-5">
+                  <button
+                    type="button"
+                    class="gradient-border-button btn btn-primary mt-5">
                     Darma
                   </button>
-                  <button type="button" class="btn btn-primary mt-5">
+                  <button
+                    type="button"
+                    class="gradient-border-button btn btn-primary mt-5 text-white">
                     ShortFilm
                   </button>
                 </div>
                 <h5 class="fs-3">Silent Walls</h5>
                 <span
-                  ><i class='far fa-clock' style='font-size:36px;color:#ffe36d'></i>2
+                  ><i class="fas fa-clock fa-2x" style="color: #ffe36d"></i>2
                   HRS 30 MINS</span
                 >
-
-
-                
                 <div class="description">
                   <p class="mt-4">
                     A deaf girl finds her life beginning to rapidly narrow and
@@ -70,7 +69,7 @@
         </div>
 
         <div class="swiper-slide">
-          <img src="./img/ngejemasong.jpg" />
+          <img src="./img/chasingstar.jpg" />
           <div class="container main-section">
             <div class="row text-container mt-5">
               <div class="col-md-6">
@@ -99,7 +98,7 @@
                 </div>
                 <div class="book-button mb-5">
                   <button
-                    onclick="location.href='details.html'"
+                    onclick="location.href='details'"
                     type="button"
                     class="btn btn-secondary mt-3">
                     BOOK NOW
@@ -132,7 +131,7 @@
                 </div>
                 <div class="book-button mb-5">
                   <button
-                    onclick="location.href='details.html'"
+                    onclick="location.href='details'"
                     type="button"
                     class="btn btn-secondary mt-3">
                     BOOK NOW
@@ -149,37 +148,52 @@
     <div class="movie-selection">
       <div class="container">
         <div class="row">
-          <div class="genre p-4">
-            <span class="m-2 text-white my-text">ALL</span>
-            <span class="m-2 text-white">ACTION</span>
-            <span class="m-2 text-white">COMEDY</span>
-            <span class="m-2 text-white">ROMANCE</span>
-            <span class="m-2 text-white">HORROR</span>
+          <div class="genre m-3">
+            <span class="m-2 text-white my-text" style="font-size: small"
+              >ALL</span
+            >
+            <span class="m-2 text-white" style="font-size: small">ACTION</span>
+            <span class="m-2 text-white" style="font-size: small">COMEDY</span>
+            <span class="m-2 text-white" style="font-size: small">ROMANCE</span>
+            <span class="m-2 text-white" style="font-size: small">HORROR</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- ===============================movie list========================================== -->
+
     <div class="container movie-list">
       <div class="row">
         <div class="col-md-12">
           <div class="image-container d-flex justify-content-between">
             <div class="col-md-3">
               <img src="./img/1.jpg" alt="Image 1" class="p-3" />
-              <button onclick="location.href='details.html'" class="book-now">
+              <button onclick="location.href='details'" class="book-now">
                 BOOK NOW
               </button>
-              <button onclick="location.href='Rating.html'" class="rate-us">
+              <button onclick="location.href='rating'" class="rate-us">
+                RATE US
+              </button>
+            </div>
+            <div class="col-md-3">
+              <img src="./img/2.jpg" alt="Image 1" class="p-3" />
+              <button onclick="location.href='details'" class="book-now">
+                BOOK NOW
+              </button>
+              <button onclick="location.href='rating'" class="rate-us">
                 RATE US
               </button>
             </div>
 
             <div class="col-md-3">
-              <img src="./img/2.jpg" alt="Image 2" class="p-3" />
-            </div>
-            <div class="col-md-3">
-              <img src="./img/3.jpg" alt="Image 3" class="p-3" />
+              <img src="./img/3.jpg" alt="Image 1" class="p-3" />
+              <button onclick="location.href='details'" class="book-now">
+                BOOK NOW
+              </button>
+              <button onclick="location.href='rating'" class="rate-us">
+                RATE US
+              </button>
             </div>
             <div class="col-md-3">
               <img src="./img/4.jpg" alt="Image 4" class="p-3" />
@@ -254,12 +268,12 @@
 
     <div class="container main-container mt-5">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-6">
           <div class="right-div d-flex justify-content-start">
             <img src="./img/watching.jpg" alt="Right Image" />
           </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-md-6">
           <div class="left-div">
             <img src="./img/popcron.png" alt="Left Image" />
             <span class="overlay-text"
@@ -270,7 +284,8 @@
         </div>
       </div>
     </div>
-    <%- include('footer') %> 
+
+    <%- include('footer') %>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -279,7 +294,6 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
       integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
       crossorigin="anonymous"></script>
-      <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
     <script src="home.js"></script>
 

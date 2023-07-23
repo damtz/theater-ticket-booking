@@ -5,10 +5,14 @@
 body {
   background-color: #eee;
   font-family: "Inter", sans-serif;
-  /* background: linear-gradient(to top, #2c2b2b 10%, rgba(0, 0, 0, 100) 90%); */
+  background-color: #49484A;
 }
 
 /* =============================Herobanner=================================== */
+
+:root {
+  --gradient: linear-gradient(to right, #ffe36d, #ece1b1);
+}
 
 .hero-banner {
   background-image: url("images/herobanner.jpg");
@@ -16,18 +20,30 @@ body {
   background-repeat: no-repeat;
 }
 
-.container.main-section {
-  /* transform: translateY(100%); */
-  /* margin-left: 45px; */
+.swiper-slide {
+  height: 700px;
+}
+.swiper-slide img {
+  width: 100%;
 }
 
-/* .button-container .btn {
+.swiper {
+  width: 100%;
+  height: fit-content;
+}
+.container.main-section {
+  transform: translateY(-130%);
+  margin-left: 45px;
+}
+
+.button-container .btn {
   border-radius: 20px;
   width: 100px;
-  height: 45px;
+  height: 40px;
   border: 2px solid #ffe36d;
   background-color: transparent;
-} */
+}
+
 
 .text-container {
   display: flex;
@@ -40,65 +56,170 @@ body {
   color: #fff;
 }
 
-/* .book-button {
+.book-button {
   display: flex;
   justify-content: flex-start;
-} */
+}
 
-/* .book-button .btn {
+.book-button .btn {
   margin-left: -2px;
   border-radius: 10px;
   width: 120px;
   height: 45px;
   border: 2px solid #ffe36d;
   background-color: transparent;
-} */
+}
 
-/* .book-button .btn:hover {
+.book-button .btn:hover {
   color: #fff;
   background: #ffe36d;
   background: linear-gradient(to right, #ffe36d 10%, rgba(0, 0, 0, 0) 60%);
-} */
+}
+
+/* ============================================movie selection========================================= */
+
+.genre {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.my-text {
+  text-decoration: underline;
+  text-decoration-color: #ffe36d;
+  font-weight: bold;
+}
+
+/* ===============Movie List======================= */
+.image-container {
+  display: flex;
+  margin-right: 12px;
+  position: relative;
+  cursor: pointer;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+}
+.image-container .col-md-3 img {
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.image-container .col-md-3 {
+  position: relative;
+}
+
+.image-container .col-md-3 .book-now {
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 60px;
+  width: 150px;
+  background-color: transparent;
+  border: solid 2px #ffe36d;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.image-container .col-md-3 .rate-us {
+  display: none;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 60px;
+  width: 150px;
+  background-color: transparent;
+  border: solid 2px #ffe36d;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.image-container .col-md-3:hover img {
+  transform: scale(1.2);
+}
+
+.image-container .col-md-3:hover button {
+  display: block;
+}
+
+.image-container .book-now:hover {
+  background-color: #ffe36d;
+}
+
+.image-container .rate-us:hover {
+  background-color: #ffe36d;
+}
+.load-more .btn {
+  width: 150px;
+  height: 50px;
+  border: 2px solid #ffe36d;
+  background-color: transparent;
+}
+
+.load-more .btn:hover {
+  color: #fff;
+  background: #ffe36d;
+  background: linear-gradient(to right, #ffe36d 10%, rgba(0, 0, 0, 0) 60%);
+}
+
+.more-content {
+  display: none;
+}
+
+/* ============================================Image Section================= */
+
+.main-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-div img {
+  width: 650px;
+  height: 400px;
+  margin-left: -30px;
+}
+.left-div {
+  position: relative;
+  display: inline-block;
+}
+
+.left-div .overlay-text {
+  position: absolute;
+  top: 60%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  z-index: 1;
+}
+
+.right-div {
+  display: flex;
+  align-items: center;
+}
+
+.right-div img {
+  width: 780px;
+  height: 400px;
+  margin-left: -80px;
+}
+
+
 
 /* ==========================================Responsivness for mobile========================================= */
 
-@media (max-width: 576px) {
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: none;
-    margin-bottom: -40px;
-  }
-
-  .search-container {
-    display: flex;
-    justify-content: center;
-    transform: translate(-2%, -110%);
-    margin-left: 95px;
-  }
-
-  .search-input {
-    width: 160px;
-  }
-
-  .navbar-toggler {
-    order: 1;
-    transform: translate(80%, -360%);
-  }
-  .bi-person-circle {
-    display: none;
-  }
-  .btn-outline-warning {
-    display: none;
-  }
-
+@media (max-width: 768px) {
   .swiper-slide {
     height: 600px;
   }
   .container.main-section {
-    transform: translate(-12%, -12%);
-    width: 370px;
+    transform: translate(-17%, -2%);
   }
 
   .genre {
@@ -122,65 +243,19 @@ body {
   }
 
   .left-div img {
-    width: 370px;
+    width: 350px;
     height: 300px;
     margin-left: 0;
+   
   }
-
   .right-div img {
-    width: 370px;
-    margin-left: 0;
-    height: 300px;
-  }
-
-  .footer-title .logo {
-    text-decoration: none;
-    color: #ffe36d;
-  }
-  .footer-title {
-    text-align: center;
-  }
-
-  .footer-social-links {
-    text-align: center;
-    margin-top: 15px;
-  }
-
-  .footer-social-links a {
-    margin: 0 10px;
-  }
-
-  .footer .justify-content-end {
-    margin-left: -90px;
-    margin-top: 20px;
+    display: none;
   }
 }
 
 /* for tablet view */
 
-@media (min-width: 768px) and (max-width: 991px) {
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .search-container {
-    order: 3;
-    transform: translateX(20%);
-  }
-
-  .navbar-toggle {
-    order: 1;
-  }
-
-  .navbar-toggler,
-  .navbar-toggler:focus {
-    transform: translateX(450%);
-  }
-  .bi-person-circle {
-    display: none;
-  }
+@media screen and (min-width:769px) and (max-width: 991px) {
 
   .swiper-slide {
     height: 500px;
@@ -196,19 +271,27 @@ body {
   .image-container {
     flex-wrap: wrap;
     margin-bottom: 20px;
-    margin-right: -20px;
   }
 
   .image-container .col-md-3 {
     flex-basis: 50%;
   }
   .right-div img {
-    width: 850px;
+    display: none;
   }
   .left-div img {
-    width: 850px;
-    margin-left: -80px;
+    width: 800px;
+    transform: translateX(-53%);
   }
-
-  
-}
+  .left-div .overlay-text {
+    position: absolute;
+    top: 60%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    z-index: 1;
+  }
+} 

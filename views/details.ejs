@@ -33,47 +33,56 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-6 col-md-4 right-div">
-          <img src="./img/7.jpg" alt="Movie Image" />
-          <div class="container movie-name px-5">
-            <p class="text-white  mt-4"><b>Meto Pema</b></p>
-            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
-            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
-            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
-            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
-            <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
-
-            <div class="row category">
-              <div class="col">
-                <p class="text text-white">Title</p>
+        <div class="col-md-3">
+          <div class="custom-card ">
+          <div class="card">
+            <img src="./img/7.jpg" class="card-img-top">
+            <div class="card-body">
+              <div class="container px-2">
+                <h5 class="card-title">Meto Pema</h5>
+              <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+        
+                    <div class="row category">
+                      <div class="col">
+                        <p class="text text-white">Title</p>
+                      </div>
+                      <div class="col">
+                        <p class="text text-white fw-light">Meto Pema</p>
+                      </div>
+                    </div>
+                    <div class="row category">
+                      <div class="col">
+                        <p class="text text-white">Duration</p>
+                      </div>
+                      <div class="col">
+                        <p class="text text-white fw-light">2hrs 3mins</p>
+                      </div>
+                    </div>
+                    <div class="row category">
+                      <div class="col">
+                        <p class="text text-white">Genre</p>
+                      </div>
+                      <div class="col">
+                        <p class="text text-white fw-light">Drama</p>
+                      </div>
+                    </div>
               </div>
-              <div class="col">
-                <p class="text text-white fw-light">Meto Pema</p>
-              </div>
+              
             </div>
-            <div class="row category">
-              <div class="col">
-                <p class="text text-white">Duration</p>
-              </div>
-              <div class="col">
-                <p class="text text-white fw-light">2hrs 3mins</p>
-              </div>
             </div>
-            <div class="row category">
-              <div class="col">
-                <p class="text text-white">Genre</p>
-              </div>
-              <div class="col">
-                <p class="text text-white fw-light">Drama</p>
-              </div>
             </div>
-          </div>
         </div>
+       
 
 
 <!-- ===============================left div====================================== -->
-          <div class="col leftdiv d-flex justify-content-end">
-            <div class="container movie-details p-5">
+          <div class="col-md-9">
+            <div class="custom-card card-container">
+            <div class="container booking-summary">
               <h4 class="text-white mb-4">Booking Summary</h4>
                 <h6 class="text-white mt-3">
                   <span class="movie-title">Movie Title:</span>
@@ -101,14 +110,22 @@
               </div>
               <hr class="mb-5">
       <!-- =================================Booking the seat accronding to hall==================================== -->
-            <div class="row">
-              <div class="col-md-6 hall-1">
+            
+      <div class="container">
+      <div class="row">
+              <div class="col hall-1">
+                <div class="custom-card">
                 <h6 class="text-white mt-3">
                   <span class="movie-title">Screening Date:</span>
-                  <div class="dropdown d-flex justify-content-end">
-                  <button class="btn btn-outline-warning">
-                    <input type="date" id="date" name="date" />
+                <div class="dropdown d-flex justify-content-end">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                   Please Select Date
                   </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">12th May</a></li>
+                    <li><a class="dropdown-item" href="#">28th June</a></li>
+                    <li><a class="dropdown-item" href="#">28th July</a></li>
+                  </ul>
                 </div>
                 </h6>
                  
@@ -129,13 +146,19 @@
             </div>
           </div>
           </div>
-                <div class="col-md-6 hall-1">
+          </div>
+                <div class="col hall-1">
                   <h6 class="text-white mt-3">
                     <span class="movie-title">Screening Date:</span>
                     <div class="dropdown d-flex justify-content-end">
-                      <button class="btn btn-outline-warning">
-                        <input type="date" id="date" name="date" />
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                       Please Select Date
                       </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">12th May</a></li>
+                        <li><a class="dropdown-item" href="#">28th June</a></li>
+                        <li><a class="dropdown-item" href="#">28th July</a></li>
+                      </ul>
                     </div>
                   </h6>
                    
@@ -157,7 +180,14 @@
             </div>
           </div>
               </div>
-         </div>    
+            </div>
+            </div>
+
+
+         </div> 
+        </div>
+         
+         
       </div>
     </div>
 

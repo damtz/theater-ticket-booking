@@ -1,3 +1,4 @@
+<!-- @format -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,23 +22,25 @@
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-   
+    <%- include('header') %>
 
-    <%- include('header') %> 
-
-    <!-- =============================================Image Slider========================================= -->
     <div class="swiper mt-2">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <img src="./img/herobanner.jpg" />
+
           <div class="container main-section">
             <div class="row text-container mt-5">
               <div class="col-md-6">
                 <div class="button-container mb-4">
-                  <button type="button" class="btn btn-primary mt-5" id="gradient-border-button">
+                  <button
+                    type="button"
+                    class="gradient-border-button btn btn-primary mt-5">
                     Darma
                   </button>
-                  <button type="button" class="btn btn-primary mt-5">
+                  <button
+                    type="button"
+                    class="gradient-border-button btn btn-primary mt-5 text-white">
                     ShortFilm
                   </button>
                 </div>
@@ -67,7 +70,7 @@
         </div>
 
         <div class="swiper-slide">
-          <img src="./img/chasingstar.jpg" />
+          <img src="./img/ngejemasong.jpg" />
           <div class="container main-section">
             <div class="row text-container mt-5">
               <div class="col-md-6">
@@ -146,12 +149,14 @@
     <div class="movie-selection">
       <div class="container">
         <div class="row">
-          <div class="genre p-4">
-            <span class="m-2 text-white my-text">ALL</span>
-            <span class="m-2 text-white">ACTION</span>
-            <span class="m-2 text-white">COMEDY</span>
-            <span class="m-2 text-white">ROMANCE</span>
-            <span class="m-2 text-white">HORROR</span>
+          <div class="genre m-3">
+            <span class="m-2 text-white my-text" style="font-size: small"
+              >ALL</span
+            >
+            <span class="m-2 text-white" style="font-size: small">ACTION</span>
+            <span class="m-2 text-white" style="font-size: small">COMEDY</span>
+            <span class="m-2 text-white" style="font-size: small">ROMANCE</span>
+            <span class="m-2 text-white" style="font-size: small">HORROR</span>
           </div>
         </div>
       </div>
@@ -264,12 +269,12 @@
 
     <div class="container main-container mt-5">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-6">
           <div class="right-div d-flex justify-content-start">
             <img src="./img/watching.jpg" alt="Right Image" />
           </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-md-6">
           <div class="left-div">
             <img src="./img/popcron.png" alt="Left Image" />
             <span class="overlay-text"
@@ -281,7 +286,7 @@
       </div>
     </div>
 
-    <%- include('footer') %> 
+    <%- include('footer') %>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

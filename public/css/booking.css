@@ -5,47 +5,28 @@
 body {
   background-color: #eee;
   font-family: "Inter", sans-serif;
-  /* background: linear-gradient(to top, #949292 10%, rgba(0, 0, 0, 100) 80%);
-   */
    background-color: #404040;
 }
 
 
-/* ====================================================================================== */
-.main-seat-booking{
-   /* margin-right: 50px; */
-}
-
-.right-div {
-  background: linear-gradient(to top, #151515 10%, rgba(0, 0, 0, 100) 90%);
-  height: 600px;
-  width: 300px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.right-div img {
-  width: 300px;
+.card {
+  width: 250px;
+  border-color:black;
+  overflow: hidden;
   height: auto;
-  max-height: 400px;
-  border-radius: 10px;
+  margin-top: 20px;
 }
 
-.category .text {
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-  font-size: small;
+.card img {
+  width: 100%;
+  height: auto;
 }
 
-.container .seat-booking {
- border-radius: 20px;
- margin-left: 60px;
+.card-body {
+  background-color: black;
+  color: #fff;
+  padding: 10px;
 }
-
-
 .material-icons{
   width: 18px;
   height: 18px;
@@ -65,20 +46,15 @@ body {
 .seat-container {
   display: flex;
   flex-wrap: wrap;
-}
-.seat-container {
   margin: 10px;
 }
 
-.seat {
-  position: relative;
-  /* Add other styles as desired */
-}
 
 
 
 .ticket-button .btn{
   background: transparent;
+  width: 120px;
 }
 
 .ticket-button .btn:hover {
@@ -89,48 +65,23 @@ body {
 
 /* ==========================================Responsivness for mobile========================================= */
 
-@media (max-width: 576px) {
-    .right-div {
-      width: 100%;
-      height: auto;
-      border-radius: 0;
-      padding: 20px;
-      text-align: center;
-    }
-
-  .time-zone{
-    display: flex;
-    justify-content: center;
-    margin-right: 40px;
-    padding-top: 30px;
+@media (max-width: 768px) {
+  .card {
+    width: 100%; 
   }
-  
+.card-body {
+display: none;
+}
 
-    .seat-booking {
-      margin-left: 0;
-    }
-  
-    .seat-container {
-      justify-content: center;
-    }
-  
+ .ticket-button .btn{
+  display: flex;
+  margin-right: 110px;
+  margin-bottom: -10px;
 
-    .container .seat-booking {
-      border-radius: 20px;
-      margin-left: 0px;
-     }
-     
-     .seat-type{
-       padding-left: 30px;
-     }
+ }
 
-     .ticket-button .btn{
-      display: flex;
-      margin-right: 90px;
-      margin-bottom: 50px;
 
-     }
-  
+
   }
 
  @media screen and (min-width: 768px) and (max-width: 991px) {
@@ -158,6 +109,10 @@ body {
  .ticket-button .btn{
  margin-right: 16.5rem;
  margin-bottom: 30px;
+ }
+
+ .container .movie-name{
+  display: none;
  }
 
   }
