@@ -28,7 +28,7 @@
 
   </head>
   <body>
-    <%- include('header1') %>
+    <%- include('header') %>
     <!-- ====================================SummaryReport================================ -->
   
     <div class="container">
@@ -164,11 +164,11 @@
             </div>
                   <div class="clearfix">
                     <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
+                    <ul class="pagination" id="pagination">
                       <li class="page-item disabled"><a href="#">Previous</a></li>
                       <li class="page-item"><a href="#" class="page-link">1</a></li>
                       <li class="page-item"><a href="#" class="page-link">2</a></li>
-                      <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                      <li class="page-item"><a href="#" class="page-link">3</a></li>
                       <li class="page-item"><a href="#" class="page-link">4</a></li>
                       <li class="page-item"><a href="#" class="page-link">5</a></li>
                       <li class="page-item"><a href="#" class="page-link">Next</a></li>
@@ -178,6 +178,8 @@
           </div>
       </div> 
   </div>
+
+
 <%- include('footer') %>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -189,29 +191,73 @@
       crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
-    <script>
-      const swiper = new Swiper(".swiper", {
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        loop: true,
-      });
-    </script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var rows = document.querySelectorAll("tbody tr");
-        for (var i = 0; i < rows.length; i++) {
-          rows[i].addEventListener("click", function () {
-            if (this.classList.contains("selected")) {
-              this.classList.remove("selected");
-            } else {
-              this.classList.add("selected");
-            }
-          });
-        }
-      });
-    </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const itemsPerPage = 5; // Number of entries to display per page
+  let currentPage = 1; // Current page, starting from 1
+
+  function showPage(pageNumber) {
+    const rows = document.querySelectorAll(".cust-datatable tbody tr");
+    const totalPages = Math.ceil(rows.length / itemsPerPage);
+
+    // Hide all rows
+    rows.forEach((row) => (row.style.display = "none"));
+
+    // Show rows for the current page
+    const startIndex = (pageNumber - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    for (let i = startIndex; i < endIndex && i < rows.length; i++) {
+      rows[i].style.display = "table-row";
+    }
+  }
+
+  // Function to generate the pagination links dynamically
+  function generatePaginationLinks() {
+    const paginationElement = document.getElementById("pagination");
+    const rows = document.querySelectorAll(".cust-datatable tbody tr");
+    const totalPages = Math.ceil(rows.length / itemsPerPage);
+
+    let paginationHTML = "";
+
+    if (currentPage > 1) {
+      paginationHTML += `<li class="page-item"><a href="#" class="page-link" onclick="changePage(${currentPage - 1})">Previous</a></li>`;
+    } else {
+      paginationHTML += `<li class="page-item disabled"><a href="#">Previous</a></li>`;
+    }
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === currentPage) {
+        paginationHTML += `<li class="page-item active"><a href="#" class="page-link" onclick="changePage(${i})">${i}</a></li>`;
+      } else {
+        paginationHTML += `<li class="page-item"><a href="#" class="page-link" onclick="changePage(${i})">${i}</a></li>`;
+      }
+    }
+
+    if (currentPage < totalPages) {
+      paginationHTML += `<li class="page-item"><a href="#" class="page-link" onclick="changePage(${currentPage + 1})">Next</a></li>`;
+    } else {
+      paginationHTML += `<li class="page-item disabled"><a href="#">Next</a></li>`;
+    }
+
+    paginationElement.innerHTML = paginationHTML;
+  }
+
+  // Function to change the current page and update the pagination links
+  function changePage(newPage) {
+    if (newPage >= 1 && newPage <= Math.ceil(rows.length / itemsPerPage)) {
+      currentPage = newPage;
+      showPage(currentPage);
+      generatePaginationLinks();
+    }
+  }
+
+  // Call the initial functions to show the first page and generate the pagination links
+  showPage(currentPage);
+  generatePaginationLinks();
+});
+
+    </script> 
   </body>
 </html>

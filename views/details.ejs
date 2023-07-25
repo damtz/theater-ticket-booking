@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="css/details.css" />
   </head>
   <body>
-   <%- include('header1') %>
+   <%- include('header') %>
     <!-- =============================================Image Slider========================================= -->
 
     <div class="container">
@@ -138,15 +138,21 @@
                   <span class="movie-title">Screening Time:</span>
                   6:30 PM
                 </h6>
+                <%- include('popupBookTicket') %>
                 <div class="container mb-4">
             <div class="booked-button d-flex justify-content-end">
-              <button onclick="location.href='booking.html'" type="button" class="btn btn-outline-warning">
-                BOOK
-              </button>
+              <button
+              type="submit"
+              class="btn btn-outline-warning"
+              onclick="openPopup()">
+              BOOK
+            </button>
             </div>
           </div>
           </div>
           </div>
+
+
                 <div class="col hall-1">
                   <h6 class="text-white mt-3">
                     <span class="movie-title">Screening Date:</span>
@@ -172,11 +178,19 @@
                     6:30 PM
                   </h6>
                   <div class="container mb-4">
+                    <%- include('popupBookTicket') %>
               <div class="booked-button d-flex justify-content-end">
-                <button onclick="location.href='booking.html'" type="button" class="btn btn-outline-warning">
-                  BOOK
-                </button>
+                <button
+                type="submit"
+                class="btn btn-outline-warning"
+                onclick="openPopup()">
+                BOOK
+              </button>
+
+
               </div>
+
+
             </div>
           </div>
               </div>
@@ -205,18 +219,6 @@
 
     <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
 
-  
-<script src="seat.js"></script>
 
-
-    <script>
-      const swiper = new Swiper(".swiper", {
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        loop: true,
-      });
-    </script>
   </body>
 </html>

@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      name="viewpoint"
+      charset="utf-8"
+      content="width=device-width, initial-scale=1.0" />
+
+    <title>Popup Message</title>
+    <link rel="stylesheet" type="text/css" href="./css/popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="popup" id="popup">
+        <p>Are you sure want to book the tickets?</p>
+
+        <div class="button-container">
+          <button type="button" onclick="closePopup()">CANCEL</button>
+          <button type="button" onclick="closePopup()">CONFIRM</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      let popup = document.getElementById("popup");
+
+      function openPopup() {
+        popup.classList.add("open-popup");
+      }
+
+      function closePopup() {
+        popup.classList.remove("open-popup");
+      }
+    </script>
+  </body>
+</html>

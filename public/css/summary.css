@@ -64,6 +64,7 @@ hr {
   border: 2px solid #ffe36d;
   display: flex;
   justify-content: flex-end;
+  width:100px;
  
 }
 

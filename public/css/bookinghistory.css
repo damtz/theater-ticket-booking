@@ -31,42 +31,6 @@ body {
 .main-datatable .row {
   margin: 0;
 }
-.searchInput {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  position: relative;
-  justify-content: flex-end;
-  margin: 20px 0px;
-  padding: 0px 4px;
-}
-.searchInput input {
-  border: 1px solid #e5e5e5;
-  border-radius: 50px;
-  margin-left: 8px;
-  height: 34px;
-  width: 100%;
-  padding: 0px 25px 0px 10px;
-  transition: all 0.6s ease;
-}
-.searchInput label {
-  color: #767676;
-  font-weight: normal;
-}
-.searchInput input:placeholder-shown {
-  width: 13%;
-}
-.searchInput:hover input:placeholder-shown {
-  width: 100%;
-  cursor: pointer;
-}
-.searchInput:after {
-  font-family: "FontAwesome";
-  color: #d4d4d4;
-  position: relative;
-  content: "\f002";
-  right: 25px;
-}
 
 .add_flex {
   display: flex;
@@ -175,7 +139,9 @@ body {
   font-size:13px;
   margin: 30px;
 }
-
+.page-link{
+  background-color: #ffe36d;
+}
 
 @media only screen and (max-width: 1200px) {
   .overflow-x {

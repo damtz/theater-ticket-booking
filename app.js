@@ -17,15 +17,11 @@ app.use("/img", express.static(__dirname + "public/img"));
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
-// app.set('views', path.join(__dirname, "views"));
-//
+
 app.get("", (req, res) => {
   res.render("index");
 });
 
-app.get("/navbar", (req, res) => {
-  res.render("nabar");
-});
 
 app.get("/home", (req, res) => {
   res.render("home");
@@ -83,6 +79,9 @@ app.get("/upcomingdetails", (req, res) => {
   res.render("upcomingMdetails");
 });
 
+app.get("/popup", (req, res) => {
+  res.render("popupmessage");
+});
 
 // listen on port
 app.listen(port, () => console.info(`Listening on port ${port}`));

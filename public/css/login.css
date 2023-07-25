@@ -21,8 +21,6 @@ body {
   max-width: 450px;
   min-height: 380px;
   margin: 30px;
-  /* background: linear-gradient(to top, #4d4c4c 100%, rgba(0, 0, 0, 0) 100%);
-   */
   background-color: transparent;
   overflow: hidden;
   cursor: pointer;

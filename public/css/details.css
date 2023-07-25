@@ -5,7 +5,6 @@
 body {
   background-color: #eee;
   font-family: "Inter", sans-serif;
-  /* background: linear-gradient(to top, #949292 10%, rgba(0, 0, 0, 100) 80%); */
   background-color: #404040;
 }
 
@@ -137,25 +136,7 @@ hr {
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
 
-  .search-container {
-    order: 3;
-    transform: translateX(20%);
-  }
-
-  .navbar-toggle {
-    order: 1;
-  }
-
-  .navbar-toggler,
-  .navbar-toggler:focus {
-    transform: translateX(300%);
-  }
   .bi-person-circle {
     display: none;
   }

@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="css/summary.css" />
   </head>
   <body>
-   <%- include('header1') %>
+   <%- include('header') %>
     <!-- =============================================Image Slider========================================= -->
 
     <div class="container">
@@ -124,12 +124,10 @@
                   <span class="movie-title">Total Price:</span>
                   Nu 1400
                 </h5>
-
-                
             <div class="container">
               <div class="ticket-button d-flex justify-content-end px-5">
-                <button type="button" class="btn btn-outline-warning">
-                  Download
+                <button  type="submit" onclick="openPopup()" class="btn btn-outline-warning">
+                  CONFIRM
                 </button>
               </div>
             </div>
@@ -153,18 +151,36 @@
 
     <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
 
-  
-<script src="seat.js"></script>
 
+    <div class="container">
+      <!-- <button type="submit" class="btn" onclick="openPopup()"> Submit</button> -->
+      <div class="popup" id="popup">
+        <img src="tick.png">
+        <h2>Thank You!</h2>
+        <p>Your Details has been successfully submitted, Thank!</p>
+  
+        <button type="button" onclick="closePopup()">OK</button>	
+      </div>
+    </div>
 
     <script>
-      const swiper = new Swiper(".swiper", {
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        loop: true,
-      });
+      let popup = document.getElementById("popup");
+  
+      function openPopup(){
+        popup.classList.add("open-popup");
+      }
+  
+  
+      function closePopup(){
+        popup.classList.remove("open-popup");
+      }
     </script>
+  
+
+
+
+
+
+
   </body>
 </html>
