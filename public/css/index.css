@@ -5,9 +5,17 @@
 body {
   background-color: #eee;
   font-family: "Inter", sans-serif;
-  background-color: #49484A;
+  background-color: #49484a;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
 /* =============================Herobanner=================================== */
 
 :root {
@@ -44,7 +52,6 @@ body {
   background-color: transparent;
 }
 
-
 .text-container {
   display: flex;
   justify-content: flex-start;
@@ -78,15 +85,41 @@ body {
 
 /* ============================================movie selection========================================= */
 
-.genre {
-  display: flex;
-  justify-content: flex-end;
+.dropdown .btn {
+  background-color: transparent;
+  color: #eee;
+  border: 2px solid #ffe36d;
 }
 
-.my-text {
-  text-decoration: underline;
-  text-decoration-color: #ffe36d;
-  font-weight: bold;
+.dropdown .btn:hover {
+  color: #fff;
+  background: #ffe36d;
+  background: linear-gradient(to right, #ffe36d 50%, rgba(0, 0, 0, 0) 90%);
+}
+
+.dropdown-item {
+  text-decoration: none;
+}
+
+.dropdown-menu ul {
+  position: absolute;
+}
+
+.dropdown-menu ul li {
+  list-style: none;
+}
+
+.dropdown-menu ul li a {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.dropdown ul li a.active {
+  background-color: #ffe36d;
+  color: #fff;
 }
 
 /* ===============Movie List======================= */
@@ -137,9 +170,7 @@ body {
   border-radius: 10px;
   color: #fff;
   font-size: 14px;
-
 }
-
 
 .image-container .col-md-3:hover img {
   transform: scale(1.2);
@@ -213,8 +244,6 @@ body {
   margin-left: -80px;
 }
 
-
-
 /* ==========================================Responsivness for mobile========================================= */
 
 @media (max-width: 768px) {
@@ -249,7 +278,6 @@ body {
     width: 350px;
     height: 300px;
     margin-left: 0;
-   
   }
   .right-div img {
     display: none;
@@ -258,8 +286,7 @@ body {
 
 /* for tablet view */
 
-@media screen and (min-width:769px) and (max-width: 991px) {
-
+@media screen and (min-width: 769px) and (max-width: 991px) {
   .swiper-slide {
     height: 500px;
   }
@@ -297,4 +324,4 @@ body {
     text-align: center;
     z-index: 1;
   }
-} 
+}

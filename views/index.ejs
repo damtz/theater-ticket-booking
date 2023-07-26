@@ -146,20 +146,40 @@
     </div>
 
     <!-- ====================================Movie selection================================ -->
-    <div class="movie-selection">
-      <div class="container">
-        <div class="row">
-          <div class="genre m-3">
-            <span class="m-2 text-white my-text" style="font-size: small"
-              >ALL</span
-            >
-            <span class="m-2 text-white" style="font-size: small">ACTION</span>
-            <span class="m-2 text-white" style="font-size: small">COMEDY</span>
-            <span class="m-2 text-white" style="font-size: small">ROMANCE</span>
-            <span class="m-2 text-white" style="font-size: small">HORROR</span>
-          </div>
-        </div>
+    <div class="container d-flex justify-content-end m-5">
+      <div class="dropdown d-flex justify-content-end">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Select Genre
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li class="active"><a class="dropdown-item" href="#">ALL</a></li>
+          <li><a class="dropdown-item" href="#">ACTION</a></li>
+          <li><a class="dropdown-item" href="#">DARMA</a></li>
+          <li><a class="dropdown-item" href="#">ROMANCE</a></li>
+          <li><a class="dropdown-item" href="#">COMEDY</a></li>
+          <li><a class="dropdown-item" href="#">HORROR</a></li>
+        </ul>
       </div>
+
+      <script>
+        dropdown = document
+          .querySelector(".dropdown-menu")
+          .querySelectorAll("a");
+        console.log(dropdown);
+
+        dropdown.forEach((element) => {
+          element.addEventListener("click", function () {
+            dropdown.forEach((drop) => drop.classList.remove("active"));
+
+            this.classList.add("active");
+          });
+        });
+      </script>
     </div>
 
     <!-- ===============================movie list========================================== -->
@@ -193,7 +213,7 @@
                 BOOK NOW
               </button>
               <button onclick="location.href='rating'" class="rate-us">
-                 RATE US
+                RATE US
               </button>
             </div>
             <div class="col-md-3">
@@ -220,7 +240,7 @@
           </div>
         </div>
       </div>
-      <div class="more-content" style="display: none;">
+      <div class="more-content" style="display: none">
         <div class="row">
           <div class="col-md-12">
             <div class="image-container d-flex justify-content-between">
@@ -308,5 +328,16 @@
         loop: true,
       });
     </script>
+
+    <!-- <script>
+      $(document).on("click", "ul li", function () {
+        $(this).addClass("active").siblings().removeClass("active");
+      });
+    </script> -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"></script>
   </body>
 </html>
