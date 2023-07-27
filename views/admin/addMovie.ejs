@@ -1,0 +1,73 @@
+<html>
+  <% if (typeof errorMessage !== "undefined") { %>
+  <p style="color: rgb(240, 19, 26)" role="alert"><%= errorMessage %></p>
+  <% } %>
+  <form action="/add-movie" method="POST" enctype="multipart/form-data">
+    <label for="movieTitle">Movie Title:</label>
+    <input type="text" id="movieTitle" name="movieTitle" required />
+
+    <label for="movieTrailer">Trailer URL:</label>
+    <input
+      type="text"
+      id="movieTrailer"
+      name="movieTrailer"
+      placeholder="Enter trailer URL"
+      required
+    />
+
+    <label for="summary">Summary:</label>
+    <textarea id="summary" name="summary" required></textarea>
+
+    <label for="casts">Casts:</label>
+    <input type="text" id="casts" name="casts" required />
+
+    <label for="status">Status:</label>
+    <select id="status" name="status" required>
+      <option value="new">New Release</option>
+      <option value="Released">Released</option>
+      <option value="Coming Soon">UpComing</option>
+      <option value="closed">Closed</option>
+    </select>
+
+    <label for="genre">Genre:</label>
+    <select id="genre" name="genre" required>
+      <option value="adventure">Adventure</option>
+      <option value="action">Action</option>
+      <option value="action/adventure">Action/Adventure</option>
+      <option value="action thriller">Action/Thriller</option>
+      <option value="animation">Animation</option>
+      <option value="Biographical">Biographical</option>
+      <option value="comedy">Comedy</option>
+      <option value="documentary">Documentary</option>
+      <option value="drama">Drama</option>
+      <option value="horror">Horror</option>
+      <option value="mystery">Mystery</option>
+      <option value="romance">Romance</option>
+      <option value="romantic comedy">Romantic/comedy</option>
+      <option value="science fiction">Science/fiction</option>
+      <option value="thriller">Thriller</option>
+      <option value="war">War</option>
+    </select>
+
+    <label for="duration">duration:</label>
+    <input
+      id="duration"
+      name="duration"
+      placeholder="Enter movie duartion"
+      required
+    ></input>
+
+    <label for="languageId">Language:</label>
+    <select id="languageId" name="languageId" required>
+      <% languages.forEach(function(language) { %>
+      <option value="<%= language.id %>"><%= language.name %></option>
+      <% }); %>
+    </select>
+
+
+    <label for="image">Movie Image:</label>
+    <input type="file" id="image" name="image" accept="image/*" required />
+
+    <button type="submit">Add Movie</button>
+  </form>
+</html>

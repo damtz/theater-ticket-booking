@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@10/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="/assets/css/newrelease.css" />
+  </head>
+  <body>
+    <%- include('header') %>
+
+    <!-- ====================================New Release================================ -->
+    <div class="newrelease">
+      <div class="container">
+        <h4 class="text-white p-4">New Release</h4>
+      </div>
+
+      <!-- ===============================movie list========================================== -->
+      <div class="container movie-list">
+        <div class="row d-flex">
+          <div class="col-md-12">
+            <div class="image-container d-flex justify-content-between">
+              <% if (movies.length === 0) { %>
+                <p style="color:white;">No new releases found.</p>
+              <% } else { %>
+                <% let count = 0; %>
+                <% movies.forEach(function(movie) { %>
+                  <div class="col-md-3">
+                    <a href="/movie-details?movieId=<%= movie.id %>">
+                      <img src="/images/<%= movie.image %>" alt="Image <%= count + 1 %>" class="p-3" />
+                    </a>
+                  </div>
+                  <% count++; %>
+                  <% if (count % 4 === 0) { %>
+                    </div>
+                    <div class="image-container d-flex justify-content-between">
+                  <% } %>
+                <% }); %>
+            </div>
+          </div>
+        </div>
+        <div class="load-more d-flex justify-content-center">
+          <button type="button" class="btn btn-secondary mt-4" id="more-button">
+            LOAD MORE
+          </button>
+          <button type="button" class="btn btn-secondary mt-4" id="less-button" style="display: none;">
+            SEE LESS
+          </button>
+        </div>
+        <% } %>
+      </div>
+      
+
+
+    <%- include('footer')%>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper(".swiper", {
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        loop: true,
+      });
+    </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const moviesPerRow = 4;
+    let moviesToShow = 4; // Show 4 movies initially
+    const moreButton = document.getElementById("more-button");
+    const lessButton = document.getElementById("less-button");
+    const movieItems = document.querySelectorAll(".movie-list .col-md-3");
+
+    // Function to toggle the visibility of movie items
+    function toggleMovieItems() {
+      movieItems.forEach((item, index) => {
+        if (index < moviesToShow) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    }
+
+    // Show/hide movie items on initial load
+    toggleMovieItems();
+
+    function showMoreButton() {
+      moreButton.style.display = "inline-block";
+      lessButton.style.display = "none";
+    }
+
+    function showLessButton() {
+      moreButton.style.display = "none";
+      lessButton.style.display = "inline-block";
+    }
+
+    // Load more button functionality
+    moreButton.addEventListener("click", function () {
+      moviesToShow += moviesPerRow; // Increase the count by moviesPerRow
+      toggleMovieItems();
+
+      // Check if there are more movies to show
+      if (moviesToShow >= movieItems.length) {
+        showLessButton();
+      }
+    });
+
+    // See less button functionality
+    lessButton.addEventListener("click", function () {
+      moviesToShow = 4; // Show 4 movies initially
+      toggleMovieItems();
+      showMoreButton();
+    });
+  });
+</script>
+  </body>
+</html>

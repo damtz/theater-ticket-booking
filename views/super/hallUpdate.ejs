@@ -1,0 +1,77 @@
+<h1>Hall upd</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Movie Hall</title>
+  </head>
+  <body>
+    <h1>Add Movie Hall</h1>
+    <% if (typeof errorMessage !== "undefined") { %>
+    <p role="alert"><%= errorMessage %></p>
+    <% } %><% if (typeof error !== "undefined") { %>
+    <span style="color: red; font: size 14px" id="Err"> <%= error %></span>
+    <% } %> <% if (typeof successMessage !== "undefined") { %>
+    <p role="alert"><%= successMessage %></p>
+    <% } %>
+    <form action="/hallUpdate/<%= hall.id %>" method="POST">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%= hall.name %>" />
+        <p style="color: red">
+          <%= (typeof errors !== "undefined" && typeof errors.name !==
+          "undefined") ? errors.name.msg : "" %>
+        </p>
+      </div>
+      <div>
+        <label for="location">Location:</label>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          value="<%= hall.location %>"
+        />
+        <p style="color: red">
+          <%= (typeof errors !== "undefined" && typeof errors.location !==
+          "undefined") ? errors.location.msg : "" %>
+        </p>
+      </div>
+      <div>
+        <label for="normal_capacity">Normal Capacity:</label>
+        <input
+          type="number"
+          id="normal_capacity"
+          name="normal_capacity"
+          value="<%= hall.normal_capacity %>"
+        />
+      </div>
+      <div>
+        <label for="vip_capacity">VIP Capacity:</label>
+        <input
+          type="number"
+          id="vip_capacity"
+          name="vip_capacity"
+          value="<%= hall.vip_capacity %>"
+        />
+      </div>
+      <div>
+        <label for="normal_rate">Normal Rate:</label>
+        <input
+          type="number"
+          id="normal_rate"
+          name="normal_rate"
+          value="<%= hall.normal_rate %>"
+        />
+      </div>
+      <div>
+        <label for="vip_rate">VIP Rate:</label>
+        <input
+          type="number"
+          id="vip_rate"
+          name="vip_rate"
+          value="<%= hall.vip_rate %>"
+        />
+      </div>
+      <button type="submit">Add Movie Hall</button>
+    </form>
+  </body>
+</html>

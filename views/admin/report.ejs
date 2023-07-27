@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Report</title>
+  </head>
+  <body>
+    <% if (movieHallMapping.length > 0) { %>
+    <h1>Movie Hall Mapping Report</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Movie</th>
+          <th>Hall</th>
+          <th>Screening Date</th>
+          <th>Screening Time</th>
+          <th>Bookings Count</th>
+          <th>Tickets Left</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% movieHallMapping.forEach(function(mapping) { %>
+        <tr>
+          <td><%= mapping.movie_title %></td>
+          <td><%= mapping.hall_name %></td>
+          <td><%= mapping.screening_date %></td>
+          <td><%= mapping.screening_time %></td>
+          <td><%= mapping.bookings_count %></td>
+          <td><%= mapping.tickets_left %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <p>No movie hall mapping data available.</p>
+    <% } %>
+  </body>
+</html>

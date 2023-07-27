@@ -1,81 +1,48 @@
-/** @format */
-
-// imports
-
-const express = require("express");
+const express = require('express');
 const app = express();
-const path = require("path");
-const port = 3000;
+const bodyParser = require('body-parser');
+const session = require('express-session');
 
-// Static Files
-app.use(express.static("public"));
-app.use("/css", express.static(__dirname + "public/css"));
-app.use("/js", express.static(__dirname + "public/js"));
-app.use("/img", express.static(__dirname + "public/img"));
+const userRoute = require('./controller/user');
+const movieHallRoute = require('./controller/movieHall');
+const movieRoute = require('./controller/addMovie');
+const bookingRoute = require('./controller/booking');
+const mappingRoute = require('./controller/movieHallMapping');
+const addUserRoute = require('./controller/addUser');
+const superRoute = require('./controller/superAdmin');
+const adminRoute = require('./controller/admin');
+const addlanguageRoute = require('./controller/addlanguage');
+const addreviewRoute = require('./controller/moviereview');
 
-// set views
-app.set("views", "./views");
-app.set("view engine", "ejs");
 
-// app.set('views', path.join(__dirname, "views"));
-//
-app.get("", (req, res) => {
-  res.render("index");
+
+
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use('/assets',express.static('assets'));
+app.use('/public',express.static('public'));
+
+app.use(
+  session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use('/', userRoute);
+app.use('/', movieHallRoute);
+app.use('/', movieRoute);
+app.use('/', bookingRoute);
+app.use('/', mappingRoute);
+app.use('/', addUserRoute);
+app.use('/', superRoute);
+app.use('/', adminRoute);
+app.use('/', addlanguageRoute);
+app.use('/', addreviewRoute);
+
+
+app.listen(process.env.PORT || 3000, function () {
+  console.log('App running on port 3000 ..');
 });
-
-app.get("/home", (req, res) => {
-  res.render("home");
-});
-
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-
-
-
-app.get("/register", (req, res) => {
-  res.render("register");
-});
-
-app.get("/forgotpass", (req, res) => {
-  res.render("forgotpass");
-});
-
-app.get("/resetpass", (req, res) => {
-  res.render("resetpass");
-});
-
-app.get("/newrelease", (req, res) => {
-  res.render("newrelease");
-});
-
-app.get("/upcoming", (req, res) => {
-  res.render("upcoming");
-});
-
-app.get("/booking", (req, res) => {
-  res.render("booking");
-});
-
-app.get("/details", (req, res) => {
-  res.render("details");
-});
-
-app.get("/summary", (req, res) => {
-  res.render("summary");
-});
-
-app.get("/bookinghistory", (req, res) => {
-  res.render("bookinghistory");
-});
-
-app.get("/rating", (req, res) => {
-  res.render("rating");
-});
-app.get("/moviedetails", (req, res) => {
-  res.render("moviedetails");
-});
-
-
-// listen on port
-app.listen(port, () => console.info(`Listening on port ${port}`));

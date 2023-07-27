@@ -1,0 +1,33 @@
+<h1>THis is movie halls</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Normal capacity</th>
+    <th>Vip Capacity</th>
+    <th>Normal Rate</th>
+    <th>VIP Rate</th>
+    <!-- <th>Status</th> -->
+    <th>Action</th>
+  </tr>
+  <% halls.forEach(function(hall){ %>
+  <tr>
+    <td><%= hall.name %></td>
+    <td><%= hall.location %></td>
+    <td><%= hall.normal_capacity %></td>
+    <td><%= hall.vip_capacity %></td>
+    <td><%= hall.normal_rate %></td>
+    <td><%= hall.vip_rate %></td>
+    <!-- <% if(hall.status == 1){ %>
+    <td>Active</td>
+    <% }else{ %>
+    <td>Inactive</td>
+    <% } %> -->
+    <td>
+      <a href="hallUpdate/<%= hall.id %>">Edit</a>
+      <a href="hallDelete/<%= hall.id %>">Delete</a>
+    </td>
+  </tr>
+  <% }) %>
+</table>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bookinghistory</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/swiper@10/swiper-bundle.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link rel="stylesheet" href="/assets/css/bookinghistory.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.datatables.net/1.10.14/css/jquery.dataTables.min.css"
+  />
+</head>
+<body>
+  <%- include('header') %>
+  <!-- ====================================SummaryReport================================ -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 main-datatable">
+        <div class="card_body">
+          <div class="row d-flex">
+            <div class="col-sm-4 createSegment">
+              <h5 class="text-black">Booking History</h5>
+            </div>
+          </div>
+          <div class="overflow-x">
+            <table class="table cust-datatable dataTable no-footer table-hover" id="bookingTable">
+              <thead>
+                <tr>
+                  <th>TicketNo</th>
+                  <th>Booking Date</th>
+                  <th>Movie Name</th>
+                  <th>Hall Name</th>
+                  <th>Location</th>
+                  <th>Booking Date</th>
+                  <th>Time</th>
+                  <th>Seat No.</th>
+                  <th>Amount</th>
+                  <th>Download</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (bookings.length === 0) { %>
+                <tr>
+                  <td colspan="9" style="color: rgb(10, 26, 170)">No bookings found.</td>
+                </tr>
+                <% } else { %>
+                <% bookings.forEach(function (booking) { %>
+                <tr>
+                  <td><%= booking.booking_id %></td>
+                  <td>
+                    <%= booking.booking_date_and_time.toLocaleDateString(
+                      "en-US",
+                      {
+                        weekday: "short",
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      }
+                    ) %>
+                  </td>
+                  <td><%= booking.movie_title %></td>
+                  <td><%= booking.hall_name %></td>
+                  <td><%= booking.hall_location %></td>
+                  <td>
+                    <%= new Date(booking.screening_date).toLocaleDateString(
+                      "en-US",
+                      {
+                        weekday: "short",
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      }
+                    ) %>
+                  </td>
+                  <td><%= booking.screening_time %></td>
+                  <td><%= booking.seat_number %></td>
+                  <td><%= booking.amount %></td>
+                  <td>
+                    <a href="/download-mybooking/<%= booking.booking_id %>">
+                      <i class="fas fa-download" style="color: #060606"></i>
+                    </a>
+                  </td>
+                </tr>
+                <% }) %>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('footer') %>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+    integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+    crossorigin="anonymous"
+  ></script>
+
+  <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#bookingTable').DataTable({
+        "paging": true,
+        "pageLength": 5, // Set the number of rows to display per page (you can change this as needed)
+        "lengthMenu": [5, 10, 25, 50], // Allow users to choose how many rows to display
+        "order": [], // Disable initial sorting (you can specify the default sorting if needed)
+        "language": {
+          "paginate": {
+            "previous": "Previous",
+            "next": "Next"
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

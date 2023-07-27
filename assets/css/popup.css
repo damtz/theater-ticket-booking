@@ -1,0 +1,93 @@
+
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600&family=Open+Sans:wght@300&family=Roboto+Flex:wght@100;200;300&family=Roboto:wght@100;300;400;500&display=swap");
+
+    .popup {
+      width: 90%; /* Adjust the width to 80% of the viewport */
+      max-width: 500px; /* Set a maximum width to prevent it from being too wide on larger screens */
+      height: 40%; /* Allow the height to adjust based on the content */
+      background: #868686;
+      border-radius: 20px;
+      position: fixed; /* Use fixed positioning for better compatibility on mobile */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* Center the popup horizontally and vertically */
+      text-align: center;
+      padding: 20px; /* Add padding to create some space between the content and the edges */
+      color: #333;
+      visibility: hidden;
+      transition: transform 0.4s, top 0.4s;
+    }
+
+    .open-popup {
+      visibility: visible;
+      top: 50%; /* Adjust the top position to center the popup */
+    }
+
+    .popup p {
+      margin-top: 40px; /* Reduce the margin on smaller screens */
+      font-size: 20px; /* Adjust the font size to fit better on mobile */
+      color: #ffffff;
+      font-family: "Inter", sans-serif;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    }
+
+    .button-container button {
+      justify-content: space-around;
+      align-items: center;
+      width: 45%; /* Adjust the button width to fit two buttons per row on mobile */
+      max-width: 200px; /* Set a maximum width to prevent the buttons from becoming too large */
+      height: 60px;
+      border-radius: 10px;
+      border: 2px solid #ffe36d;
+      margin: 10px; /* Reduce the margin between buttons */
+      padding: 10px;
+      cursor: pointer;
+      font-size: 16px; /* Adjust the font size for better readability on mobile */
+      background-color: transparent;
+      color: #fff;
+    }
+
+    .button-container button:hover {
+      background-color: #ffe36d;
+    }
+  
+	@media (max-width: 768px){
+	.popup {
+		width: 90%;
+		height: auto;
+		padding: 20px;
+	  }
+	
+	  .popup p {
+		margin-top: 20px;
+		font-size: 18px;
+	  }
+	
+	  .button-container {
+		display: flex;
+		justify-content: space-around;
+	  }
+	  .button-container button {
+		justify-content: space-around;
+		align-items: center;
+		width: 100px;
+		height: 50px;
+		border-radius: 10px;
+		border: 2px solid #ffe36d;
+		cursor: pointer;
+		font-size: 18px;
+		background-color: transparent;
+		color: #fff;
+	  }
+	
+	  .open-popup {
+		visibility: visible;
+		top: 50%;
+	  }
+	
+	}

@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@10/swiper-bundle.min.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+
+    <link rel="stylesheet" href="/assets/css/details.css" />
+  </head>
+  <body>
+
+   <%- include('header') %>
+    <!-- =============================================Image Slider========================================= -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="custom-card ">
+          <div class="card">
+            <img src="/images/<%= movie.image %>" class="card-img-top">
+            <div class="card-body">
+              <div class="container px-2">
+                <h5 class="card-title"><a href="/movie/<%= movie.id %>"><%=movie.title%></a></a></h5>
+              <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
+        
+                    <div class="row category">
+                      <div class="col">
+                        <p class="text text-white">Title</p>
+                      </div>
+                      <div class="col">
+                        <p class="text text-white fw-light"><%= movie.title %></p>
+                      </div>
+                    </div>
+                    <div class="row category">
+                      <div class="col">
+                        <p class="text text-white">Duration</p>
+                      </div>
+                      <div class="col">
+                        <p class="text text-white fw-light"><%= movie.duration %></p>
+                      </div>
+                    </div>
+                    <div class="row category">
+                      <div class="col">
+                        <p class="text text-white">Genre</p>
+                      </div>
+                      <div class="col">
+                        <p class="text text-white fw-light"><%= movie.genre %></p>
+                      </div>
+                    </div>
+              </div>
+              
+            </div>
+            </div>
+            </div>
+        </div>
+       
+
+
+<!-- ===============================left div====================================== -->
+          <div class="col-md-9">
+            <div class="custom-card card-container">
+            <div class="container booking-summary">
+              <h4 class="text-white mb-4">Booking Summary</h4>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Movie Title:</span>
+                  <%= movie.title %>                </h6>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Duration:</span>
+                  <%= movie.duration %>                </h6>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Genre:</span>
+                  <%= movie.genre %>                </h6>
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Cast:</span>
+                  <%= movie.casts %>               
+                 </h6>
+                <h6 class="text-white mt-3 ">
+                  <span class="movie-title">Description:</span>
+                  <%= movie.summary %>
+                </h6>
+              <div>
+              </div>
+              <hr class="mb-5">
+      <!-- =================================Booking the seat accronding to hall==================================== -->
+            
+      <div class="container">
+      <div class="row">
+        <% halls.forEach((hall) => { %>
+              <div class="col hall-1">
+                <div class="custom-card">
+                <h6 class="text-white mt-3">
+                  <span class="movie-title">Screening Date and time:</span>
+                  <select style="width: 150px;" name="screening" onchange="redirectToSeatAvailability(this)">
+                    <option value="" disabled selected>Select Date</option>
+                    <% hall.screenings.forEach((screening) => { %>
+                    <option
+                      value="/seat-availability?hallId=<%= hall.id %>&movieId=<%= movie.id %>&date=<%= screening.screening_date %>&time=<%= screening.screening_time %>"
+                    >
+                      <%= screening.screening_date.toLocaleDateString("en-US", {
+                        weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %> <%= formatTime(screening.screening_time) %>
+                    </option>
+                    <% }) %>
+                  </select>
+                </h6>
+                 
+                <h6 class="text-white mt-3 ">
+                  <span class="movie-title">Screening Hall:</span>
+                  <%= hall.name %>               
+                 </h6>
+
+                <h6 class="text-white mt-3 ">
+                  <span class="movie-title">Location:</span>
+                  <%= hall.location %>                </h6>
+                <div class="container mb-4">
+          </div>
+          </div>
+          </div>
+          <% }) %>
+              </div>
+            </div>
+            </div>
+
+
+         </div> 
+        </div>
+         
+         
+      </div>
+    </div>
+
+    <%- include('footer') %>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/js/all.min.js"></script>
+
+    <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
+
+  
+<script src="seat.js"></script>
+
+
+    <script>
+      const swiper = new Swiper(".swiper", {
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        loop: true,
+      });
+    </script>
+     <script>
+      function redirectToSeatAvailability(selectElement) {
+        const selectedOption = selectElement.value;
+        window.location.href = selectedOption;
+      }
+    </script>
+       <% function formatTime(timeString) {
+        const time = new Date(`2000-01-01T${timeString}`);
+        let hours = time.getHours();
+        let minutes = time.getMinutes();
+        const amPm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12;
+        minutes = minutes.toString().padStart(2, "0");
+        return `${hours}:${minutes} ${amPm}`;
+      } %>
+  </body>
+</html>
+

@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navigation Bar with Search Box</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="stylesheet" href="/assets/css/header.css" />
+
+    <head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-sAd15VB6Iz7vGQVQzvBE30s16yzzsTBgd1u6VEnVIt56RtOlPuP6MluuKjXl4f73sdrgmhy6gAmudRJ0lZCJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <body>
+
+
+    <nav class="nav">
+      <a href="/" class="logo">
+      <img src="/public/images/logo.png" alt="Logo" />
+    </a> 
+      <ul class="nav-links">
+        <i class="uil uil-times navCloseBtn"></i>
+        <li><a href="/">Home</a></li>
+        <li><a href="/new-releases">New Release</a></li>
+        <li><a href="/up-coming">UpComing</a></li>
+        
+
+      </ul>
+      <form method="GET" action="/search">
+        <div class="Search-bar">
+        <div class="box">
+          <input type="text" name="search" id="search" placeholder="Search.....">
+           <button style="background: transparent; border: transparent;" type="submit"><i class="fas fa-search"></i></button>
+          </a>
+        </div>
+        </div>
+      </form>
+        <% if(currentUser){ %>
+
+          <div class="navbar-item dropdown has-divider">
+            <a
+              class="navbar-link"
+              href="#"
+              id="dropdownMenuLink"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <div
+                class="d-flex justify-content-end account-setting"
+                style="margin-right: 10px"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="30"
+                  fill="currentColor"
+                  class="bi bi-person-circle"
+                  style="color: #ffe36d"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                  <path
+                    fill-rule="evenodd"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                  />
+                </svg>
+              </div>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="#">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    class="bi bi-person-circle"
+                    viewBox="0 0 16 16"
+                    style="margin-right: 10px"
+                  >
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path
+                      fill-rule="evenodd"
+                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                    />
+                  </svg>
+                  <%=currentUser.username%>
+                </a>
+              </li>
+              <hr />
+              <li>
+                <a class="dropdown-item" href="/my-bookings"
+                  ><img
+                    src="/public/images/bookinghistory.png"
+                    style="margin-right: 10px"
+                  />Booking History</a
+                >
+              </li>
+              <hr />
+              <li>
+                <a class="dropdown-item" href="/logout"
+                  ><i
+                    class="fa-solid fa-right-from-bracket"
+                    style="margin-right: 10px"
+                  ></i
+                  >Logout</a
+                >
+              </li>
+            </ul>
+            <% }else{ %>
+      <i class="uil uil-bars navOpenBtn"></i>
+       <div class="navbar-menu" id="navbar-menu">
+          <div class="navbar-end">
+              <a class="navbar-link">
+                <button
+                  onclick="location.href='login'"
+                  type="button"
+                  class="btn btn-outline-warning"
+                  id="Signin">
+                  Sign In
+                </button>
+              </a>
+          </div>
+        </div>
+        <% } %>
+    </nav>
+
+
+    <script>
+      const nav = document.querySelector(".nav"),
+      navOpenBtn = document.querySelector(".navOpenBtn"),
+      navCloseBtn = document.querySelector(".navCloseBtn");
+
+
+      navOpenBtn.addEventListener("click", () => {
+      nav.classList.add("openNav");
+      nav.classList.remove("openSearch");
+  
+});
+navCloseBtn.addEventListener("click", () => {
+  nav.classList.remove("openNav");
+});
+    </script>
+  </body>
+</html>
