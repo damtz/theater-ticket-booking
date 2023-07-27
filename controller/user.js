@@ -134,6 +134,7 @@ router.post('/register', registerValidation, function (req, res) {
         errors: errMsg,
         inputData: inputData,
         error: error,
+        currentUser: req.user,
       });
     } else {
       const { name, email, password } = req.body;
@@ -149,7 +150,7 @@ router.post('/register', registerValidation, function (req, res) {
         const emailCount = results[0].count;
         if (emailCount > 0) {
           console.log('Email already exists.');
-          res.render('user/register', {
+          res.render('user/register', {currentUser: req.user,
             errorMessage: 'Email already exists.',
           });
         } else {
@@ -160,7 +161,7 @@ router.post('/register', registerValidation, function (req, res) {
               return;
             }
             console.log('Data inserted successfully.');
-            res.render('user/login', {
+            res.render('user/login', {currentUser: req.user,
               successMessage: 'Registration Success. Please Login now.',
             });
           });
@@ -169,7 +170,7 @@ router.post('/register', registerValidation, function (req, res) {
     }
   } catch (err) {
     console.log('Verification Invalid!!' + err);
-    res.render('user/register', { errorMessage: 'Something went wrong' });
+    res.render('user/register', {currentUser: req.user, errorMessage: 'Something went wrong' });
   }
 });
 
