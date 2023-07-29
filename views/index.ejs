@@ -15,6 +15,9 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+      <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper@10/swiper-bundle.min.css" />
@@ -24,129 +27,333 @@
   <body>
     <%- include('header') %>
 
-    <div class="swiper mt-2">
-      <div class="swiper-wrapper">
+<!-- slider 1-->
+<div class="swiper mt-2">
+  <div class="swiper-wrapper">
+        <!-- slider 1-->
         <div class="swiper-slide">
-          <img src="./img/herobanner.jpg" />
-
-          <div class="container main-section">
-            <div class="row text-container mt-5">
-              <div class="col-md-6">
-                <div class="button-container mb-4">
-                  <button
-                    type="button"
-                    class="gradient-border-button btn btn-primary mt-5">
-                    Darma
-                  </button>
-                  <button
-                    type="button"
-                    class="gradient-border-button btn btn-primary mt-5 text-white">
-                    ShortFilm
-                  </button>
+          <section class="hero-banner text-white">
+            <div class="container text-white">
+              <div class="row">
+                <div class="col-md-6 d-none d-md-block d-lg-block">
+                  <div class="hero-overlay">
+                    <button class="gradient-border-button"
+              type="button"
+              class="btn btn-primary"
+              style="
+                background-color: transparent;
+                border: 2px solid #ffe36d;
+                border-radius: 15px;
+              ">
+              Darma
+            </button>
+            <button class="gradient-border-button"
+            type="button"
+            class="btn btn-primary"
+            style="
+              background-color: transparent;
+              border: 2px solid #ffe36d;
+              border-radius: 15px;
+            ">
+            ShortFlim
+          </button>
+                    <h6 class="hero-title mb-2" class="text-white">Slient Walls</h6>
+                    <span>
+                      <i class="bi bi-clock-fill" style="color: #ffe36d"></i>2HRS 3
+                      MINS</span
+                    >
+                    <p class="hero-subtitle">
+                      A deaf girl finds her life beginning to rapidly narrow and
+                      deteriorate when she gets locked up by her over-protective
+                      father owing to her puberty.
+                    </p>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-lg"
+                      style="
+                        background-color: transparent;
+                        border: 2px solid #ffe36d;
+                        border-radius: 15px;
+                      ">
+                      BOOK NOW
+                    </button>
+                  </div>
                 </div>
-                <h5 class="fs-3">Silent Walls</h5>
-                <span
-                  ><i class="fas fa-clock fa-2x" style="color: #ffe36d"></i>2
-                  HRS 30 MINS</span
-                >
-                <div class="description">
-                  <p class="mt-4">
+              </div>
+            </div>
+          </section>
+
+          
+    <!-- Additional Hero Overlay in the Second Row (between 992px and less than 576px) -->
+    <section class="hero-overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 d-md-none">
+            <button class="gradient-border-button"
+            type="button"
+            class="btn btn-primary"
+            style="
+              background-color: transparent;
+              border: 2px solid #ffe36d;
+              border-radius: 15px;
+            ">
+            Darma
+          </button>
+          <button class="gradient-border-button"
+          type="button"
+          class="btn btn-primary"
+          style="
+            background-color: transparent;
+            border: 2px solid #ffe36d;
+            border-radius: 15px;
+          ">
+          ShortFlim
+        </button>
+                  <h6 class="hero-title mb-2">Slient Walls</h6>
+                  <span>
+                    <i class="bi bi-clock-fill" style="color: #ffe36d"></i>2HRS 3
+                    MINS</span
+                  >
+                  <p class="hero-subtitle">
                     A deaf girl finds her life beginning to rapidly narrow and
                     deteriorate when she gets locked up by her over-protective
                     father owing to her puberty.
                   </p>
-                </div>
-                <div class="book-button mb-5">
                   <button
-                    onclick="location.href='details.html'"
                     type="button"
-                    class="btn btn-secondary mt-3">
+                    class="btn btn-primary btn-lg"
+                    style="
+                      background-color: transparent;
+                      border: 2px solid #ffe36d;
+                      border-radius: 15px;
+                    ">
                     BOOK NOW
                   </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <img src="./img/ngejemasong.jpg" />
-          <div class="container main-section">
-            <div class="row text-container mt-5">
-              <div class="col-md-6">
-                <div class="button-container mb-4">
-                  <button type="button" class="btn btn-primary mt-5">
-                    Darma
-                  </button>
-                  <button type="button" class="btn btn-secondary mt-5">
-                    Romance
-                  </button>
-                  <button type="button" class="btn btn-secondary mt-5">
-                    Fantasy
-                  </button>
-                </div>
-                <h5 class="fs-3">Nga Je Masong</h5>
-                <span
-                  ><i class="fas fa-clock fa-2x" style="color: #ffe36d"></i>2
-                  HRS 30 MINS</span
-                >
-                <div class="description">
-                  <p class="mt-4">
-                    In a heartbeat, she appears and in a blink of an eye, she
-                    disappears. Are memories going to be the only thing that
-                    remains or will that be lost too?
-                  </p>
-                </div>
-                <div class="book-button mb-5">
-                  <button
-                    onclick="location.href='details'"
-                    type="button"
-                    class="btn btn-secondary mt-3">
-                    BOOK NOW
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <img src="./img/chasingstar.jpg" />
-          <div class="container main-section">
-            <div class="row text-container mt-5">
-              <div class="col-md-6">
-                <div class="button-container mb-3">
-                  <button type="button" class="btn btn-primary mt-5">
-                    Romance
-                  </button>
-                </div>
-                <h5 class="fs-3">Chasing Star</h5>
-                <span
-                  ><i class="fas fa-clock fa-2x" style="color: #ffe36d"></i>2
-                  HRS 3 MINS</span
-                >
-                <div class="description">
-                  <p class="mt-4">
-                    When the paths of two individuals with dreams collide, will
-                    they find love or will their hearts be broken?
-                  </p>
-                </div>
-                <div class="book-button mb-5">
-                  <button
-                    onclick="location.href='details'"
-                    type="button"
-                    class="btn btn-secondary mt-3">
-                    BOOK NOW
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+</div>
+
+
+   
+
+
+
+        <!-- slider 2-->
+        <div class="swiper-slide">
+          <section class="hero-banner text-white">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 d-none d-md-block d-lg-block">
+                  <div class="hero-overlay">
+                    <button class="gradient-border-button"
+              type="button"
+              class="btn btn-primary"
+              style="
+                background-color: transparent;
+                border: 2px solid #ffe36d;
+                border-radius: 15px;
+              ">
+              Romance
+            </button>
+                    <h6 class="hero-title mb-2">Chasing Star</h6>
+                    <span>
+                      <i class="bi bi-clock-fill" style="color: #ffe36d"></i>2HRS 3
+                      MINS</span
+                    >
+                    <p class="hero-subtitle">
+                      When the paths of two individuals with dreams collide, will they
+                      find love or will their hearts be broken?
+                    </p>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-lg"
+                      style="
+                        background-color: transparent;
+                        border: 2px solid #ffe36d;
+                        border-radius: 15px;
+                      ">
+                      BOOK NOW
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          
+    <!-- Additional Hero Overlay in the Second Row (between 992px and less than 576px) -->
+    <section class="hero-overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 d-md-none">
+            <button class="gradient-border-button"
+              type="button"
+              class="btn btn-primary"
+              style="
+                background-color: transparent;
+                border: 2px solid #ffe36d;
+                border-radius: 15px;
+              ">
+              Romance
+            </button>
+            <h6 class="hero-title">Chasing Star</h6>
+            <span>
+              <i class="bi bi-clock-fill" style="color: #ffe36d"></i>2HRS 3
+              MINS</span
+            >
+            <p class="hero-subtitle">
+              When the paths of two individuals with dreams collide, will they
+              find love or will their hearts be broken?
+            </p>
+
+            <button
+              type="button"
+              class="btn btn-primary btn-lg"
+              style="
+                background-color: transparent;
+                border: 2px solid #ffe36d;
+                border-radius: 15px;
+              ">
+              BOOK NOW
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>
+
+
+        <!-- second slider 3-->
+        <div class="swiper-slide">
+          <section class="hero-banner text-white">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 d-none d-md-block d-lg-block">
+                  <div class="hero-overlay">
+                
+              <button class="gradient-border-button"
+              type="button"
+              class="btn btn-primary"
+              style="
+                background-color: transparent;
+                border: 2px solid #ffe36d;
+                border-radius: 15px;">
+                Darma
+            </button>
+            <button class="gradient-border-button"
+              type="button"
+              class="btn btn-primary"
+              style="
+                background-color: transparent;
+                border: 2px solid #ffe36d;
+                border-radius: 15px;">
+                Romance
+            </button>
+            <button class="gradient-border-button"
+              type="button"
+              class="btn btn-primary"
+              style="
+                background-color: transparent;
+                border: 2px solid #ffe36d;
+                border-radius: 15px;">
+                Fantasy
+            </button>
+                    
+                    <h6 class="hero-title mb-2">Nga Je Masong</h6>
+                    <span>
+                      <i class="bi bi-clock-fill" style="color: #ffe36d"></i>2HRS 3
+                      MINS</span
+                    >
+                    <p class="hero-subtitle">
+                      In a heartbeat, she appears and in a blink of an eye, she
+                    disappears. Are memories going to be the only thing that
+                    remains or will that be lost too?
+                    </p>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-lg"
+                      style="
+                        background-color: transparent;
+                        border: 2px solid #ffe36d;
+                        border-radius: 15px;
+                      ">
+                      BOOK NOW
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+    <!-- Additional Hero Overlay in the Second Row (between 992px and less than 576px) -->
+    <section class="hero-overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 d-md-none">
+            <button class="gradient-border-button"
+            type="button"
+            class="btn btn-primary"
+            style="
+              background-color: transparent;
+              border: 2px solid #ffe36d;
+              border-radius: 15px;">
+              Darma
+          </button>
+          <button class="gradient-border-button"
+            type="button"
+            class="btn btn-primary"
+            style="
+              background-color: transparent;
+              border: 2px solid #ffe36d;
+              border-radius: 15px;">
+              Romance
+          </button>
+          <button class="gradient-border-button"
+            type="button"
+            class="btn btn-primary"
+            style="
+              background-color: transparent;
+              border: 2px solid #ffe36d;
+              border-radius: 15px;">
+              Fantasy
+          </button>
+
+            <h6 class="hero-title">Nga Je Masong</h6>
+            <span>
+              <i class="bi bi-clock-fill" style="color: #ffe36d"></i>2HRS 3
+              MINS</span
+            >
+            <p class="hero-subtitle">
+              In a heartbeat, she appears and in a blink of an eye, she
+              disappears. Are memories going to be the only thing that
+              remains or will that be lost too?
+            </p>
+
+            <button
+              type="button"
+              class="btn btn-primary btn-lg"
+              style="
+                background-color: transparent;
+                border: 2px solid #ffe36d;
+                border-radius: 15px;
+              ">
+              BOOK NOW
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+ </div>
+ <!-- end slider -->
+</div>
+</div>
 
     <!-- ====================================Movie selection================================ -->
-    <div class="container d-flex justify-content-end m-5">
+
+    <section class="p-5">
+    <div class="container">
       <div class="dropdown d-flex justify-content-end">
         <button
           class="btn btn-secondary dropdown-toggle"
@@ -182,130 +389,94 @@
       </script>
     </div>
 
+  </section>
+
     <!-- ===============================movie list========================================== -->
 
-    <div class="container movie-list">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="image-container d-flex justify-content-between">
-            <div class="col-md-3">
-              <img src="./img/1.jpg" alt="Image 1" class="p-3" />
-              <button onclick="location.href='details'" class="book-now">
-                BOOK NOW
-              </button>
-              <button onclick="location.href='rating'" class="rate-us">
-                RATE US
-              </button>
-            </div>
-            <div class="col-md-3">
-              <img src="./img/2.jpg" alt="Image 1" class="p-3" />
-              <button onclick="location.href='details'" class="book-now">
-                BOOK NOW
-              </button>
-              <button onclick="location.href='rating'" class="rate-us">
-                RATE US
-              </button>
-            </div>
-
-            <div class="col-md-3">
-              <img src="./img/3.jpg" alt="Image 1" class="p-3" />
-              <button onclick="location.href='details'" class="book-now">
-                BOOK NOW
-              </button>
-              <button onclick="location.href='rating'" class="rate-us">
-                RATE US
-              </button>
-            </div>
-            <div class="col-md-3">
-              <img src="./img/4.jpg" alt="Image 4" class="p-3" />
-            </div>
-          </div>
+  
+<!-- <section> -->
+  <div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-3 col-6">
+          <img src="./img/1.jpg" alt="" class="img-fluid">
+          <button onclick="location.href='details'" class="book-now">
+            BOOK NOW
+          </button>
+          <button onclick="location.href='rating'" class="rate-us">
+            RATE US
+          </button>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="image-container">
-            <div class="col-md-3">
-              <img src="./img/5.jpg" alt="Image 5" class="p-3" />
-            </div>
-            <div class="col-md-3">
-              <img src="./img/6.jpg" alt="Image 6" class="p-3" />
-            </div>
-            <div class="col-md-3">
-              <img src="./img/7.jpg" alt="Image 7" class="p-3" />
-            </div>
-            <div class="col-md-3">
-              <img src="./img/8.jpg" alt="Image 8" class="p-3" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="more-content" style="display: none">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="image-container d-flex justify-content-between">
-              <div class="col-md-3">
-                <img src="./img/1.jpg" alt="Image 1" class="p-3" />
-              </div>
-              <div class="col-md-3">
-                <img src="./img/2.jpg" alt="Image 2" class="p-3" />
-              </div>
-              <div class="col-md-3">
-                <img src="./img/3.jpg" alt="Image 3" class="p-3" />
-              </div>
-              <div class="col-md-3">
-                <img src="./img/4.jpg" alt="Image 4" class="p-3" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="image-container">
-              <div class="col-md-3">
-                <img src="./img/5.jpg" alt="Image 5" class="p-3" />
-              </div>
-              <div class="col-md-3">
-                <img src="./img/6.jpg" alt="Image 6" class="p-3" />
-              </div>
-              <div class="col-md-3">
-                <img src="./img/7.jpg" alt="Image 7" class="p-3" />
-              </div>
-              <div class="col-md-3">
-                <img src="./img/8.jpg" alt="Image 8" class="p-3" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="load-more d-flex justify-content-center">
-        <button type="button" class="btn btn-secondary mt-4" id="more-button">
-          LOAD MORE
+      
+    
+      <div class="col-md-6 col-lg-3 col-6">
+        <img src="./img/2.jpg" alt="" class="img-fluid">
+        <button onclick="location.href='details'" class="book-now">
+          BOOK NOW
+        </button>
+        <button onclick="location.href='rating'" class="rate-us">
+          RATE US
         </button>
       </div>
+      <div class="col-md-6 col-lg-3 col-6">
+        <img src="./img/3.jpg" alt="" class="img-fluid">
+        <button onclick="location.href='details'" class="book-now">
+          BOOK NOW
+        </button>
+        <button onclick="location.href='rating'" class="rate-us">
+          RATE US
+        </button>
+      </div>
+      <div class="col-md-6 col-lg-3 col-6">
+        <img src="./img/4.jpg" alt="" class="img-fluid">
+        <button onclick="location.href='details'" class="book-now">
+          BOOK NOW
+        </button>
+        <button onclick="location.href='rating'" class="rate-us">
+          RATE US
+        </button>
+      </div>
+      <!-- Add more col divs for additional cards -->
     </div>
+    <div class="row mt-4">
+      <div class="col-md-6 col-lg-3 col-6">
+        <img src="./img/5.jpg" alt="" class="img-fluid">
+      </div>
+      <div class="col-md-6 col-lg-3 col-6">
+        <img src="./img/6.jpg" alt="" class="img-fluid">
+      </div>
+      <div class="col-md-6 col-lg-3 col-6">
+        <img src="./img/7.jpg" alt="" class="img-fluid">
+      </div>
+      <div class="col-md-6 col-lg-3 col-6">
+        <img src="./img/8.jpg" alt="" class="img-fluid">
+      </div>
+      <!-- Add more col divs for additional cards -->
+    </div>
+    <div class="load-more d-flex justify-content-center mt-3">
+      <button type="button" class="btn btn-secondary mt-4" id="more-button">
+        LOAD MORE
+      </button>
+    </div>
+  </div>
+</section>
+
 
     <!-- =========================================image============================================ -->
 
-    <div class="container main-container mt-5">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="right-div d-flex justify-content-start">
-            <img src="./img/watching.jpg" alt="Right Image" />
-          </div>
+  
+
+  <section class="text-light py-5">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-md">
+          <img src="./img/watching.jpg" class="img-fluid " />
         </div>
-        <div class="col-md-6">
-          <div class="left-div">
-            <img src="./img/popcron.png" alt="Left Image" />
-            <span class="overlay-text"
-              ><h5>ENJOY THE SHOW WITH</h5>
-              <a class="navbar-brand" href="#">FlickTix</a></span
-            >
-          </div>
+        <div class="col-md">
+          <img src="./img/popcron.png" class="img-fluid d-none d-sm-block" />
         </div>
       </div>
     </div>
-
+  </section>
     <%- include('footer') %>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -328,13 +499,6 @@
         loop: true,
       });
     </script>
-
-    <!-- <script>
-      $(document).on("click", "ul li", function () {
-        $(this).addClass("active").siblings().removeClass("active");
-      });
-    </script> -->
-
     <script
       src="https://code.jquery.com/jquery-3.7.0.js"
       integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="

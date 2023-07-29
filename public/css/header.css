@@ -1,50 +1,52 @@
-/** @format */
 
-.nav {
-  top: 0;
-  right: 0;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600&family=Open+Sans:wght@300&family=Roboto+Flex:wght@100;200;300&family=Roboto:wght@100;300;400;500&display=swap");
+
+
+nav {
   width: 100%;
-  padding: 15px 80px;
-}
-
-.nav,
-.nav .nav-links {
+  height: 100px;
   display: flex;
-  align-items: center;
-}
-
-.nav {
   justify-content: space-between;
+  padding: 30px 6%;
 }
-
-a {
-  color: #fff;
+nav .logo{
+  font-size: 30px;
+  font-weight: 700;
+}
+nav ul{
+  display: flex;
+  list-style: none;
+}
+nav ul li{
+  padding: 8px 15px;
+  border-radius: 10px;
+  transition: 0.2s ease-in;
+}
+nav ul li a{
+  color: white;
   text-decoration: none;
 }
-
-.nav .logo {
-  font-size: 22px;
-  font-weight: 500;
-}
-
-.logo1 {
+nav .menubtn{
+  font-size: 30px;
+  font-weight: bolder;
+  cursor: pointer;
   display: none;
 }
 
-.nav-links {
-  margin-bottom: -10px;
-}
-.nav .nav-links {
-  column-gap: 50px;
-  list-style: none;
-  justify-content: center;
+
+ 
+  .btn-outline-warning {
+  background-color: transparent;
+  color: #eee;
+  border: 2px solid #ffe36d;
+  height: 40px;
+  width: 80px;
+  margin-left: 40px;
 }
 
-.nav .nav-links a {
-  transition: all 0.2s linear;
-}
 
-.nav .Search-bar {
+
+  .nav .Search-bar {
   display: flex;
   justify-content: center;
   align-items: right;
@@ -71,127 +73,94 @@ nav .box input {
   background: transparent;
 }
 
-nav .box a .fas {
+.box a .fas {
   color: #ffe36d;
   font-size: 18px;
 }
 
-.nav .navOpenBtn,
-.nav .navCloseBtn {
+
+ 
+.sideNav{
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  top: 0;
+  right: 0%;
+  background-color: #615d5d;
+  overflow-x: hidden;
+  transition: 0.3s ease-in;
+  padding-top: 60px;
   display: none;
+  z-index: 100;
+  gap: 5px;
+}
+ 
+.sideNav a{
+  padding: 8px 8px 8px 40px;
+  display: block;
+  font-size: 25px;
+  font-weight: 500;
+  color: #d1d1d1;
+  transition: 0.3s;
+  text-decoration: none;
 }
 
-.btn-outline-warning {
+.sideNav .btn-outline-warning {
   background-color: transparent;
   color: #eee;
   border: 2px solid #ffe36d;
   height: 40px;
   width: 80px;
-  margin-left: 40px;
+  margin-left: 0px;
 }
 
-.dropdown-items{
-  display: none;
+.sideNav a:hover{
+  color: white;
+}
+.sideNav .closeBtn{
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 20px;
+  margin-left: 50px;
+  color: #ffe36d;
 }
 
-/* responsive */
-@media screen and (max-width: 1160px) {
-  .nav {
-    padding: 15px 100px;
-  }
-  .nav .search-box {
-    right: 150px;
-  }
-}
 
-@media screen and (max-width: 950px) {
-  .nav {
-    padding: 15px 50px;
+/* responsive navbar css */
+@media screen and (max-width: 600px) {
+  nav .menubtn{
+    display: flex;
   }
-  .nav .search-box {
-    right: 100px;
-    max-width: 400px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .nav .navOpenBtn,
-  .nav .navCloseBtn {
-    display: block;
-    margin-left: auto;
-  }
-
-  .btn-outline-warning {
+  nav .navLinks{
     display: none;
   }
-
-  .nav .logo {
-    margin-right: auto;
-  }
-  .nav {
-    padding: 15px 20px;
-  }
-  .nav .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    height: 100%;
-    max-width: 280px;
-    width: 100%;
-    padding-top: 20px;
-    row-gap: 5px;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: #615d5d;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s ease;
-    z-index: 100;
-  }
-
-  .nav-links li {
-    margin-bottom: 50px;
-  }
-  .nav.openNav .nav-links {
-    right: 0;
-  
-  }
-  .nav .navOpenBtn {
-    color: #ffe36d;
-    font-size: 30px;
-    cursor: pointer;
-  }
-
-  .nav .navCloseBtn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    color: #ffe36d;
-    font-size: 30px;
-    cursor: pointer;
+  .sideNav {
+    display: block !important;
   }
 
   nav .box input {
-    width: 100px;
-    outline: none;
-    border: none;
-    font-weight: 500;
-    transition: 0.8s;
-    background: transparent;
-  }
-
-  .nav .nav-links a{
-    padding: 20px;
-  }
-  .logo1 {
-    display: block;
-    
-  }
-
-  .dropdown-items{
-    display: block;
-   
-  }
-
+  width: 120px;
   
+}
+  
+}
+
+
+@media screen  and (min-width: 768px) and (max-width:992px){
+
+  nav .navLinks{
+    display: none;
+  }
+
+  nav .menubtn{
+    display: flex;
+  }
+  
+  .sideNav {
+    display: block !important;
+  }
+
+
   
 }

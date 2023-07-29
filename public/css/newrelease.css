@@ -52,17 +52,26 @@ body {
 /* ==========================================Responsivness for mobile========================================= */
 
 @media (max-width: 768px) {
-
-  .genre {
-    display: flex;
-    justify-content: center;
-    margin-bottom: -10px;
-  }
-
   .load-more {
     margin-top: -20px;
   }
 
+  .image-container {
+    flex-wrap: wrap;
+    margin-bottom: -10px;
+  }
+
+  .image-container .col-md-3 {
+    flex-basis: 50%;
+    margin-bottom: 15px;
+  }
+}
+
+
+
+
+/* ==========================================Responsivness for mobile========================================= */
+@media screen  and (max-width: 992px){
   .image-container {
     flex-wrap: wrap;
     margin-bottom: -10px;

@@ -8,6 +8,57 @@ body {
   background-color: #49484a;
 }
 
+
+body,
+html {
+  height: 100%;
+  background-color: rgb(121, 119, 119);
+}
+
+.hero-banner {
+  position: relative;
+  height: 100%;
+  background: url("../img/ngejemasong.jpg") no-repeat center center / cover;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-overlay {
+  padding: 0, 0, 40px, 40px;
+}
+
+.hero-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: #fff;
+}
+
+
+.gradient-border-button {
+color: white;
+font-size: 16px;
+padding: 12px 24px;
+border: 4px solid transparent;
+border-image: linear-gradient(45deg, #FFE36D, #F7EFCB) 10;
+border-image-slice: 1;
+cursor: pointer;
+background-color: transparent;
+background-clip: padding-box;
+}
+
+/* .gradient-border-button:hover{
+background-image: linear-gradient(430deg, #ffe36d, transparent);
+border-color: #ece1b1;
+} */
+
+
+
 h1,
 h2,
 h3,
@@ -18,18 +69,9 @@ h6 {
 }
 /* =============================Herobanner=================================== */
 
-:root {
-  --gradient: linear-gradient(to right, #ffe36d, #ece1b1);
-}
-
-.hero-banner {
-  background-image: url("images/herobanner.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
 
 .swiper-slide {
-  height: 700px;
+  height: 600px;
 }
 .swiper-slide img {
   width: 100%;
@@ -38,50 +80,12 @@ h6 {
 .swiper {
   width: 100%;
   height: fit-content;
-}
-.container.main-section {
-  transform: translateY(-120%);
-  margin-left: 45px;
-}
+} 
 
-.button-container .btn {
-  border-radius: 20px;
-  width: 100px;
-  height: 40px;
-  border: 2px solid #ffe36d;
-  background-color: transparent;
-}
 
-.text-container {
-  display: flex;
-  justify-content: flex-start;
-  color: #fff;
-  margin-left: 10px;
-}
 
-.description {
-  color: #fff;
-}
 
-.book-button {
-  display: flex;
-  justify-content: flex-start;
-}
 
-.book-button .btn {
-  margin-left: -2px;
-  border-radius: 10px;
-  width: 120px;
-  height: 45px;
-  border: 2px solid #ffe36d;
-  background-color: transparent;
-}
-
-.book-button .btn:hover {
-  color: #fff;
-  background: #ffe36d;
-  background: linear-gradient(to right, #ffe36d 10%, rgba(0, 0, 0, 0) 60%);
-}
 
 /* ============================================movie selection========================================= */
 
@@ -122,34 +126,31 @@ h6 {
   color: #fff;
 }
 
-/* ===============Movie List======================= */
-.image-container {
-  display: flex;
-  margin-right: 12px;
-  position: relative;
-  cursor: pointer;
-}
 
-.image-container img {
+
+
+/* ===============Movie List======================= */
+
+.img-fluid {
   width: 100%;
   height: auto;
 }
-.image-container .col-md-3 img {
+.col-md-6 img {
   height: auto;
   transition: transform 0.3s ease;
 }
 
-.image-container .col-md-3 {
+.col-md-6 {
   position: relative;
 }
 
-.image-container .col-md-3 .book-now {
+.col-md-6 .book-now {
   display: none;
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 60px;
+  height: 50px;
   width: 150px;
   background-color: transparent;
   border: solid 2px #ffe36d;
@@ -157,13 +158,13 @@ h6 {
   color: #fff;
 }
 
-.image-container .col-md-3 .rate-us {
+ .col-md-6 .rate-us {
   display: none;
   position: absolute;
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 50px;
+  height: 40px;
   width: 100px;
   background-color: transparent;
   border: solid 2px #ffe36d;
@@ -172,19 +173,18 @@ h6 {
   font-size: 14px;
 }
 
-.image-container .col-md-3:hover img {
+ .col-md-6:hover img {
   transform: scale(1.2);
 }
 
-.image-container .col-md-3:hover button {
+ .col-md-6:hover button {
   display: block;
 }
 
-.image-container .book-now:hover {
+ .book-now:hover {
   background-color: #ffe36d;
 }
-
-.image-container .rate-us:hover {
+ .rate-us:hover {
   background-color: #ffe36d;
 }
 .load-more .btn {
@@ -211,117 +211,32 @@ h6 {
   justify-content: space-between;
 }
 
-.left-div img {
-  width: 650px;
-  height: 400px;
-  margin-left: -30px;
-}
-.left-div {
-  position: relative;
-  display: inline-block;
-}
 
-.left-div .overlay-text {
-  position: absolute;
-  top: 60%;
-  left: 65%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-weight: bold;
-  font-size: 24px;
-  text-align: center;
-  z-index: 1;
-}
-
-.right-div {
-  display: flex;
-  align-items: center;
-}
-
-.right-div img {
-  width: 780px;
-  height: 400px;
-  margin-left: -80px;
-}
-
-/* ==========================================Responsivness for mobile========================================= */
 
 @media (max-width: 768px) {
-  .swiper-slide {
-    height: 600px;
-  }
-  .container.main-section {
-    transform: translate(-17%, -15%);
-  }
-
-  .genre {
-    display: flex;
-    justify-content: center;
-    margin-bottom: -10px;
-  }
-
   .load-more {
     margin-top: -20px;
   }
 
-  .image-container {
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    margin-right: -17px;
-  }
-
-  .image-container .col-md-3 {
-    flex-basis: 50%;
-  }
-
-  .left-div img {
-    width: 350px;
-    height: 300px;
-    margin-left: 0;
-  }
-  .right-div img {
-    display: none;
-  }
 }
 
-/* for tablet view */
 
-@media screen and (min-width: 769px) and (max-width: 991px) {
-  .swiper-slide {
-    height: 500px;
-  }
-
-  .swiper-slide img {
-    width: 100%;
-  }
-  .container.main-section {
-    transform: translate(-2%, -110%);
-  }
-
-  .image-container {
+/* Custom CSS for smaller screens (between 576px and 991.98px) */
+@media (max-width: 991.98px) {
+  .hero-banner {
     flex-wrap: wrap;
-    margin-bottom: 20px;
+  }
+  .hero-overlay {
+    width: 100%;
+    padding-top: 20px;
+    height: 100%;
   }
 
-  .image-container .col-md-3 {
-    flex-basis: 50%;
-  }
-  .right-div img {
-    display: none;
-  }
-  .left-div img {
-    width: 800px;
-    transform: translateX(-53%);
-  }
-  .left-div .overlay-text {
-    position: absolute;
-    top: 60%;
-    left: 65%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-weight: bold;
-    font-size: 24px;
-    text-align: center;
-    z-index: 1;
+}
+
+@media screen and (max-width:576px){
+  .hero-banner {
+    flex-wrap: wrap;
+    height: 30%;
   }
 }

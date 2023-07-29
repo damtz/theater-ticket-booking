@@ -1,11 +1,10 @@
-/** @format */
 
 // imports
 
 const express = require("express");
 const app = express();
 const path = require("path");
-const port = 3000;
+const port = 5000;
 
 // Static Files
 app.use(express.static("public"));
