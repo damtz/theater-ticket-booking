@@ -1,73 +1,87 @@
-<html>
-  <% if (typeof errorMessage !== "undefined") { %>
-  <p style="color: rgb(240, 19, 26)" role="alert"><%= errorMessage %></p>
-  <% } %>
-  <form action="/add-movie" method="POST" enctype="multipart/form-data">
-    <label for="movieTitle">Movie Title:</label>
-    <input type="text" id="movieTitle" name="movieTitle" required />
+<%- include('header') %>
+          <section class="table__header">
+            <h3>Movie Administration</h3>
+          </section>
+          <section class="table__body">
+            <form
+              action="/admin-addMovie"
+              method="POST"
+              class="hall-form"
+              enctype="multipart/form-data"
+            >
+              <div class="input-row">
+                <div>
+                  <label for="name">Name:</label>
+                  <input type="text" id="name" name="movieTitle" />
+                  <p style="color: red">
+                    <%= (typeof errors !== "undefined" && typeof errors.name !==
+                    "undefined") ? errors.name.msg : "" %>
+                  </p>
+                </div>
+                <div>
+                  <label for="casts">Casts:</label>
+                  <input type="text" id="name" name="casts" />
+                  <p style="color: red">
+                    <%= (typeof errors !== "undefined" && typeof errors.location
+                    !== "undefined") ? errors.location.msg : "" %>
+                  </p>
+                </div>
+              </div>
+              <div class="input-row">
+                <div>
+                  <label for="genre">Genre:</label>
+                  <select name="genre" id="genre" required>
+                    <option selected>Select Genre:</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="action">Action</option>
+                    <option value="romance">Romance</option>
+                  </select>
+                  <p style="color: red">
+                    <%= (typeof errors !== "undefined" && typeof errors.location
+                    !== "undefined") ? errors.location.msg : "" %>
+                  </p>
+                </div>
+                <div>
+                  <label for="status">Status:</label>
+                  <select name="status" id="status" required>
+                    <option selected>Select Status:</option>
+                    <option value="New Release">New Release</option>
+                    <option value="UpComing">UpComing</option>
+                    <option value="Closed">Closed</option>
+                  </select>
+                  <p style="color: red">
+                    <%= (typeof errors !== "undefined" && typeof errors.location
+                    !== "undefined") ? errors.location.msg : "" %>
+                  </p>
+                </div>
+              </div>
+              <div class="input-row">
+                <div>
+                  <label for="duration">Duration:</label>
+                  <input type="text" id="name" name="duration" />
+                  <p style="color: red">
+                    <%= (typeof errors !== "undefined" && typeof errors.location
+                    !== "undefined") ? errors.location.msg : "" %>
+                  </p>
+                </div>
 
-    <label for="movieTrailer">Trailer URL:</label>
-    <input
-      type="text"
-      id="movieTrailer"
-      name="movieTrailer"
-      placeholder="Enter trailer URL"
-      required
-    />
+                <div>
+                  <label for="image">Movie Image:</label>
+                  <input type="file" id="image" name="image" accept="image/*" />
+                </div>
+              </div>
 
-    <label for="summary">Summary:</label>
-    <textarea id="summary" name="summary" required></textarea>
+              <label for="summary">Summary:</label>
+              <textarea id="summary" name="summary"></textarea>
 
-    <label for="casts">Casts:</label>
-    <input type="text" id="casts" name="casts" required />
-
-    <label for="status">Status:</label>
-    <select id="status" name="status" required>
-      <option value="new">New Release</option>
-      <option value="Released">Released</option>
-      <option value="Coming Soon">UpComing</option>
-      <option value="closed">Closed</option>
-    </select>
-
-    <label for="genre">Genre:</label>
-    <select id="genre" name="genre" required>
-      <option value="adventure">Adventure</option>
-      <option value="action">Action</option>
-      <option value="action/adventure">Action/Adventure</option>
-      <option value="action thriller">Action/Thriller</option>
-      <option value="animation">Animation</option>
-      <option value="Biographical">Biographical</option>
-      <option value="comedy">Comedy</option>
-      <option value="documentary">Documentary</option>
-      <option value="drama">Drama</option>
-      <option value="horror">Horror</option>
-      <option value="mystery">Mystery</option>
-      <option value="romance">Romance</option>
-      <option value="romantic comedy">Romantic/comedy</option>
-      <option value="science fiction">Science/fiction</option>
-      <option value="thriller">Thriller</option>
-      <option value="war">War</option>
-    </select>
-
-    <label for="duration">duration:</label>
-    <input
-      id="duration"
-      name="duration"
-      placeholder="Enter movie duartion"
-      required
-    ></input>
-
-    <label for="languageId">Language:</label>
-    <select id="languageId" name="languageId" required>
-      <% languages.forEach(function(language) { %>
-      <option value="<%= language.id %>"><%= language.name %></option>
-      <% }); %>
-    </select>
-
-
-    <label for="image">Movie Image:</label>
-    <input type="file" id="image" name="image" accept="image/*" required />
-
-    <button type="submit">Add Movie</button>
-  </form>
+              <button type="submit" style="color: black; margin-top: 20px">
+                Add Now
+              </button>
+            </form>
+          </section>
+        </main>
+      </section>
+    </div>
+    <%- include('alert') %>
+  </body>
 </html>

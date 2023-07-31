@@ -1,18 +1,37 @@
-<form action="/add-admin" method="POST">
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="username" required /><br />
+<%- include('header') %>
+<link href="/super/css/style.css" rel="stylesheet" type="text/css" />
+          <section class="table__header">
+            <h3>User Management</h3>
+          </section>
+          <section class="table__body">
+            <form action="/add-admin" method="POST" class="admin-form">
+              <div class="form-row">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required />
+              </div>
 
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email" required /><br />
+              <div class="form-row">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required />
+              </div>
 
-  <label for="assignedTheater">Assigned Theater:</label>
-  <select id="assignedTheater" name="assignedTheater" required>
-    <option value="" disabled selected>Select a Theater</option>
-    <!-- Populate the theater options dynamically from the database -->
-    <% theaters.forEach(function(theater) { %>
-    <option value="<%= theater.id %>"><%= theater.name %></option>
-    <% }) %></select
-  ><br />
+              <div class="form-row">
+                <label for="assignedTheater">Assigned Theater:</label>
+                <select id="assignedTheater" name="assignedTheater" required>
+                  <option value="" disabled selected>Select a Theater</option>
+                  <!-- Populate the theater options dynamically from the database -->
+                  <% theaters.forEach(function(theater) { %>
+                  <option value="<%= theater.id %>"><%= theater.name %></option>
+                  <% }) %>
+                </select>
+              </div>
 
-  <input type="submit" value="Add Admin" />
-</form>
+              <input type="submit" value="Add Admin" class="add-admin-button" />
+            </form>
+          </section>
+        </main>
+      </section>
+    </div>
+    <%- include('alert') %>
+  </body>
+</html>

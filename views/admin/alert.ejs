@@ -1,0 +1,26 @@
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script src="/path/to/alertify.min.js"></script>
+<script>
+  function showSuccessMessage(message) {
+    alertify.success(message);
+  }
+
+  // Check if there's a success message to display
+  const successMessage = '<%= smessage %>'; // This should be a variable passed from your server-side code
+  if (successMessage) {
+    alertify.set('notifier', 'position', 'top-center'); // Set the position of the message
+    alertify.set('notifier', 'delay', 5); // Set the display duration (in seconds)
+    showSuccessMessage(successMessage);
+  }
+  function showErrorMessage(message) {
+    alertify.error(message);
+  }
+
+  // Check if there's a success message to display
+  const errorMessage = '<%= emessage %>'; // This should be a variable passed from your server-side code
+  if (errorMessage) {
+    alertify.set('notifier', 'position', 'top-center'); // Set the position of the message
+    alertify.set('notifier', 'delay', 5); // Set the display duration (in seconds)
+    showErrorMessage(errorMessage);
+  }
+</script>

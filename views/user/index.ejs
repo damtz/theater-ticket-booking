@@ -8,7 +8,13 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-5+fyiv8dMxGauzwA3uUUvSf3zRfrN0MhAEbZlj0Sz5n7mwyUFR7rNWT4ym0DxliYbE5mU1KlO0hwUIf+haJFA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-5+fyiv8dMxGauzwA3uUUvSf3zRfrN0MhAEbZlj0Sz5n7mwyUFR7rNWT4ym0DxliYbE5mU1KlO0hwUIf+haJFA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -29,156 +35,212 @@
     <!-- ===================================Navbar============================================ -->
     <%- include('header') %>
     <!-- =============================================Image Slider========================================= -->
+    <!-- slider 1-->
     <div class="swiper mt-2">
       <div class="swiper-wrapper">
-        <% 
-        // Get the three most recent movies (latest added)
-        const latestAddedMovies = movies.slice(-3);
-    
-        // Iterate through the latestAddedMovies array
+        <% const latestAddedMovies = movies.slice(-3);
         latestAddedMovies.forEach(function(movie) { %>
         <div class="swiper-slide">
-          <img src="/images/<%= movie.image %>" />
-          <div class="container main-section">
-            <div class="row text-container mt-5">
-              <div class="col-md-6">
-                <div class="button-container mb-4">
-                  <button type="button" class="btn btn-primary mt-5">
+          <section
+            class="hero-banner text-white"
+            style="
+              background: url('/images/<%= movie.image %>') no-repeat center
+                center / cover;
+            "
+          >
+            <div class="container text-white">
+              <div class="row">
+                <div class="col-md-6 d-none d-md-block d-lg-block">
+                  <div class="hero-overlay">
+                    <button
+                      class="gradient-border-button"
+                      type="button"
+                      class="btn btn-primary"
+                      style="
+                        background-color: transparent;
+                        border: 2px solid #ffe36d;
+                        border-radius: 15px;
+                      "
+                    >
+                      <%= movie.genre %>
+                    </button>
+                    <h6 class="hero-title mb-2" class="text-white">
+                      <%= movie.title %>
+                    </h6>
+                    <span>
+                      <i class="bi bi-clock-fill" style="color: #ffe36d"></i><%=
+                      movie.duration %></span
+                    >
+                    >
+                    <p class="hero-subtitle"><%= movie.summary %></p>
+                    <button
+                      type="button"
+                      onclick="location.href='/movie-details?movieId=<%= movie.id %>'"
+                      class="btn btn-primary btn-lg"
+                      style="
+                        background-color: transparent;
+                        border: 2px solid #ffe36d;
+                        border-radius: 15px;
+                      "
+                    >
+                      BOOK NOW
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Additional Hero Overlay in the Second Row (between 992px and less than 576px) -->
+          <section class="hero-overlay">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 d-md-none">
+                  <button
+                    class="gradient-border-button"
+                    type="button"
+                    class="btn btn-primary"
+                    style="
+                      background-color: transparent;
+                      border: 2px solid #ffe36d;
+                      border-radius: 15px;
+                    "
+                  >
                     <%= movie.genre %>
                   </button>
-                </div>
-                <h5 class="fs-3"><%= movie.title %></h5>
-                <span
-                  ><i class="fas fa-clock fa-2x" style="color: #ffe36d"></i
-                  ><%= movie.duration %></span
-                >
-                <div class="description">
-                  <p class="mt-4"><%= movie.summary %></p>
-                </div>
-                <div class="book-button mb-5">
+                  <h6 class="hero-title mb-2"><%= movie.title %></h6>
+                  <span>
+                    <i class="bi bi-clock-fill" style="color: #ffe36d"></i><%=
+                    movie.duration %></span
+                  >
+                  <p class="hero-subtitle"><%= movie.summary %></p>
                   <button
+                    type="button"
                     onclick="location.href='/movie-details?movieId=<%= movie.id %>'"
-                    class="btn btn-secondary mt-3"
+                    class="btn btn-primary btn-lg"
+                    style="
+                      background-color: transparent;
+                      border: 2px solid #ffe36d;
+                      border-radius: 15px;
+                    "
                   >
                     BOOK NOW
                   </button>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
         <% }) %>
       </div>
     </div>
-    
 
     <!-- ====================================Movie selection================================ -->
-<form method="GET" action="/">
-  <div class="movie-selection">
-    <div class="container">
+    <form method="GET" action="/">
+      <section class="p-5">
+        <div class="movie-selection">
+          <div class="container">
+            <div class="row">
+              <div class="genre justify-content-end">
+                <select name="genre" id="genre">
+                  <option value="">All Genres</option>
+                  <option value="comedy">Comedy</option>
+                  <option value="action">Action</option>
+                  <option value="romance">Romance</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </form>
+    <!-- ===============================movie list========================================== -->
+    <div class="container movie-list">
       <div class="row">
-        <div class="genre m-3">
-          <select name="genre" id="genre">
-            <option value="">All Genres</option>
-            <option value="comedy">Comedy</option>
-            <option value="action">Action</option>
-            <option value="romance">Romance</option>
-          </select>
+        <div class="col-md-12">
+          <div class="image-container d-flex justify-content-between">
+            <%let counter = 0; movies.reverse().forEach(function(movie) {%>
+            <div class="col-md-3 movie-item" data-genre="<%= movie.genre %>">
+              <img src="/images/<%= movie.image %>" alt="Image 1" class="p-3" />
+              <button
+                onclick="location.href='/movie-details?movieId=<%= movie.id %>'"
+                class="book-now"
+              >
+                BOOK NOW
+              </button>
+              <button
+                onclick="location.href='/movie/<%= movie.id %>'"
+                class="rate-us"
+              >
+                RATE US
+              </button>
+            </div>
+            <% counter++; if (counter === 4) {counter = 0; %>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</form>
-<!-- ===============================movie list========================================== -->
-<div class="container movie-list">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="image-container d-flex justify-content-between">
-        <% 
-        // Use a counter to keep track of the number of movies displayed in a row
-        let counter = 0;
-        movies.reverse().forEach(function(movie) { %>
-        <div class="col-md-3 movie-item" data-genre="<%= movie.genre %>">
-          <img src="/images/<%= movie.image %>" alt="Image 1" class="p-3" />
-          <button onclick="location.href='/movie-details?movieId=<%= movie.id %>'" class="book-now">
-            BOOK NOW
-          </button>
-          <button onclick="location.href='/movie/<%= movie.id %>'" class="rate-us">
-            RATE US
-          </button>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="image-container d-flex justify-content-between">
+            <% } }); %>
+          </div>
         </div>
-        <% 
-        // Increment the counter
-        counter++;
-        // Check if four movies have been displayed in a row
-        if (counter === 4) {
-          // If four movies displayed, start a new row
-          counter = 0;
-        %> 
+      </div>
+      <div class="load-more d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary mt-4" id="more-button">
+          LOAD MORE
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary mt-4"
+          id="less-button"
+          style="display: none"
+        >
+          SEE LESS
+        </button>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="image-container d-flex justify-content-between">
-        <% } }); %>
-      </div>
-    </div>
-  </div>
-  <div class="load-more d-flex justify-content-center">
-    <button type="button" class="btn btn-secondary mt-4" id="more-button">
-      LOAD MORE
-    </button>
-    <button type="button" class="btn btn-secondary mt-4" id="less-button" style="display: none;">
-      SEE LESS
-    </button>
-  </div>
-</div>
-
 
     <!-- =========================================image============================================ -->
 
-    <div class="container main-container mt-5">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="right-div d-flex justify-content-start">
-            <img src="./images/watching.jpg" alt="Right Image" />
+    <section class="text-light py-5">
+      <div class="container">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-md">
+            <img src="/public/images/watching.jpg" class="img-fluid" />
           </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="left-div">
-            <img src="./images/popcron.png" alt="Left Image" />
-            <span class="overlay-text">
-              <h5>ENJOY THE SHOW WITH</h5>
-              <a class="navbar-brand" href="#">FlickTix</a>
-            </span>
+          <div class="col-md">
+            <img
+              src="/public/images/popcron.png"
+              class="img-fluid d-none d-sm-block"
+            />
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- ==============================Footer======================================= -->
     <%- include('footer') %>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-  // JavaScript and jQuery to handle genre filtering
-  $(document).ready(function () {
-    $('#genre').on('change', function () {
-      const selectedGenre = $(this).val();
+      // JavaScript and jQuery to handle genre filtering
+      $(document).ready(function () {
+        $('#genre').on('change', function () {
+          const selectedGenre = $(this).val();
 
-      // Show all movies if "All Genres" is selected, otherwise, filter movies by the selected genre
-      $('.movie-item').each(function () {
-        const movieGenre = $(this).data('genre');
-        if (selectedGenre === '' || movieGenre === selectedGenre) {
-          $(this).show();
-        } else {
-          $(this).hide();
-        }
+          // Show all movies if "All Genres" is selected, otherwise, filter movies by the selected genre
+          $('.movie-item').each(function () {
+            const movieGenre = $(this).data('genre');
+            if (selectedGenre === '' || movieGenre === selectedGenre) {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+        });
       });
-    });
-  });
-</script>
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -190,57 +252,67 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const moviesPerRow = 4;
-    let moviesToShow = 4; // Show 4 movies initially
-    const moreButton = document.getElementById("more-button");
-    const lessButton = document.getElementById("less-button");
-    const movieItems = document.querySelectorAll(".movie-list .col-md-3");
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const moviesPerRow = 4;
+        let moviesToShow = 4; // Show 4 movies initially
+        const moreButton = document.getElementById('more-button');
+        const lessButton = document.getElementById('less-button');
+        const movieItems = document.querySelectorAll('.movie-list .col-md-3');
 
-    // Function to toggle the visibility of movie items
-    function toggleMovieItems() {
-      movieItems.forEach((item, index) => {
-        if (index < moviesToShow) {
-          item.style.display = "flex";
-        } else {
-          item.style.display = "none";
+        // Function to toggle the visibility of movie items
+        function toggleMovieItems() {
+          movieItems.forEach((item, index) => {
+            if (index < moviesToShow) {
+              item.style.display = 'flex';
+            } else {
+              item.style.display = 'none';
+            }
+          });
         }
+
+        // Show/hide movie items on initial load
+        toggleMovieItems();
+
+        function showMoreButton() {
+          moreButton.style.display = 'inline-block';
+          lessButton.style.display = 'none';
+        }
+
+        function showLessButton() {
+          moreButton.style.display = 'none';
+          lessButton.style.display = 'inline-block';
+        }
+
+        // Load more button functionality
+        moreButton.addEventListener('click', function () {
+          moviesToShow += moviesPerRow; // Increase the count by moviesPerRow
+          toggleMovieItems();
+
+          // Check if there are more movies to show
+          if (moviesToShow >= movieItems.length) {
+            showLessButton();
+          }
+        });
+
+        // See less button functionality
+        lessButton.addEventListener('click', function () {
+          moviesToShow = 4; // Show 4 movies initially
+          toggleMovieItems();
+          showMoreButton();
+        });
       });
-    }
-
-    // Show/hide movie items on initial load
-    toggleMovieItems();
-
-    function showMoreButton() {
-      moreButton.style.display = "inline-block";
-      lessButton.style.display = "none";
-    }
-
-    function showLessButton() {
-      moreButton.style.display = "none";
-      lessButton.style.display = "inline-block";
-    }
-
-    // Load more button functionality
-    moreButton.addEventListener("click", function () {
-      moviesToShow += moviesPerRow; // Increase the count by moviesPerRow
-      toggleMovieItems();
-
-      // Check if there are more movies to show
-      if (moviesToShow >= movieItems.length) {
-        showLessButton();
-      }
-    });
-
-    // See less button functionality
-    lessButton.addEventListener("click", function () {
-      moviesToShow = 4; // Show 4 movies initially
-      toggleMovieItems();
-      showMoreButton();
-    });
-  });
-</script>
-
+    </script>
+    <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper('.swiper', {
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        loop: true,
+      });
+    </script>
+    <%- include('alert') %>
   </body>
 </html>

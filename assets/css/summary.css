@@ -20,7 +20,7 @@ body {
 
 .card img {
   width: 100%;
-  height: 15rem;
+  height: auto;
 }
 
 .card-body {
@@ -95,7 +95,7 @@ hr {
 
 }
 
-@media screen and (min-width: 768px) and (max-width: 991px) {
+@media screen and (min-width: 768px) and (max-width: 992px) {
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -132,27 +132,7 @@ hr {
     padding: 20px;
     text-align: center;
   }
-
-  .footer-title {
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-  }
-  
-  .footer-title .text-white {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-right: 60px;
-  }
-  
-  .footer-title .logo {
-    text-decoration: none;
-    color: #ffe36d;
-  }
-  
-  .footer-social-links {
-    display: flex;
-    flex-direction: end;
+  .card {
+    width: 100%; 
   }
 }

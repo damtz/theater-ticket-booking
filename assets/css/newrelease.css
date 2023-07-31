@@ -27,7 +27,7 @@ body {
 }
 
 .image-container .col-md-3 img {
-  height: 20rem;
+  height: 22rem;
   transition: transform 0.3s ease;
 }
 

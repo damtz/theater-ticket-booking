@@ -1,0 +1,279 @@
+<%- include('header') %>
+<link href="/admin/css/home.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <section class="table__header">
+            <h1>Dashboard</h1>
+
+        </section>
+
+        <section class="table__body">
+         <% if (todayScreening){ %>
+            <section class="boxes">
+              <div class="box">
+                  <h3 class="tabletitle">Total Tickets</h3>
+                  <div class="number"><b><%= totalCapacity %></b></div>
+                  <i class="fa-solid fa-chair icon"></i>
+              </div>
+              <div class="box">
+                  <h3 class="tabletitle">Ticket Booked</h3>
+                  <div class="number"><b><%= ticketsBookedToday %></b></div>
+                  <i class="fa-solid fa-ticket icon"></i>
+              </div>
+              <div class="box">
+                  <h3 class="tabletitle">Ticket Available</h3>
+                  <div class="number">
+                      <b><%= ticketsAvailable %></b>
+                  </div>
+                  <i class="fa-solid fa-ticket icon"></i>
+              </div>
+          </section>
+        <% } %>
+            <section class="graphbox-row">
+                <div class="graphbox">
+                    <h5>Ticket Booked for Each Movie</h5>
+                    <canvas class="my-chart1" width="200" height="200"></canvas>
+                </div>
+                <div class="graphbox">
+                    <h5>Revenue for each Room Type</h5>
+                    
+                    <canvas class="my-chart2" width="180" height="200"></canvas>
+                </div>
+            </section>
+            <section class="graphcontainer">
+                <h5>Top 10 Movies based on Tickets Sold</h5>
+                <canvas class="my-chart3" ></canvas>
+            </section>
+            <!-- uydfgkhlj -->
+
+    </main>
+  
+  <!-- Assuming you have correctly rendered the `moviesData` array in your EJS template -->
+  <script>
+    const moviesData = <%- JSON.stringify(moviesData) %>;
+    const movieNames = moviesData.map((movie) => movie.movie_name);
+    const ticketsSold = moviesData.map((movie) => movie.tickets_sold);
+  </script>   
+
+  <script>
+    const chartData1 = {
+      labels: movieNames,
+      data: ticketsSold,
+    };
+  
+    const myChart1 = new Chart(document.querySelector('.my-chart1'), {
+      type: 'bar',
+      data: {
+        labels: chartData1.labels,
+        datasets: [
+          {
+            label: 'Movie Name',
+            data: chartData1.data,
+            backgroundColor: ['#5988e1'],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Movie Names',
+            },
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Number of Ticket(s)',
+            },
+            beginAtZero: true,
+          },
+        },
+        layout: {
+          padding: 30,
+        },
+      },
+    });
+  // Chart 2 data
+  // <!-- Assuming the total tickets for Normal Room and VIP Room is 800 -->
+  const totalTickets = <%= totalCapacity %>;
+
+  // Define chartData2 using the vipRevenue and normalRevenue values passed from the server
+  const chartData2 = {
+    labels: ['Normal Seat', 'VIP Seat'],
+    data: [ <%= normalRevenue %>, <%= vipRevenue %> ], // Adjust these values as needed
+  };
+
+  // Calculate percentages for each room type using the updated chartData2.data
+  const percentageNormalRoom = ((chartData2.data[0] / totalTickets) * 100).toFixed(2);
+  const percentageVipRoom = ((chartData2.data[1] / totalTickets) * 100).toFixed(2);
+
+  // Function to update Chart 2 based on the selected time period
+  function updateChart2() {
+    const timePeriodDropdown = document.getElementById('timePeriodDropdown');
+    const selectedTimePeriod = timePeriodDropdown.value;
+
+    // Update the chart data and re-render the chart
+    myChart2.data.datasets[0].data = updatedChartData;
+    myChart2.update();
+  }
+
+// Function to format percentage with two decimal places
+function formatPercentage(percentage) {
+  return parseFloat(percentage).toFixed(2);
+}
+
+// Update the legend to display the percentages
+const legendCallbacks = {
+  label: (context) => {
+    const label = context.label;
+    const index = context.dataIndex;
+    const value = context.raw;
+    const percentage = index === 0 ? percentageNormalRoom : percentageVipRoom;
+    const formattedPercentage = formatPercentage(percentage);
+    return `${label}: ${value} (${formattedPercentage}% of total tickets)`;
+  },
+};
+
+
+  const myChart2 = new Chart(document.querySelector('.my-chart2'), {
+    type: 'doughnut', // Use "doughnut" for a donut chart
+    data: {
+      labels: chartData2.labels,
+      datasets: [
+        {
+          data: chartData2.data,
+          backgroundColor: ['#395589 ', '#8294b5'], // Set the colors for the donut segments
+          borderWidth: 0,
+          borderColor: '#059669', // Set borderWidth to 0 for the inner circle
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      cutout: '65%', // Adjust this value to control the size of the inner circle
+      plugins: {
+        legend: {
+          position: 'right',
+          display: true,
+          labels: {
+            // Update the tooltip to show percentages
+            usePointStyle: true,
+            pointStyle: 'circle',
+            boxWidth: 10,
+            callbacks: legendCallbacks,
+          },
+        },
+        tooltip: {
+          callbacks: {
+            // Update the tooltip to show percentages
+            label: (context) => {
+              const label = context.label;
+              const index = context.dataIndex;
+              const value = context.raw;
+              const percentage = index === 0 ? percentageNormalRoom : percentageVipRoom;
+              return `${label}: ${value}`;
+            },
+          },
+        },
+      },
+      layout: {
+        padding: {
+          top: 30, // Add desired top margin (adjust the value as needed)
+          bottom: 30, // Add desired bottom margin (adjust the value as needed)
+        },
+      },
+      maintainAspectRatio: false,
+    },
+  });
+ 
+  // Chart 3 data
+  const topMovies = <%- JSON.stringify(topMoviesData) %>;
+  const movieName = topMovies.map((movie) => movie.movie_name);
+  const ticketSold = topMovies.map((movie) => movie.tickets_sold);
+  const chartData3 = {
+    labels: movieName,
+    data: ticketSold,
+  };
+  
+  const myChart3 = new Chart(document.querySelector('.my-chart3'), {
+    type: 'bar',
+    data: {
+      labels: chartData3.labels,
+      datasets: [
+        {
+          label: 'Number of Tickets Sold',
+          data: chartData3.data,
+          backgroundColor: '#5988e1',
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Movie Names',
+          },
+          grid: {
+            display: false,
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Number of Ticket(s)',
+          },
+          beginAtZero: true,
+        },
+      },
+      layout: {
+        padding: 30,
+      },
+    },
+  });
+  
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+      
+  <script>
+    function showSuccessMessage(message) {
+      alertify.success(message);
+    }
+
+    // Check if there's a success message to display
+    const successMessage = '<%= smessage %>'; // This should be a variable passed from your server-side code
+    if (successMessage) {
+      alertify.set('notifier', 'position', 'top-center'); // Set the position of the message
+      alertify.set('notifier', 'delay', 5); // Set the display duration (in seconds)
+      showSuccessMessage(successMessage);
+    }
+  </script>
+  
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="text-muted">&copy; 2023 FlexTix</p>
+        </div>
+    </footer>
+</body>
+
+</html>

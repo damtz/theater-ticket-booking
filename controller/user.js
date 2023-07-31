@@ -2,25 +2,15 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const { connection, passport } = require('../database');
-const {check, validationResult, matchedData } = require('express-validator');
+const { check, validationResult, matchedData } = require('express-validator');
 const registerValidation = require('../validation/registerValidation');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const PDFDocument = require('pdfkit');
+const transporter = require('../config/email');
 
 router.use(passport.initialize());
 router.use(passport.session());
-
-function ensureUser(req, res, next) {
-  if (req.isAuthenticated() && req.user.role === 'user') {
-    // If the user is logged in and has the role "user," proceed to the next middleware or route handler
-    return next();
-  } else {
-    // If the user is not logged in or doesn't have the role "user," redirect to the desired route (e.g., home page)
-    res.redirect('/login');
-  }
-}
-
 
 const isLoggedin = function (req, res, next) {
   if (req.isAuthenticated()) {
@@ -30,21 +20,20 @@ const isLoggedin = function (req, res, next) {
   }
 };
 
-// router.get('/', function (req, res) {
-//   const query = 'SELECT * FROM movies';
-
-//   connection.query(query, (error, results) => {
-//     if (error) {
-//       console.error('Error executing the query: ', error);
-//       return;
-//     }
-//     res.render('user/index', { movies: results, currentUser: req.user });
-//   });
-// });
+function ensureuser(req, res, next) {
+  if (req.isAuthenticated() && req.user.role === 'user') {
+    // If the user is logged in and has the role "user," proceed to the next middleware or route handler
+    return next();
+  } else {
+    res.redirect('/login');
+  }
+}
 
 router.get('/', function (req, res) {
   let query = 'SELECT * FROM movies';
 
+  const emessage = req.flash('error');
+  const smessage = req.flash('success');
   const { genre } = req.query;
   if (genre) {
     // If a genre is provided in the query string, add a WHERE clause to filter by genre
@@ -56,7 +45,12 @@ router.get('/', function (req, res) {
       console.error('Error executing the query: ', error);
       return;
     }
-    res.render('user/index', { movies: results, currentUser: req.user });
+    res.render('user/index', {
+      movies: results,
+      currentUser: req.user,
+      smessage,
+      emessage,
+    });
   });
 });
 
@@ -85,10 +79,8 @@ router.get('/search', function (req, res) {
   });
 });
 
-
-
 //get to the new_release page
-router.get('/new-releases',  function (req, res) {
+router.get('/new-releases', function (req, res) {
   const query = 'SELECT * FROM movies WHERE status = "New Release";';
 
   connection.query(query, (error, results) => {
@@ -113,13 +105,18 @@ router.get('/up-coming', function (req, res) {
   });
 });
 
-
 router.get('/register', function (req, res) {
-  res.render('user/register',{ currentUser: req.user});
+  res.render('user/register', { currentUser: req.user });
 });
 
 router.get('/login', function (req, res) {
-  res.render('user/login', {currentUser: req.user, errorMessage: '' });
+  const successMessages = req.flash('success');
+  const errorMessages = req.flash('error');
+  res.render('user/login', {
+    emessage: errorMessages,
+    smessage: successMessages,
+    currentUser: req.user,
+  });
 });
 
 const error = [];
@@ -149,28 +146,33 @@ router.post('/register', registerValidation, function (req, res) {
         }
         const emailCount = results[0].count;
         if (emailCount > 0) {
-          console.log('Email already exists.');
-          res.render('user/register', {currentUser: req.user,
-            errorMessage: 'Email already exists.',
-          });
+          req.flash(
+            'error',
+            'Email Already Exists! Please use a different email.'
+          );
+          res.redirect('/login');
         } else {
           const query = `INSERT INTO users (username, email, password, role) VALUES ('${name}', '${email}', '${hashedPassword}', 'user')`;
           connection.query(query, (error, results) => {
             if (error) {
-              console.error('Error executing the query: ', error);
-              return;
+              req.flash('error', 'Something went wrong. Please try again.');
+              res.redirect('/login');
             }
-            console.log('Data inserted successfully.');
-            res.render('user/login', {currentUser: req.user,
-              successMessage: 'Registration Success. Please Login now.',
-            });
+            req.flash(
+              'success',
+              'Registered successfully. Login Now to Book a Movie.'
+            );
+            res.redirect('/login');
           });
         }
       });
     }
   } catch (err) {
     console.log('Verification Invalid!!' + err);
-    res.render('user/register', {currentUser: req.user, errorMessage: 'Something went wrong' });
+    res.render('user/register', {
+      currentUser: req.user,
+      errorMessage: 'Something went wrong',
+    });
   }
 });
 
@@ -189,8 +191,46 @@ const authenticateUser = (req, res, next) => {
 // Register the middleware before defining your routes
 app.use(authenticateUser);
 
+// router.post('/login', function (req, res) {
+//   const email = req.body.email;
+
+//   const userQuery = 'SELECT * FROM users WHERE email = ?';
+//   connection.query(userQuery, [email], (error, results) => {
+//     if (error) {
+//       req.flash('error', 'Error validating user.');
+//       res.redirect('/login');
+//     } else {
+//       // Check if any user was found
+//       if (results && results.length > 0) {
+//         const user = results[0];
+//         if (user.role == 'super-admin') {
+//           passport.authenticate('local')(req, res, function () {
+//             req.flash('success', 'Logged in successfully as Super Admin.');
+//             res.redirect('/sdashboard');
+//           });
+//         } else if (user.role == 'admin') {
+//           passport.authenticate('local')(req, res, function () {
+//             req.flash('success', 'Logged in successfully as Admin.');
+//             res.redirect('adashboard');
+//           });
+//         } else {
+//           passport.authenticate('local')(req, res, function () {
+//             req.flash('success', 'Logged in successfully.');
+//             res.redirect('/');
+//           });
+//         }
+//       } else {
+//         // No user found for the given email, display error message
+//         req.flash('error', 'Invalid user credentials.');
+//         res.redirect('/login');
+//       }
+//     }
+//   });
+// });
+
 router.post('/login', function (req, res) {
   const email = req.body.email;
+  const password = req.body.password; // Get the password provided by the user
 
   const userQuery = 'SELECT * FROM users WHERE email = ?';
   connection.query(userQuery, [email], (error, results) => {
@@ -199,26 +239,50 @@ router.post('/login', function (req, res) {
       return res.status(500).send('Invalid User');
     } else {
       const user = results[0];
-      if (user.role == 'super-admin') {
-        passport.authenticate('local')(req, res, function () {
-          res.redirect('/sdashboard');
-        });
-      } else if (user.role == 'admin') {
-        passport.authenticate('local')(req, res, function () {
-          res.redirect('adashboard');
-        });
-      } else {
-        passport.authenticate('local')(req, res, function () {
-          res.redirect('/');
-        });
+      if (!user || results.length === 0) {
+        req.flash('error', 'User not found!');
+        return res.redirect('/login');
       }
+
+      // Compare the password provided by the user with the password stored in the database
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) {
+          console.error('Error comparing passwords:', err);
+          return res.status(500).send('Server Error');
+        }
+
+        if (isMatch) {
+          // Passwords match, user is authenticated
+          if (user.role === 'super-admin') {
+            passport.authenticate('local')(req, res, function () {
+              req.flash('success', 'Logged in successfully.');
+              res.redirect('/sdashboard');
+            });
+          } else if (user.role === 'admin') {
+            passport.authenticate('local')(req, res, function () {
+              req.flash('success', 'Logged in successfully.');
+              res.redirect('/adashboard');
+            });
+          } else {
+            passport.authenticate('local')(req, res, function () {
+              req.flash('success', 'Logged in successfully.');
+              res.redirect('/');
+            });
+          }
+        } else {
+          req.flash('error', 'Invalid Passoword!');
+          res.redirect('/login');
+        }
+      });
     }
   });
 });
 
-router.get('/my-bookings', isLoggedin, ensureUser, function (req, res) {
+router.get('/my-bookings', isLoggedin, ensureuser, function (req, res) {
   const userId = req.user.id;
-  console.log(userId);
+  const smessage = req.flash('success');
+  const emessage = req.flash('error');
+
   const query = `
     SELECT b.*, u.username, u.email, mh.name AS hall_name, mh.location AS hall_location, m.title AS movie_title
     FROM bookings AS b
@@ -254,8 +318,12 @@ router.get('/my-bookings', isLoggedin, ensureUser, function (req, res) {
       };
     });
 
-    res.render('user/myBookings', { bookings: formattedResults, currentUser: req.user }
-    );
+    res.render('user/myBookings', {
+      bookings: formattedResults,
+      currentUser: req.user,
+      smessage,
+      emessage,
+    });
   });
 });
 
@@ -270,11 +338,15 @@ function formatTime(time) {
   return formattedTime;
 }
 
-router.get('/download-mybooking/:bookingId', isLoggedin, ensureUser, function (req, res) {
-  const bookingId = req.params.bookingId;
+router.get(
+  '/download-mybooking/:bookingId',
+  isLoggedin,
+  ensureuser,
+  function (req, res) {
+    const bookingId = req.params.bookingId;
 
-  // Fetch the booking details from the database based on the booking ID
-  const query = `
+    // Fetch the booking details from the database based on the booking ID
+    const query = `
     SELECT b.*, u.username, u.email, mh.name AS hall_name, mh.location AS hall_location, m.title AS movie_title
     FROM bookings AS b
     JOIN users AS u ON b.user_id = u.id
@@ -283,62 +355,66 @@ router.get('/download-mybooking/:bookingId', isLoggedin, ensureUser, function (r
     WHERE b.booking_id = ${bookingId}
   `;
 
-  connection.query(query, (error, results) => {
-    if (error) {
-      console.log(error);
-      return res.status(500).json({ error: 'Internal server error' });
-    }
+    connection.query(query, (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
 
-    if (results.length === 0) {
-      return res.status(404).send('Booking not found');
-    }
+      if (results.length === 0) {
+        return res.status(404).send('Booking not found');
+      }
 
-    const booking = results[0];
+      const booking = results[0];
 
-    // Create a new PDF document
-    const doc = new PDFDocument();
+      // Create a new PDF document
+      const doc = new PDFDocument();
 
-    // Set response headers to make the browser treat the response as a PDF file
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader(
-      'Content-Disposition',
-      'attachment; filename=booking_details.pdf'
-    );
+      // Set response headers to make the browser treat the response as a PDF file
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader(
+        'Content-Disposition',
+        'attachment; filename=booking_details.pdf'
+      );
 
-    // Pipe the PDF document to the response
-    doc.pipe(res);
+      // Pipe the PDF document to the response
+      doc.pipe(res);
 
-    // Add content to the PDF document
-    doc
-      .font('Helvetica-Bold')
-      .fontSize(16)
-      .text('Booking Details', { align: 'center' });
-    doc.moveDown();
-    doc.font('Helvetica').fontSize(12).text(`Ticket No: ${booking.booking_id}`);
-    doc.text(`Movie Name: ${booking.movie_title}`);
-    doc.text(`Booked By: ${booking.username}`);
-    doc.text(`Hall Name: ${booking.hall_name}`);
-    doc.text(`Location: ${booking.hall_location}`);
-    doc.text(
-      `Booking Date: ${new Date(booking.screening_date).toLocaleDateString(
-        'en-US',
-        {
-          weekday: 'short',
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-        }
-      )}`
-    );
-    const formattedTime = formatTime(booking.screening_time);
-    doc.text(`Time: ${formattedTime}`);
-    doc.text(`Seat No: ${booking.seat_number}`);
-    doc.text(`Amount: ${booking.amount}`);
+      // Add content to the PDF document
+      doc
+        .font('Helvetica-Bold')
+        .fontSize(16)
+        .text('Booking Details', { align: 'center' });
+      doc.moveDown();
+      doc
+        .font('Helvetica')
+        .fontSize(12)
+        .text(`Ticket No: ${booking.booking_id}`);
+      doc.text(`Movie Name: ${booking.movie_title}`);
+      doc.text(`Booked By: ${booking.username}`);
+      doc.text(`Hall Name: ${booking.hall_name}`);
+      doc.text(`Location: ${booking.hall_location}`);
+      doc.text(
+        `Booking Date: ${new Date(booking.screening_date).toLocaleDateString(
+          'en-US',
+          {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          }
+        )}`
+      );
+      const formattedTime = formatTime(booking.screening_time);
+      doc.text(`Time: ${formattedTime}`);
+      doc.text(`Seat No: ${booking.seat_number}`);
+      doc.text(`Amount: ${booking.amount}`);
 
-    // Finalize the PDF document
-    doc.end();
-  });
-});
+      // Finalize the PDF document
+      doc.end();
+    });
+  }
+);
 
 router.get('/logout', (req, res) => {
   req.logout(function (err) {
@@ -356,13 +432,14 @@ router.get('/logout', (req, res) => {
   });
 });
 
-//Step 1: Add a "Forgot Password" link on the login page
-router.get('/forgot-password', function(req, res) {
-  res.render('user/forgot-password', { errorMessage: '' });
+router.get('/forgot-password', function (req, res) {
+  const smessage = req.flash('success');
+  const emessage = req.flash('error');
+  res.render('user/forgot-password', { errorMessage: '', smessage, emessage });
 });
 
 //Step 2: Implement email verification and send reset password link
-router.post('/reset-password', function(req, res) {
+router.post('/reset-password', function (req, res) {
   const email = req.body.email;
 
   // Check if the email exists in the database
@@ -375,12 +452,12 @@ router.post('/reset-password', function(req, res) {
     const emailCount = results[0].count;
     if (emailCount === 0) {
       res.render('user/forgot-password', {
-        errorMessage: 'Invalid email address.'
+        errorMessage: 'Invalid email address.',
       });
     } else {
       // Generate a unique token and store it in the database
       const token = generateToken(); // Call the generateToken() function here
-      
+
       const updateQuery = `UPDATE users SET reset_token = ? WHERE email = ?`;
       connection.query(updateQuery, [token, email], (error, results) => {
         if (error) {
@@ -389,11 +466,24 @@ router.post('/reset-password', function(req, res) {
         }
 
         // Send the reset password email to the user
-        sendResetPasswordEmail(email, token); // Call the sendResetPasswordEmail() function here
 
-        console.log('Reset password email sent successfully.');
-        res.render('user/forgot-password', {
-          errorMessage: 'An email with instructions has been sent to your email address.please not that you token is just for 5 minutes, after that it wll be expired'
+        var mailOptions = {
+          from: process.env.auth_user,
+          to: email,
+          subject: 'FlickTix - Password Reset',
+          html: `Click the following link to reset your password: http://localhost:5000/Reset-password?token=${token}`,
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log('Email error:', error);
+          } else {
+            req.flash(
+              'success',
+              'Reset link sent to your email. Please check and reset.'
+            );
+            res.redirect('/');
+          }
         });
       });
 
@@ -412,10 +502,8 @@ router.post('/reset-password', function(req, res) {
   });
 });
 
-
-
 //Step 3: Create a reset password form
-router.get('/Reset-password', function(req, res) {
+router.get('/Reset-password', function (req, res) {
   const token = req.query.token; // Get the token from the query parameters or wherever it is stored
   res.render('user/reset-password', { token, errorMessage: '' });
 });
@@ -433,16 +521,15 @@ router.post(
       .withMessage('New Password must be minimum 8 characters long')
       .matches(/[!@#$%^&*(),.?":{}|<>]/)
       .withMessage('New Password should have at least one special character'),
-    check('confirmPassword')
-      .custom((confirmPassword, { req }) => {
-        const newPassword = req.body.newPassword;
+    check('confirmPassword').custom((confirmPassword, { req }) => {
+      const newPassword = req.body.newPassword;
 
-        if (newPassword !== confirmPassword) {
-          throw new Error('New Passwords must match.');
-        }
+      if (newPassword !== confirmPassword) {
+        throw new Error('New Passwords must match.');
+      }
 
-        return true;
-      }),
+      return true;
+    }),
   ],
   (req, res) => {
     const errors = validationResult(req);
@@ -473,29 +560,30 @@ router.post(
 
         // Update the user's password in the database
         const updateQuery = `UPDATE users SET password = ? WHERE id = ?`;
-        connection.query(updateQuery, [hashedPassword, userId], (error, results) => {
-          if (error) {
-            console.error('Error executing the query: ', error);
-            return;
-          }
-          console.log('Password reset successfully.');
-
-          // Clear the reset_token field for the user
-          const clearTokenQuery = `UPDATE users SET reset_token = null WHERE id = ?`;
-          connection.query(clearTokenQuery, [userId], (error, results) => {
+        connection.query(
+          updateQuery,
+          [hashedPassword, userId],
+          (error, results) => {
             if (error) {
               console.error('Error executing the query: ', error);
               return;
             }
-            console.log('Reset token cleared.');
-            res.redirect('/login');
-          });
-        });
+
+            // Clear the reset_token field for the user
+            const clearTokenQuery = `UPDATE users SET reset_token = null WHERE id = ?`;
+            connection.query(clearTokenQuery, [userId], (error, results) => {
+              if (error) {
+                console.error('Error executing the query: ', error);
+                return;
+              }
+              req.flash('success', 'Password reset successful. Login Now');
+              res.redirect('/login');
+            });
+          }
+        );
       } else {
-        res.render('user/reset-password', {
-          token,
-          errorMessage: 'Invalid or expired token.',
-        });
+        req.flash('error', 'Token Expired. Please try again.');
+        res.redirect('/forgot-password');
       }
     });
   }
@@ -503,40 +591,13 @@ router.post(
 
 function generateToken() {
   // Generate a random string of characters for the token
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let token = '';
   for (let i = 0; i < 20; i++) {
     token += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return token;
-}
-
-const nodemailer = require('nodemailer');
-
-async function sendResetPasswordEmail(email, token) {
-  try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      port: 587,
-      secure: true, 
-      auth: {
-        user: '12190095.gcit@rub.edu.bt', 
-        pass: '17980119@tshering' 
-      }
-    });
-
-    const mailOptions = {
-      from: '12190042.gcit@gcit.edu.bt', 
-      to: email,
-      subject: 'Reset Your Password',
-      text: `Click the following link to reset your password: http://localhost:3000/Reset-password?token=${token}`
-    };
-
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Reset password email sent successfully. Message ID:', info.messageId);
-  } catch (error) {
-    throw new Error('Error sending email: ' + error.message);
-  }
 }
 
 module.exports = router;

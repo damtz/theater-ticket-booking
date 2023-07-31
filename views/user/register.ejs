@@ -22,14 +22,13 @@
   <body>
     <%- include('header') %>
 
-
     <!-- ==============================Login=================== -->
     <div class="wrapper d-flex justify-content-center">
       <div class="card">
         <form action="/register" method="POST" class="d-flex flex-column">
           <div class="h3 text-center login">Create An Account</div>
           <% if (typeof errorMessage !== "undefined") { %>
-          <p role="alert"><%= errorMessage %></p>
+          <p role="alert" style="color: red"><%= errorMessage %></p>
           <% } %><% if (typeof error !== "undefined") { %>
           <span style="color: red; font: size 14px" id="Err">
             <%= error %></span
@@ -111,7 +110,9 @@
               </label>
             </div>
             <div class="mt-sm-0 mt-3">
-              <a href="forgotpass.html" class="Forgot-pass">Forgot password?</a>
+              <a href="/forgot-password" class="Forgot-pass"
+                >Forgot password?</a
+              >
             </div>
           </div>
 

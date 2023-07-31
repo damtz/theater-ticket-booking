@@ -1,0 +1,72 @@
+<%- include('header') %>
+
+          <section class="table__header">
+            <h3>Movie Administration</h3>
+          </section>
+          <section class="table__body">
+            <div class="pr-4 pl-4" style="padding-bottom: 100px">
+              <div class="table-scroll-container">
+                <table id="myTable" class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th style="padding: 15px 10px;">SI No <span class="icon-arrow">&UpArrow;</span></th>
+                      <th>Movie Name</th>
+                      <th>Genre</th>
+                      <th>Status</th>
+                      <th>Duration</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% let slNo = 1; %>
+                    <!-- Initialize the slNo variable outside the loop -->
+                    <% movies.forEach(function(movie) { %>
+                    <tr id="rowId1">
+                      <td style="padding: 15px 10px;"><%= slNo %></td>
+                      <td><%= movie.title %></td>
+                      <td><%= movie.genre %></td>
+                      <td><%= movie.status %></td>
+                      <td><%= movie.duration %></td>
+                      <td>
+                        <a href="/admin-edit-movie/<%= movie.id %>">
+                          <i class="fa fa-edit"></i
+                        ></a>
+                        <a href="/movieDeleteAdmin/<%= movie.id %>">
+                          <i class="fa fa-trash delete-icon"></i
+                        ></a>
+                      </td>
+                    </tr>
+                    <% slNo++; %>
+                    <!-- Increment the slNo for the next iteration -->
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+              <div class="add-user-button-container">
+                <a href="/admin-addMovie"
+                  ><button class="add-user-button">Add New Movie</button></a
+                >
+              </div>
+            </div>
+          </section>
+        </main>
+      </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#myTable').DataTable({
+          // Enable filtering
+          searching: true,
+          // Enable sorting
+          ordering: true,
+          // Enable pagination
+          paging: true,
+        });
+      });
+    </script>
+    <%- include('alert') %>
+  </body>
+</html>

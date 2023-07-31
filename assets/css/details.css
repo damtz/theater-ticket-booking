@@ -5,7 +5,6 @@
 body {
   background-color: #eee;
   font-family: "Inter", sans-serif;
-  /* background: linear-gradient(to top, #949292 10%, rgba(0, 0, 0, 100) 80%); */
   background-color: #404040;
 }
 
@@ -22,7 +21,7 @@ body {
 
 .card img {
   width: 100%;
-  height: 15rem;
+  height: auto;
 }
 
 .card-body {
@@ -103,7 +102,7 @@ hr {
 
 /* ==========================================Responsivness for mobile========================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 768px) and (max-width: 992px) {
   .card {
     width: 100%; 
   }
@@ -136,26 +135,14 @@ hr {
   
 }
 
-@media screen and (min-width: 768px) and (max-width: 991px) {
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+ @media screen and (min-width: 768px) and (max-width: 991px) {
+  .card {
+    width: 100%; 
+  }
+  .card-body{
+    display: none;
   }
 
-  .search-container {
-    order: 3;
-    transform: translateX(20%);
-  }
-
-  .navbar-toggle {
-    order: 1;
-  }
-
-  .navbar-toggler,
-  .navbar-toggler:focus {
-    transform: translateX(300%);
-  }
   .bi-person-circle {
     display: none;
   }
@@ -193,27 +180,4 @@ hr {
 
    }
   
-
-.footer-title {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-}
-
-.footer-title .text-white {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-right: 60px;
-}
-
-.footer-title .logo {
-  text-decoration: none;
-  color: #ffe36d;
-}
-
-.footer-social-links {
-  display: flex;
-  flex-direction: end;
-}
 }

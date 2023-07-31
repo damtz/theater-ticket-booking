@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hall Configuration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Kd8TZj5zwej/JI8MvhiBSvjN3pXyI+plQdFpspSoZdbsq1eX2aodScThRSVN4P8P9eWvHvkjjIMtoPzSEEBLcA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="/super/css/home.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <style>
+        .table__header {
+            margin-top: 12px;
+            height: 10%;
+            background-color: #fff4;
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* width: 100%; */
+            margin-left: 55px;
+        }
+        
+        .boxes {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+        
+        .box {
+            /* flex-grow: 1; */
+            position: relative;
+            width: 100%;
+            max-width: 550px;
+            height: 150px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: flex;
+            justify-content: start;
+            align-items: flex-start;
+            padding: 10px;
+            margin: 0 50px;
+        }
+        
+        .tabletitle {
+            margin-top: 5px;
+            margin-left: 5px;
+            font-size: 20px;
+        }
+        
+        .number {
+            position: absolute;
+            bottom: 8px;
+            left: 15px;
+            font-size: 26px;
+            color: #333;
+        }
+        
+        .icon {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: #676565;
+            border-radius: 50%;
+            border: 4px solid #676565;
+            padding: 18px;
+        }
+        
+        .graphbox-row {
+            display: flex;
+            justify-content: flex-start;
+            margin: 20px;
+            margin-top: 95px;
+        }
+        
+        .graphbox {
+            /* flex-grow: 1; */
+            position: relative;
+            width: 100%;
+            max-width: 850px;
+            height: 410px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0 50px;
+        }
+        
+        .graphbox h5 {
+            position: absolute;
+            top: 10px;
+            left: 40px;
+            /* margin: 0; */
+            font-size: 22px;
+            color: #262626;
+        }
+        
+        #timePeriodDropdown {
+            position: absolute;
+            z-index: 999;
+            background-color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 18px;
+            width: 160px;
+            height: 45px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent;
+            border-image: linear-gradient(45deg, #4c95c9, #96d5e1);
+            border-image-slice: 1;
+            top: 20px;
+            right: 20px;
+        }
+        
+        #timePeriodDropdown select {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+            padding: 8px;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #timePeriodDropdown:hover {
+            background-color: #f1f1f1;
+        }
+        
+        @media (max-width: 768px) {
+            .table__header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .boxes {
+                flex-direction: column;
+                align-items: center;
+            }
+            .box {
+                margin: 10px 0;
+                max-width: 300px;
+            }
+            .icon {
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                font-size: 15px;
+                color: #676565;
+                border-radius: 50%;
+                border: 3px solid #676565;
+                padding: 18px;
+            }
+            .graphbox-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            .graphbox {
+                margin: 10px 0;
+                max-width: 100%;
+            }
+            .my-chart1,
+            .my-chart2 {
+                max-width: 90%;
+            }
+            .graphbox h5 {
+                font-size: 18px;
+            }
+            .dropdown {
+                margin-top: 20px;
+                width: 50px;
+                height: 20px;
+            }
+            .footer-content {
+                text-align: center;
+            }
+        }
+        /* Media query for even smaller screens */
+        
+        @media (max-width: 576px) {
+            .tabletitle {
+                font-size: 18px;
+            }
+            .number {
+                font-size: 22px;
+            }
+            .icon {
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                font-size: 20px;
+                color: #676565;
+                border-radius: 50%;
+                border: 4px solid #676565;
+                padding: 18px;
+            }
+            .my-chart1,
+            .my-chart2 {
+                max-width: 95%;
+            }
+            .graphbox h5 {
+                font-size: 16px;
+            }
+            .dropdown {
+                margin-top: 15px;
+                width: 30px;
+                height: 25px;
+                font-size: 14px;
+            }
+            .footer-content {
+                font-size: 14px;
+            }
+        }
+
+        .movies {
+            position: absolute;
+            margin-top: 10px;
+            display: inline-block;
+          }
+    
+
+        .dropbtn {
+            background-color: #ffffff;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+          }
+    
+          .dropdown {
+            position: relative;
+            display: inline-block;
+          }
+    
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+          }
+    
+          .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+          }
+    
+          .dropdown-content a:hover {
+            background-color: #f1f1f1;
+          }
+    
+          .dropdown:hover .dropdown-content {
+            display: block;
+          }
+          /* Add New User button styles */
+          .add-user-button-container {
+            text-align: right; /* Align the button to the right side */
+            margin-top: 20px;
+          }
+    
+          .add-user-button {
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #828282;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            background: linear-gradient(
+              to right,
+              #ffe36d,
+              #eef6ee
+            ); /* Linear gradient for background */
+            border-image: linear-gradient(to right, #4caf50, #45a049) 1; /* Linear gradient for border */
+            border-image-slice: 1; /* Controls the width of the border image */
+          }
+    
+          .add-user-button:hover {
+            background: linear-gradient(to right, #eef6ee, #ffe36d);
+          }
+    </style>
+</head>
+
+<body>
+    <main class="table">
+        <header class="header">
+            <div class="dropdown">
+                <button class="dropbtn"><i class="fa fa-user"></i></button>
+                <div class="dropdown-content">
+                  <a href=""><%= currentUser.username %></a>
+                  <a href="/logout">Logout</a>
+                </div>
+              </div>
+        </header>
+        <section class="table__header">
+            <h1>Dashboard</h1>
+
+        </section>
+        <section class="table__body">
+            <section class="boxes">
+                <div class="box">
+                    <h3 class="tabletitle">Movie showing Today</h3>
+                    <div class="number"><b><%= moviesScreeningToday %></b></div>
+                    <i class="fas fa-video  icon"></i>
+                </div>
+                <div class="box">
+                    <h3 class="tabletitle">Booking made Today</h3>
+                    <div class="number"><b><%= totalBookingsToday %></b></div>
+                    <i class="fa-solid fa-file-lines icon"></i>
+                </div>
+                <div class="box">
+                    <h3 class="tabletitle">Theater</h3>
+                    <div class="number">
+                        <b><%= hallsScreeningToday %></b>
+                    </div>
+                    <i class="fas fa-tv icon"></i>
+                </div>
+            </section>
+            <section class="graphbox-row">
+                <div class="graphbox">
+                    <h5>Top Movies by Bookings</h5>
+                    <canvas class="my-chart1" width="200" height="200"></canvas>
+                  </div>
+                <!-- Add a script tag to store the movie titles and bookings counts as JSON -->
+                <div class="graphbox">
+                  <h5>Ticket Sold for each Theater</h5>
+                  <div class="movies" style="top: 10px; right: 15px">
+                    <select id="timePeriodDropdown" onchange="updateChart2()">
+                      <% ticketsData.forEach((ticket) => { %>
+                        <option value="<%= ticket.hall_name %>">
+                          <%= ticket.hall_name %> (<%= ticket.screening_time %>)
+                        </option>
+                      <% }) %>
+                    </select>
+                  </div>
+                  <canvas class="my-chart2" width="300" height="200"></canvas>
+                </div>
+            </section>         
+    </main>
+          <!-- Display Top Movies -->
+          <script>
+            const topMoviesData = <%- JSON.stringify(topMovies) %>;
+            const movieTitles = topMoviesData.map((movie) => movie.movie_name);
+            const bookingsCount = topMoviesData.map((movie) => movie.bookings_count);
+          </script>        
+
+    <script>
+
+                // Chart 1 data
+                const chartData1 = {
+                    labels: movieTitles,
+                    data: bookingsCount,
+                  };
+                  const myChart1 = new Chart(document.querySelector(".my-chart1"), {
+                    type: "bar",
+                    data: {
+                      labels: chartData1.labels,
+                      datasets: [
+                        {
+                          label: "Movie Name",
+                          data: chartData1.data,
+                          backgroundColor: "#5988e1",
+                          borderWidth: 1,
+                        },
+                      ],
+                    },
+                    options: {
+                      responsive: true,
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
+                      maintainAspectRatio: false,
+                      scales: {
+                        x: {
+                          title: {
+                            display: true,
+                            text: "Movie Names",
+                          },
+                          grid: {
+                            display: false,
+                          },
+                        },
+                        y: {
+                          title: {
+                            display: true,
+                            text: "Number of Ticket(s)",
+                          },
+                          beginAtZero: true,
+                        },
+                      },
+                      layout: {
+                        padding: 30,
+                      },
+                    },
+                  });
+
+        // Parse the JSON string to get the ticketsData array
+        const ticketsData = <%- JSON.stringify(ticketsData) %>;
+      
+        // Function to set the initial chart data for the first hall
+        function setInitialChartData() {
+          const firstHallData = ticketsData[0];
+          const initialChartData = [firstHallData.tickets_sold, firstHallData.tickets_left];
+          myChart2.data.datasets[0].data = initialChartData;
+          myChart2.update();
+        }
+      
+        // Chart 2 initialization
+        const myChart2 = new Chart(document.querySelector(".my-chart2"), {
+          type: "doughnut", // Use "doughnut" for a donut chart
+          data: {
+            labels: ["Ticket Sold", "Ticket Left"],
+            datasets: [
+              {
+                data: [0, 0], // Initial values set to 0, will be updated dynamically
+                backgroundColor: ["#395589", "#8294b5"], // Set the colors for the donut segments
+                borderWidth: 0,
+                borderColor: "#059669", // Set borderWidth to 0 for the inner circle
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            cutout: "65%", // Adjust this value to control the size of the inner circle
+            plugins: {
+              legend: {
+                position: "right",
+                display: true,
+              },
+              tooltip: {
+                callbacks: {
+                  label: (context) => {
+                    const hallName = ticketsData.map((ticket) => ticket.hall_name);
+                    const screeningTime = ticketsData.map((ticket) => ticket.screening_time);
+                    const index = context.dataIndex;
+                    const value = context.raw;
+                    return ` (${screeningTime[index]}): ${value}`;
+                  },
+                },
+              },
+            },
+            layout: {
+              padding: {
+                top: 20, // Add desired top margin (adjust the value as needed)
+                bottom: 20, // Add desired bottom margin (adjust the value as needed)
+              },
+            },
+            maintainAspectRatio: false,
+          },
+        });
+      
+        // Function to update Chart 2 based on the selected theater
+        function updateChart2() {
+          const hallDropdown = document.getElementById("timePeriodDropdown");
+          const selectedTheater = hallDropdown.value;
+      
+          // Find the ticket data for the selected theater
+          const selectedTheaterData = ticketsData.find((ticket) => ticket.hall_name === selectedTheater);
+      
+          // Update the chart data based on the selected theater
+          if (selectedTheaterData) {
+            const updatedChartData = [selectedTheaterData.tickets_sold, selectedTheaterData.tickets_left];
+            myChart2.data.datasets[0].data = updatedChartData;
+            myChart2.update();
+          }
+        }
+      
+        // Add an event listener to update the chart once the DOM content is loaded
+        document.addEventListener("DOMContentLoaded", function () {
+          setInitialChartData();
+        });
+      </script>
+      <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+      
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="text-muted">&copy; 2023 FlexTix</p>
+        </div>
+    </footer>
+</body>
+
+</html>

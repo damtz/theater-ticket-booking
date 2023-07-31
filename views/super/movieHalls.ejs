@@ -1,33 +1,83 @@
-<h1>THis is movie halls</h1>
+<%- include('header') %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Location</th>
-    <th>Normal capacity</th>
-    <th>Vip Capacity</th>
-    <th>Normal Rate</th>
-    <th>VIP Rate</th>
-    <!-- <th>Status</th> -->
-    <th>Action</th>
-  </tr>
-  <% halls.forEach(function(hall){ %>
-  <tr>
-    <td><%= hall.name %></td>
-    <td><%= hall.location %></td>
-    <td><%= hall.normal_capacity %></td>
-    <td><%= hall.vip_capacity %></td>
-    <td><%= hall.normal_rate %></td>
-    <td><%= hall.vip_rate %></td>
-    <!-- <% if(hall.status == 1){ %>
-    <td>Active</td>
-    <% }else{ %>
-    <td>Inactive</td>
-    <% } %> -->
-    <td>
-      <a href="hallUpdate/<%= hall.id %>">Edit</a>
-      <a href="hallDelete/<%= hall.id %>">Delete</a>
-    </td>
-  </tr>
-  <% }) %>
-</table>
+          <section class="table__header">
+            <h3>Hall Configuration</h3>
+          </section>
+          <section class="table__body">
+            <div class="pr-4 pl-4" style="padding-bottom: 100px">
+              <div class="table-scroll-container">
+                <table id="myTable" class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th style="padding: 15px 10px;">SI No <span class="icon-arrow">&UpArrow;</span></th>
+                      <th>Hall Name</th>
+                      <th>Location</th>
+                      <th>Normal Capacity</th>
+                      <th>Normal Rate</th>
+                      <th>Vip Capacity</th>
+                      <th>Vip Rate</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% let slNo = 1; %>
+                    <!-- Initialize the slNo variable outside the loop -->
+                    <% halls.forEach(function(hall) { %>
+                    <tr id="rowId1">
+                      <td style="padding: 15px 10px;"><%= slNo %></td>
+                      <td><%= hall.name %></td>
+                      <td><%= hall.location %></td>
+                      <td><%= hall.normal_capacity %></td>
+                      <td><%= hall.normal_rate %></td>
+                      <td><%= hall.vip_capacity %></td>
+
+                      <td><%= hall.vip_rate %></td>
+                      <% if(hall.status == 1){ %>
+                      <td>Active</td>
+                      <% }else{ %>
+                      <td>Inactive</td>
+                      <% } %>
+                      <td>
+                        <a href="/hallUpdate/<%= hall.id %>">
+                          <i class="fa fa-edit"></i
+                        ></a>
+                        <a href="/hallDelete/<%= hall.id %>">
+                          <i class="fa fa-trash delete-icon"></i
+                        ></a>
+                      </td>
+                    </tr>
+                    <% slNo++; %>
+                    <!-- Increment the slNo for the next iteration -->
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+              <div class="add-user-button-container">
+                <a href="/addHall"
+                  ><button class="add-user-button">Add New Hall</button></a
+                >
+              </div>
+            </div>
+          </section>
+        </main>
+      </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#myTable').DataTable({
+          // Enable filtering
+          searching: true,
+          // Enable sorting
+          ordering: true,
+          // Enable pagination
+          paging: true,
+        });
+      });
+    </script>
+    <%- include('alert') %>
+  </body>
+</html>

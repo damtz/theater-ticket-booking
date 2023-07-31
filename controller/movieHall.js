@@ -7,15 +7,6 @@ const movieHallValidation = require('../validation/movieHallValidation');
 
 router.use(express.json());
 
-function ensureUser(req, res, next) {
-  if (req.isAuthenticated() && req.user.role === 'user') {
-    // If the user is logged in and has the role "user," proceed to the next middleware or route handler
-    return next();
-  } else {
-    // If the user is not logged in or doesn't have the role "user," redirect to the desired route (e.g., home page)
-    res.redirect('/login');
-  }
-}
 const isLoggedin = function (req, res, next) {
   if (req.isAuthenticated()) {
     next();
@@ -24,38 +15,87 @@ const isLoggedin = function (req, res, next) {
   }
 };
 
-router.get('/addHall', function (req, res) {
-  res.render('super/addHall');
+router.get('/addHall', isLoggedin, function (req, res) {
+  const smessage = req.flash('success');
+  const emessage = req.flash('error');
+  res.render('super/addHall', { smessage, emessage, currentUser: req.user });
 });
 
 const error = [];
 
-router.post(
-  '/add-hall',
-  isLoggedin,
+// router.post(
+//   '/add-hall',
+//   isLoggedin,
 
-  function (req, res) {
-    const {
-      name,
-      location,
-      normal_capacity,
-      vip_capacity,
-      normal_rate,
-      vip_rate,
-    } = req.body;
-    const query = `INSERT INTO movie_halls (name, location, normal_capacity, vip_capacity, normal_rate, vip_rate) VALUES 
-   ('${name}', '${location}', ${normal_capacity}, ${vip_capacity}, ${normal_rate}, ${vip_rate})`;
-    connection.query(query, (error, results) => {
-      if (error) {
-        console.error('Error executing the query: ', error);
-        return res.status(500).json({ error: 'Internal server error' });
-      }
+//   function (req, res) {
+//     const {
+//       name,
+//       location,
+//       normal_capacity,
+//       vip_capacity,
+//       normal_rate,
+//       vip_rate,
+//     } = req.body;
+//     const query = `INSERT INTO movie_halls (name, location, normal_capacity, vip_capacity, normal_rate, vip_rate) VALUES
+//    ('${name}', '${location}', ${normal_capacity}, ${vip_capacity}, ${normal_rate}, ${vip_rate})`;
+//     connection.query(query, (error, results) => {
+//       if (error) {
+//         req.flash('error', 'Hall added successfully.');
+//         res.redirect('/movieHalls');
+//       }
 
-      console.log('Movie added successfully.');
-      res.redirect('/sdashboard');
-    });
-  }
-);
+//       req.flash('success', 'Hall added successfully.');
+//       res.redirect('/movieHalls');
+//     });
+//   }
+// );
+
+router.post('/add-hall', isLoggedin, function (req, res) {
+  const {
+    name,
+    location,
+    normal_capacity,
+    vip_capacity,
+    normal_rate,
+    vip_rate,
+  } = req.body;
+
+  const checkQuery = `SELECT * FROM movie_halls WHERE name = ? AND location = ?`;
+  connection.query(checkQuery, [name, location], (checkError, checkResults) => {
+    if (checkError) {
+      console.error('Error checking if hall exists:', checkError);
+      req.flash('error', 'An error occurred while checking for existing hall.');
+      res.redirect('/movieHalls');
+    } else if (checkResults.length > 0) {
+      req.flash(
+        'error',
+        'A hall with the same name and location already exists.'
+      );
+      res.redirect('/addHall');
+    } else {
+      const insertQuery = `INSERT INTO movie_halls (name, location, normal_capacity, vip_capacity, normal_rate, vip_rate) VALUES (?, ?, ?, ?, ?, ?)`;
+      const values = [
+        name,
+        location,
+        normal_capacity,
+        vip_capacity,
+        normal_rate,
+        vip_rate,
+      ];
+
+      connection.query(insertQuery, values, (insertError, insertResults) => {
+        if (insertError) {
+          console.error('Error adding hall:', insertError);
+          req.flash('error', 'An error occurred while adding the hall.');
+          res.redirect('/movieHalls');
+        } else {
+          req.flash('success', 'Hall added successfully.');
+          res.redirect('/movieHalls');
+        }
+      });
+    }
+  });
+});
 
 router.post('/hall-details', function (req, res) {
   const hallName = req.body.hallName;
@@ -100,7 +140,7 @@ router.post('/hall-details', function (req, res) {
   }
 });
 
-router.get('/movie-details', ensureUser, function (req, res) {
+router.get('/movie-details', function (req, res) {
   const movieId = req.query.movieId;
   const selectedDate = req.query.date;
 
@@ -130,14 +170,12 @@ router.get('/movie-details', ensureUser, function (req, res) {
       }
 
       if (hallsResults.length === 0) {
-        return res
-          .status(404)
-          .json({ error: 'This Movie is not screening in Any theatre' });
+        req.flash(
+          'error',
+          'This movie is not allocated in any of the Theatres!'
+        );
+        res.redirect('/');
       }
-      // if (hallsResults.length === 0) {
-      //   return res.redirect('/'); 
-      // }
-      
 
       const hallsMap = hallsResults.reduce((map, hall) => {
         const {
@@ -170,24 +208,22 @@ router.get('/movie-details', ensureUser, function (req, res) {
       // Convert the map values to an array of halls
       const hallDetails = Array.from(hallsMap.values());
 
-
       res.render('user/movieDetail', {
+        currentUser: req.user,
         movie: movieDetails,
         halls: hallDetails,
         selectedDate: selectedDate,
-        currentUser: req.user
+        currentUser: req.user,
       });
     });
   });
 });
 
-router.get('/seat-availability',isLoggedin, ensureUser, function (req, res) {
+router.get('/seat-availability', function (req, res) {
   const hallId = req.query.hallId;
   const movieId = req.query.movieId;
   const selectedDate = new Date(req.query.date).toISOString().split('T')[0];
   const selectedTime = req.query.time;
-  console.log('Date', selectedDate);
-  console.log('Time', selectedTime);
 
   const movieQuery = `SELECT * FROM movies WHERE id = '${movieId}'`;
   connection.query(movieQuery, (movieError, movieResults) => {
@@ -231,13 +267,13 @@ router.get('/seat-availability',isLoggedin, ensureUser, function (req, res) {
           const bookedSeats = bookingsResults.map((row) => row.seat_number);
 
           res.render('user/seatAvailability', {
+            currentUser: req.user,
             movie: movieResults[0],
             hall: hallResults[0],
             selectedDate: selectedDate,
             selectedTime: selectedTime,
             bookedSeats: bookedSeats,
-            currentUser: req.user
-
+            currentUser: req.user,
           });
         }
       );

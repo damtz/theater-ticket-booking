@@ -55,7 +55,7 @@ router.post('/book-seats', isLoggedin, ensureUser, function (req, res) {
         return { seatNumber, amount: seatAmount };
       });
       // Render the summary view with the booking details
-      console.log(selectedSeats); 
+      console.log(selectedSeats);
 
       //res.redirect('/seat-availability')
 
@@ -69,9 +69,8 @@ router.post('/book-seats', isLoggedin, ensureUser, function (req, res) {
         screeningDate,
         screeningTime,
         selectedSeats: selectedSeatsWithAmount,
-        currentUser: req.user
-
-     });
+        currentUser: req.user,
+      });
     });
   });
 });
@@ -79,11 +78,11 @@ router.post('/book-seats', isLoggedin, ensureUser, function (req, res) {
 function getCurrentDateTimeForMySQL() {
   const now = new Date();
   const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  const seconds = String(now.getSeconds()).padStart(2, "0");
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
@@ -117,7 +116,6 @@ router.post('/confirm-booking', isLoggedin, ensureUser, function (req, res) {
           screeningTime,
           seatAmount,
           getCurrentDateTimeForMySQL(), // Call custom function to get current datetime formatted for MySQL
-
         ],
         (error, results) => {
           if (error) {
@@ -132,6 +130,7 @@ router.post('/confirm-booking', isLoggedin, ensureUser, function (req, res) {
 
   Promise.all(bookingPromises)
     .then(() => {
+      req.flash('success', 'Successfully Booked.');
       res.redirect('/my-bookings');
     })
     .catch((error) => {

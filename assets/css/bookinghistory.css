@@ -21,7 +21,7 @@ body {
   justify-content: space-between;
 }
 .card_body {
-  background-color: #c9bfd2;
+  background-color: #f9f4fd;
   border: 1px solid transparent;
   border-radius: 2px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);

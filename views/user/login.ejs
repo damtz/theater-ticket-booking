@@ -16,6 +16,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"
+    />
 
     <link rel="stylesheet" href="/assets/css/login.css" />
   </head>
@@ -65,7 +69,9 @@
               </label>
             </div>
             <div class="mt-sm-0 mt-3">
-              <a href="/forgot-password" class="Forgot-pass">Forgot password?</a>
+              <a href="/forgot-password" class="Forgot-pass"
+                >Forgot password?</a
+              >
             </div>
           </div>
 
@@ -94,5 +100,7 @@
       integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
       crossorigin="anonymous"
     ></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <%- include('alert') %>
   </body>
 </html>

@@ -1,0 +1,9 @@
+/* Change text color for success message */
+.alertify-success {
+  color: white; /* Change the color to your desired color */
+}
+
+/* Change text color for error message */
+.alertify-error {
+  color: red; /* Change the color to your desired color */
+}

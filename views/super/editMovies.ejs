@@ -1,0 +1,100 @@
+<%- include('header') %>
+          <section class="table__header">
+            <h3>Movie Administration</h3>
+          </section>
+          <section class="table__body">
+            <form
+              action="/super-edit-movie/<%= movie.id %>"
+              method="POST"
+              class="hall-form"
+              enctype="multipart/form-data"
+            >
+              <div class="input-row">
+                <div>
+                  <label for="name">Name:</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="movieTitle"
+                    value="<%= movie.title %>"
+                  />
+                  <p style="color: red">
+                    <%= (typeof errors !== "undefined" && typeof errors.name !==
+                    "undefined") ? errors.name.msg : "" %>
+                  </p>
+                </div>
+                <div>
+                  <label for="casts">Casts:</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="casts"
+                    value="<%= movie.casts %>"
+                  />
+                  <p style="color: red">
+                    <%= (typeof errors !== "undefined" && typeof errors.location
+                    !== "undefined") ? errors.location.msg : "" %>
+                  </p>
+                </div>
+              </div>
+              <div class="input-row">
+                <div>
+                  <label for="genre">Genre:</label>
+                  <select name="genre" id="genre" required>
+                    <option value="<%= movie.genre %>" selected>
+                      Select Genre:
+                    </option>
+                    <option value="comedy">Comedy</option>
+                    <option value="action">Action</option>
+                    <option value="romance">Romance</option>
+                  </select>
+                  <p style="color: red">
+                    <%= (typeof errors !== "undefined" && typeof errors.location
+                    !== "undefined") ? errors.location.msg : "" %>
+                  </p>
+                </div>
+                <div>
+                  <label for="status">Status:</label>
+                  <select name="status" id="status" required>
+                    <option value="<%= movie.status %>" selected>
+                      Select Status:
+                    </option>
+                    <option value="New Release">New Release</option>
+                    <option value="UpComing">UpComing</option>
+                    <option value="Closed">Closed</option>
+                  </select>
+                  <p style="color: red">
+                    <%= (typeof errors !== "undefined" && typeof errors.location
+                    !== "undefined") ? errors.location.msg : "" %>
+                  </p>
+                </div>
+              </div>
+              <div class="input-row">
+                <div>
+                  <label for="duration">Duration:</label>
+                  <input type="text" id="name" name="duration" value="<%= movie.duration %>" />
+                  <p style="color: red">
+                    <%= (typeof errors !== "undefined" && typeof errors.location
+                    !== "undefined") ? errors.location.msg : "" %>
+                  </p>
+                </div>
+
+                <div>
+                  <label for="image">Movie Image:</label>
+                  <input type="file" id="image" name="image" accept="image/*" />
+                </div>
+              </div>
+              
+                <label for="summary">Summary:</label>
+                <textarea id="summary" name="summary">
+<%- movie.summary %></textarea
+                >
+              
+              <button type="submit" style="color: black; margin-top:15px">Update Now</button>
+            </form>
+          </section>
+        </main>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<%- include('header') %>
+<link href="/super/css/style.css" rel="stylesheet" type="text/css" />
+          <section class="table__header">
+            <h3>Hall Mapping</h3>
+          </section>
+          <section class="table__body">
+            <form action="/movie-hall-mapping" method="POST" class="hall-form">
+              <label for="movieId">Movie:</label>
+              <select id="movieId" name="movieId" required>
+                <option value="">Select a Movie</option>
+                <% movies.forEach(function(movie) { %>
+                <option value="<%= movie.id %>"><%= movie.title %></option>
+                <% }) %></select
+              ><br />
+
+              <label for="movieHallId">Movie Hall:</label>
+              <select id="movieHallId" name="movieHallId" required>
+                <option value="">Select a Movie Hall</option>
+                <% movieHalls.forEach(function(movieHall) { %>
+                <option value="<%= movieHall.id %>">
+                  <%= movieHall.name %>
+                </option>
+                <% }) %></select
+              ><br />
+
+              <label for="screeningDates">Screening Dates:</label>
+              <select
+                id="screeningDates"
+                name="screeningDates"
+                multiple
+                required
+              >
+                <% for (let i = 0; i < 7; i++) { %> <% const currentDate = new
+                Date(); %> <% currentDate.setDate(currentDate.getDate() + i); %>
+                <% const formattedDate =
+                currentDate.toISOString().split('T')[0]; %>
+                <option value="<%= formattedDate %>">
+                  <%= formattedDate %>
+                </option>
+                <% } %></select
+              ><br />
+
+              <label for="screeningTime">Screening Time:</label>
+              <input
+                type="time"
+                id="screeningTime"
+                name="screeningTime"
+                required
+              /><br />
+
+              <button type="submit" style="color: black;  margin-top: 20px">Create Mapping</button>
+            </form>
+          </section>
+        </main>
+      </section>
+    </div>
+    <%- include('alert') %>
+  </body>
+</html>

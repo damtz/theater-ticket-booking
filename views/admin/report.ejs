@@ -1,37 +1,105 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Report</title>
-  </head>
-  <body>
-    <% if (movieHallMapping.length > 0) { %>
-    <h1>Movie Hall Mapping Report</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Movie</th>
-          <th>Hall</th>
-          <th>Screening Date</th>
-          <th>Screening Time</th>
-          <th>Bookings Count</th>
-          <th>Tickets Left</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% movieHallMapping.forEach(function(mapping) { %>
-        <tr>
-          <td><%= mapping.movie_title %></td>
-          <td><%= mapping.hall_name %></td>
-          <td><%= mapping.screening_date %></td>
-          <td><%= mapping.screening_time %></td>
-          <td><%= mapping.bookings_count %></td>
-          <td><%= mapping.tickets_left %></td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
-    <% } else { %>
-    <p>No movie hall mapping data available.</p>
-    <% } %>
+<%- include('header') %>
+
+          <section class="table__header">
+            <h3>Report</h3>
+          </section>
+          <section class="table__body">
+            <div class="pr-4 pl-4" style="padding-bottom: 100px">
+              <div class="table-scroll-container">
+                <table id="myTable" class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>SI No <span class="icon-arrow">&UpArrow;</span></th>
+                      <th>Hall Name</th>
+                      <th>Location</th>
+                      <th>Movie Title</th>
+                      <th>Screening Date</th>
+                      <th>Screening Time</th>
+                      <th>Bookings Count</th>
+                      <th>Tickets Left</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% let slNo = 1; %>
+                    <!-- Initialize the slNo variable outside the loop -->
+                    <% movieHallMapping.forEach((booking) => { %>
+                      <tr>
+                        <td><%= slNo %></td>
+                        <td><%= booking.hall_name %></td>
+                        <td><%= booking.location %></td>
+                        <td><%= booking.movie_title %></td>
+                        <td><%= booking.screening_date %></td>
+                        <td><%= booking.screening_time %></td>
+                        <td><%= booking.bookings_count %></td>
+                        <td><%= booking.tickets_left %></td>
+                      </tr>
+                    <% slNo++; %>
+                    <!-- Increment the slNo for the next iteration -->
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+
+            <h1>Movie Report</h1>
+
+            <!-- Display the top two most watched movies -->
+            <h2>Top Two Movies</h2>
+            <% topTwoMovies.forEach((movie) => { %>
+            <p><%= movie %></p>
+            <% }) %>
+            
+            <!-- Display the movie data -->
+            <h2>Movie Data</h2>
+            <div class="pr-4 pl-4" style="padding-bottom: 100px">
+            <div class="table-scroll-container">
+              <table id="myTable" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>SI No <span class="icon-arrow">&UpArrow;</span></th>
+                    <th>Movie Title</th>
+                    <th>Ticket Count</th>
+                    <th>Revenue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% let SlNO = 1; %>
+                  <!-- Initialize the slNo variable outside the loop -->
+                  <% movieData.forEach((movie) => { %>
+                    <tr>
+                      <td><%= SlNO %></td>
+                      <td><%= movie.movie_title %></td>
+                      <td><%= movie.count %></td>
+                      <td><%= movie.revenue %></td>
+                    </tr>
+                  <% SlNO++; %>
+                  <!-- Increment the slNo for the next iteration -->
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </section>
+        </main>
+      </section>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#myTable').DataTable({
+          // Enable filtering
+          searching: true,
+          // Enable sorting
+          ordering: true,
+          // Enable pagination
+          paging: true,
+        });
+      });
+    </script>
+    <%- include('alert') %>
   </body>
 </html>

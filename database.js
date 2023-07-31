@@ -4,10 +4,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 const connection = mysql.createConnection({
-  host: '127.0.0.1',
+  host: 'localhost',
   user: 'root',
-  password: 'Damber123.',
-  database: 'movie_booking',
+  password: '',
+  database: 'movie_booking2',
   connectionLimit: 10,
 });
 
@@ -19,7 +19,6 @@ connection.connect((err) => {
   console.log('Connected to the database');
 });
 
-// Table creation query
 const createMovieHallsTable = `CREATE TABLE IF NOT EXISTS movie_halls (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -38,6 +37,7 @@ connection.query(createMovieHallsTable, (err) => {
   }
 });
 
+// Table creation query
 const createUserTable = `CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255) NOT NULL,
@@ -55,6 +55,26 @@ connection.query(createUserTable, (err) => {
     return;
   }
 });
+
+const createMovies = `CREATE TABLE IF NOT EXISTS movies (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  summary TEXT NOT NULL,
+  casts VARCHAR(255) NOT NULL,
+  status VARCHAR(50) NOT NULL,
+  genre VARCHAR(50) NOT NULL,
+  image VARCHAR(255) NOT NULL,
+  duration VARCHAR(255) NOT NULL
+);
+`;
+
+connection.query(createMovies, (err) => {
+  if (err) {
+    console.error('Error creating movie_halls table: ', err);
+    return;
+  }
+});
+
 const createHallMapping = `CREATE TABLE IF NOT EXISTS movie_hall_mapping (
   id INT AUTO_INCREMENT PRIMARY KEY,
   movie_id INT,
@@ -94,41 +114,6 @@ connection.query(createBooking, (err) => {
   }
 });
 
-const createMovies = `CREATE TABLE IF NOT EXISTS movies (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  trailer VARCHAR(255) NOT NULL,
-  summary TEXT NOT NULL,
-  casts VARCHAR(255) NOT NULL,
-  status VARCHAR(50) NOT NULL,
-  genre VARCHAR(50) NOT NULL,
-  duration VARCHAR(50) NOT NULL,
-  language_id INT,
-  image VARCHAR(255) NOT NULL,
-  FOREIGN KEY (language_id) REFERENCES languages(id)
-);
-`;
-
-connection.query(createMovies, (err) => {
-  if (err) {
-    console.error('Error creating movie_halls table: ', err);
-    return;
-  }
-});
-
-const createlanguages = `CREATE TABLE IF NOT EXISTS languages (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(255) NOT NULL
-)`;
-
-connection.query(createlanguages, (err) => {
-  if (err) {
-    console.error("Error creating movie_halls table: ", err);
-    return;
-  }
-  console.log("Language table created.");
-});
-
 const createreviews = `CREATE TABLE IF NOT EXISTS movie_review (
   id INT PRIMARY KEY AUTO_INCREMENT,
   movie_id INT,
@@ -137,15 +122,12 @@ const createreviews = `CREATE TABLE IF NOT EXISTS movie_review (
   user_id INT,
   FOREIGN KEY (user_id) REFERENCES users(id)
 )`;
-
 connection.query(createreviews, (err) => {
   if (err) {
-    console.error("Error creating review table: ", err);
+    console.error('Error creating review table: ', err);
     return;
   }
-  console.log("review table created.");
 });
-
 // Configure the LocalStrategy for username and password authentication
 passport.use(
   new LocalStrategy(

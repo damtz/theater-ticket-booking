@@ -1,35 +1,75 @@
-<h1>THis is movie bookings</h1>
+<%- include('header') %>
 
-<table>
-  <tr>
-    <th>TicketNo</th>
-    <th>Movie Name</th>
-    <th>Booked By</th>
-    <th>Hall Name</th>
-    <th>Location</th>
-    <th>Booking Date</th>
-    <th>Time</th>
-    <th>Seat No.</th>
-    <th>Amount</th>
-    <th>Download</th>
-  </tr>
-  <% bookings.forEach(function(booking){ %>
-  <tr>
-    <td><%= booking.booking_id %></td>
-    <td><%= booking.movie_title %></td>
-    <td><%= booking.username %></td>
-    <td><%= booking.hall_name %></td>
-    <td><%= booking.hall_location %></td>
-    <td>
-      <%= new Date(booking.screening_date).toLocaleDateString("en-US", {
-      weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %>
-    </td>
-    <td><%= booking.screening_time %></td>
-    <td><%= booking.seat_number %></td>
-    <td><%= booking.amount %></td>
-    <td>
-      <a href="/download-booking/<%= booking.booking_id %>">Download </a>
-    </td>
-  </tr>
-  <% }) %>
-</table>
+          <section class="table__header">
+            <h3>Booking Details</h3>
+          </section>
+          <section class="table__body">
+            <div class="pr-4 pl-4" style="padding-bottom: 100px">
+              <div class="table-scroll-container">
+                <table id="myTable" class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>SI No <span class="icon-arrow">&UpArrow;</span></th>
+                      <th>Movie Name</th>
+                      <th>Booked By</th>
+                      <th>Hall Name</th>
+                      <th>Location</th>
+                      <th>Booking Date</th>
+                      <th>Time</th>
+                      <th>Seat No.</th>
+                      <th>Amount</th>
+                      <th>Download</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% let slNo = 1; %>
+                    <!-- Initialize the slNo variable outside the loop -->
+                      <% bookings.forEach(function(booking){ %>
+                        <tr>
+                          <td><%= booking.booking_id %></td>
+                          <td><%= booking.movie_title %></td>
+                          <td><%= booking.username %></td>
+                          <td><%= booking.hall_name %></td>
+                          <td><%= booking.hall_location %></td>
+                          <td>
+                            <%= new Date(booking.screening_date).toLocaleDateString("en-US", {
+                            weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %>
+                          </td>
+                          <td><%= booking.screening_time %></td>
+                          <td><%= booking.seat_number %></td>
+                          <td><%= booking.amount %></td>
+                          <td>
+                            <a href="/download-booking/<%= booking.booking_id %>">Download </a>
+                          </td>
+                        </tr>
+                      
+                    <% slNo++; %>
+                    <!-- Increment the slNo for the next iteration -->
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </section>
+        </main>
+      </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#myTable').DataTable({
+          // Enable filtering
+          searching: true,
+          // Enable sorting
+          ordering: true,
+          // Enable pagination
+          paging: true,
+        });
+      });
+    </script>
+    <%- include('alert') %>
+  </body>
+</html>

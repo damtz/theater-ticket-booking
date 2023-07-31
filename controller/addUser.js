@@ -5,21 +5,38 @@ const { connection } = require('../database');
 const router = express.Router();
 const transporter = require('../config/email');
 
-router.get('/addUser', (req, res) => {
+const isLoggedin = function (req, res, next) {
+  if (req.isAuthenticated()) {
+    req.currentUser = req.user;
+    next();
+  } else {
+    res.redirect('/login');
+  }
+};
+
+router.get('/addUser', isLoggedin, (req, res) => {
   // Fetch theater data from the database
   const theaterQuery = 'SELECT * FROM movie_halls';
+  const smessage = req.flash('success');
+  const emessage = req.flash('error');
+
   connection.query(theaterQuery, (error, theaters) => {
     if (error) {
       console.error('Error fetching theaters:', error);
       return res.status(500).send('Internal Server Error');
     }
-    res.render('super/addUser', { theaters });
+    res.render('super/addUser', {
+      theaters,
+      smessage,
+      emessage,
+      currentUser: req.user,
+    });
   });
 });
 
 const bcrypt = require('bcrypt');
 
-router.post('/add-admin', (req, res) => {
+router.post('/add-admin', isLoggedin, (req, res) => {
   const { username, email, assignedTheater } = req.body;
 
   const randomPassword = generateRandomPassword();
@@ -35,7 +52,11 @@ router.post('/add-admin', (req, res) => {
     }
 
     if (results.length > 0) {
-      return res.status(400).send('Email already exists');
+      req.flash(
+        'error',
+        'Email already exists. Please try with different Email.'
+      );
+      return res.redirect('/addUser'); // Return here to stop further execution
     }
 
     const insertUserQuery =
@@ -82,11 +103,78 @@ router.post('/add-admin', (req, res) => {
           if (error) {
             console.log('Email error:', error);
           } else {
-            res.redirect('/userAdded');
+            req.flash('success', 'Admin added successfully.');
+            res.redirect('/user');
           }
         });
       });
     });
+  });
+});
+
+// GET route to render the user update form
+router.get('/userUpdate/:id', isLoggedin, function (req, res) {
+  const userId = req.params.id;
+
+  const userQuery = `SELECT * from users where id = ${userId}`;
+
+  connection.query(userQuery, (error, userResults) => {
+    if (error) {
+      console.log(error);
+      return res.status(500).send('Internal server error');
+    }
+
+    const user = userResults[0];
+
+    // Query to fetch the list of theaters
+    const theatersQuery = `SELECT * FROM movie_halls`;
+
+    connection.query(theatersQuery, (error, theaters) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).send('Internal server error');
+      }
+
+      // Render the editUser template with the user and theaters data
+      res.render('super/editUser', { user, theaters, currentUser: req.user });
+    });
+  });
+});
+
+router.post('/userUpdate/:id', isLoggedin, function (req, res) {
+  const userId = req.params.id;
+  console.log(userId);
+  const { username, email, assignedTheater } = req.body;
+
+  // Update the movie details
+  const updateQuery = `
+    UPDATE users
+    SET username='${username}', email='${email}', assigned_theater_id='${assignedTheater}' WHERE id=${userId}
+  `;
+
+  connection.query(updateQuery, (error, results) => {
+    if (error) {
+      req.flash('error', 'User update failed!');
+      res.redirect('/user');
+    } else {
+      req.flash('success', 'User updated successfully.');
+      res.redirect('/user');
+    }
+  });
+});
+
+router.get('/userDelete/:id', isLoggedin, function (req, res) {
+  const userId = req.params.id;
+
+  const deleleQuerry = 'DELETE FROM users WHERE id= ?';
+
+  connection.query(deleleQuerry, [userId], (error, result) => {
+    if (error) {
+      console.log(error);
+    } else {
+      req.flash('success', 'User deleted successfully!');
+      res.redirect('/user');
+    }
   });
 });
 

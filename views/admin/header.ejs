@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Administration</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0-beta2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link href="/admin/css/movie.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-Kd8TZj5zwej/JI8MvhiBSvjN3pXyI+plQdFpspSoZdbsq1eX2aodScThRSVN4P8P9eWvHvkjjIMtoPzSEEBLcA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="/super/css/movieconfiguration.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- Include DataTables CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"
+    />
+     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+
+    <style>
+    .alertify-notifier .ajs-success {
+        background: #5cb85c;
+        color: #fff; /* Set the text color to white */
+      }
+
+      /* Styles for error message */
+    .alertify-notifier .ajs-error {
+      background: #d9534f;
+      color: #fff;
+    }
+
+      
+      .dropbtn {
+        background-color: #ffffff;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      /* Add New User button styles */
+      .add-user-button-container {
+        text-align: right; /* Align the button to the right side */
+        margin-top: 20px;
+      }
+
+      .add-user-button {
+        padding: 10px 20px;
+        font-size: 14px;
+        color: #828282;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        background: linear-gradient(
+          to right,
+          #ffe36d,
+          #eef6ee
+        ); /* Linear gradient for background */
+        border-image: linear-gradient(to right, #4caf50, #45a049) 1; /* Linear gradient for border */
+        border-image-slice: 1; /* Controls the width of the border image */
+      }
+
+      .add-user-button:hover {
+        background: linear-gradient(to right, #eef6ee, #ffe36d);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="body">
+      <nav class="side-bar">
+        <h2 class="u-name">FlickTix</h2>
+        <ul>
+          <li>
+            <a href="/adashboard">
+              <i class="fa fa-th-large" aria-hidden="true"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminMovieMapping">
+              <i class="fa-solid fa-landmark"></i>
+              <span>Hall Mapping</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/movie">
+              <i class="fa fa-film" aria-hidden="true"></i>
+              <span>Movie Administration</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/admin-booking">
+              <i class="fa fa-book" aria-hidden="true"></i>
+              <span>Booking Details</span>
+            </a>
+          </li>
+          <li>
+            <a href="/report">
+              <i class="far fa-file"></i>
+              <span>Report</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+  
+      <section class="section-1">
+        <main class="table">
+          <header class="header">
+            <div class="dropdown">
+              <button class="dropbtn"><i class="fa fa-user"></i></button>
+              <div class="dropdown-content">
+                <a href=""><%= currentUser.username %></a>
+                <a href="/logout">Logout</a>
+              </div>
+            </div>
+          </header>

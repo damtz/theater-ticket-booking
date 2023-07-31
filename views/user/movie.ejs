@@ -34,20 +34,14 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-lg-3">
           <div class="custom-card ">
           <div class="card">
             <img src="/images/<%= movie.image %>"  class="card-img-top">
             <div class="card-body">
               <div class="container px-2">
                 <h5 class="card-title"><%=movie.title%></h5>
-              <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
-                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
-                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
-                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
-                    <i class="fa-sharp fa-solid fa-star" style="color: #ffe36d"></i>
-        
-                    <div class="row category">
+                     <div class="row category">
                       <div class="col">
                         <p class="text text-white">Title</p>
                       </div>
@@ -81,23 +75,14 @@
 
 
 <!-- ===============================left div====================================== -->
-          <div class="col-md-9">
+          <div class="col-lg-9">
             <div class="custom-card card-container">  
             <div class="container booking-summary">
-
-              <h4 class="text-white mb-4">Rate This Movie</h4>
-              <div>
-                <i class="fa-sharp fa-regular fa-star" style="color: #ffe36d; height: 20px;"></i>            
-                <i class="fa-sharp fa-regular fa-star" style="color: #ffe36d;  height: 20px;"></i>            
-                <i class="fa-sharp fa-regular fa-star" style="color: #ffe36d;  height: 20px;"></i>            
-                <i class="fa-sharp fa-regular fa-star" style="color: #ffe36d;  height: 20px;"></i>            
-                <i class="fa-sharp fa-regular fa-star" style="color: #ffe36d;  height: 20px;"></i>   
-              </div>
               <form method="POST" action="/addReview">
                 <input type="hidden" name="movieId" value="<%= movie.id %>">
               <div class="Feedback mb-5">
                 <h4 class="text-white mt-4">Write Review</h4>
-                  <textarea name="review" rows="3" cols="30" required></textarea>
+                  <textarea class="form-control" name="review" rows="3" cols="30" required></textarea>
                  <hr class="horizontal-line">
                  <button type="submit" class="btn btn-warning btn-lg mt-2" onclick="openPopup()"
                  style="background-color: transparent; border: 2px solid #ffe36d; color: #fff;"
@@ -117,14 +102,6 @@
                 <i class="fa-sharp fa-solid fa-circle-user icon" style="color: #ffe36d; font-size: 24px; margin-right: 10px;"></i>
                 <% var reviewer = users.find(user => user.id === review.user_id); %>
                 <span class="username text-white">@ <%= reviewer.username %></span>
-              </div>
-
-              <div class="rating ms-4">
-                <i class="fa-sharp fa-regular fa-star" style="color: #ffe36d; height: 20px;"></i>            
-                <i class="fa-sharp fa-regular fa-star" style="color: #ffe36d;  height: 20px;"></i>            
-                <i class="fa-sharp fa-regular fa-star" style="color: #ffe36d;  height: 20px;"></i>            
-                <i class="fa-sharp fa-regular fa-star" style="color: #ffe36d;  height: 20px;"></i>            
-                <i class="fa-sharp fa-regular fa-star" style="color: #ffe36d;  height: 20px;"></i>   
               </div>
 
               <p class="text-white" style="font-weight: 200;"><%= review.review %></p>
@@ -168,4 +145,3 @@
     </script>
   </body>
 </html>
-

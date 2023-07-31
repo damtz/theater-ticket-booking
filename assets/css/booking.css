@@ -8,42 +8,65 @@ body {
    background-color: #404040;
 }
 
-/* Style the custom popup */
-.popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.popup-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  text-align: center;
-  border-radius: 5px;
-}
-
-.popup-content p {
-  margin: 0;
-}
-
-.popup-content button {
-  margin-top: 10px;
-}
-
-/* Style the button to submit the form */
-#submitBtn {
-  margin-top: 10px;
-}
 
 
+
+
+
+  /* Style the custom popup */
+  .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #f6eded;
+    background: transparent;
+    background-color: transparent;
+  
+  }
+  
+  .popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:#404040;
+    border: 2px solid #ffe36d;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+  }
+  
+  .popup-content p {
+    margin: 0;
+  }
+  .popup-content button {
+    justify-content: space-around;
+    align-items: center;
+    width: 45%; /* Adjust the button width to fit two buttons per row on mobile */
+    max-width: 100px; /* Set a maximum width to prevent the buttons from becoming too large */
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid #ffe36d;
+    margin: 10px; /* Reduce the margin between buttons */
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px; /* Adjust the font size for better readability on mobile */
+    background-color:transparent;
+    color: #f9f2f2;
+  }
+  
+  .popup-content button {
+    margin-top: 10px;
+  }
+  
+  
+  /* Style the button to submit the form */
+  #submitBtn {
+    margin-top: 10px;
+  }
 
 .card {
   width: 250px;
@@ -55,7 +78,7 @@ body {
 
 .card img {
   width: 100%;
-  height: 15rem;
+  height: auto;
 }
 
 .card-body {
@@ -68,6 +91,7 @@ body {
   height: 18px;
   padding: 10px;
 }
+
 .available{
   color: #fff;
   cursor: pointer;
@@ -78,7 +102,6 @@ body {
   cursor: pointer;
 
 }
-
 .selected {
   color:#00A67E
 }
@@ -108,13 +131,13 @@ body {
   .card {
     width: 100%; 
   }
-.card-body {
+/* .card-body {
 display: none;
-}
+} */
 
  .ticket-button .btn{
   display: flex;
-  margin-right: 110px;
+  margin-right: 90px;
   margin-bottom: -10px;
 
  }
@@ -123,7 +146,19 @@ display: none;
 
   }
 
- @media screen and (min-width: 768px) and (max-width: 991px) {
+ @media screen and (min-width: 769px) and (max-width: 992px) {
+
+  
+
+  .card {
+    width: 100%; 
+  }
+  /* .card-body{
+    display: none;
+  } */
+
+
+
  
   .right-div {
     width: 100%;
@@ -156,4 +191,13 @@ display: none;
 
   }
   
+
+
+
+
+
+
+
+
+
 
