@@ -278,7 +278,7 @@ router.post('/login', function (req, res) {
   });
 });
 
-router.get('/my-bookings', isLoggedin, ensureuser, function (req, res) {
+router.get('/my-bookings', function (req, res) {
   const userId = req.user.id;
   const smessage = req.flash('success');
   const emessage = req.flash('error');
