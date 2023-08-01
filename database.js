@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'Damber123.',
-  database: 'movie_booking2',
+  database: 'movie_booking',
   connectionLimit: 10,
 });
 
