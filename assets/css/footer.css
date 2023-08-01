@@ -1,11 +1,12 @@
 
 
+
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600&family=Open+Sans:wght@300&family=Roboto+Flex:wght@100;200;300&family=Roboto:wght@100;300;400;500&display=swap");
 
 /* =========================Footer================================== */
 
 .footer {
-  /* background: #2c2b2b; */
   color: #fff;
   text-decoration: none;
 }
@@ -28,7 +29,6 @@
 
 .footer-links a {
   padding: 10px 0;
-  /* border-bottom: 1px solid #404040; */
   color: #fff;
   display: block;
   transition: color 0.5s ease-in-out;
@@ -40,17 +40,13 @@
 }
 
 .footer-social-links a {
-  width: 40px;
-  height: 40px;
-  margin-top: 15px;
   float: left;
   text-align: center;
   color: #ffe36d;
 }
 
-.footer-social-links a i {
-  height: 60px;
-  width: 60px;
+.footer-social-links li span a {
+ font-size: 30px;
 }
 
 .footer-bottom {
@@ -71,45 +67,12 @@
     text-align: center;
   }
 
-  .footer-social-links {
-    text-align: center;
-    margin-top: 15px;
-  }
+}
 
-  .footer-social-links a {
-    margin: 0 10px;
-  }
 
-  .footer .justify-content-end {
-    margin-left: -90px;
+@media screen and (max-width:992px) {
+  .footer-social-links{
     margin-top: 20px;
   }
 }
 
-/* for tablet view */
-
-@media (min-width: 768px) and (max-width: 991px) {
-
-  .footer-title {
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-  }
-
-  .footer-title .text-white {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-right: 60px;
-  }
-
-  .footer-title .logo {
-    text-decoration: none;
-    color: #ffe36d;
-  }
-
-  .footer-social-links {
-    display: flex;
-    flex-direction: end;
-  }
-}
