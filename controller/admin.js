@@ -6,6 +6,8 @@ const PDFDocument = require('pdfkit');
 const { strategies } = require('passport');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
+const fs = require('fs');
+
 app.use(fileUpload());
 const multer = require('multer');
 
@@ -698,14 +700,32 @@ router.get(
   function (req, res) {
     const movieId = req.params.id;
 
-    const deleleQuerry = 'DELETE FROM movies WHERE id= ?';
-
-    connection.query(deleleQuerry, [movieId], (error, result) => {
+    // Retrieve the image filename for the movie before deleting it from the database
+    const getMovieImageQuery = 'SELECT image FROM movies WHERE id = ?';
+    connection.query(getMovieImageQuery, [movieId], (error, result) => {
       if (error) {
         console.log(error);
       } else {
-        req.flash('success', 'Movie deleted successfully!');
-        res.redirect('/movie');
+        const imageFileName = result[0].image;
+
+        // Delete the movie from the database
+        const deleteQuery = 'DELETE FROM movies WHERE id = ?';
+        connection.query(deleteQuery, [movieId], (error, result) => {
+          if (error) {
+            req.flash('error', 'Could not delete this movie');
+            res.redirect('/movie');
+          } else {
+            // Delete the corresponding image file from the local storage
+            fs.unlink(`public/images/${imageFileName}`, (error) => {
+              if (error) {
+                console.log('Error deleting image file: ', error);
+              } else {
+                req.flash('success', 'Movie deleted successfully!');
+                res.redirect('/movie');
+              }
+            });
+          }
+        });
       }
     });
   }
