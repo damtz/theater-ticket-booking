@@ -29,15 +29,15 @@ app.use(
 );
 //
 app.use(flash());
-app.use('', userRoute);
-app.use('', movieHallRoute);
-app.use('', movieRoute);
-app.use('', bookingRoute);
-app.use('', mappingRoute);
-app.use('', addUserRoute);
-app.use('', superRoute);
-app.use('', adminRoute);
-app.use('', addreviewRoute);
+app.use(userRoute);
+app.use(movieHallRoute);
+app.use(movieRoute);
+app.use(bookingRoute);
+app.use(mappingRoute);
+app.use(addUserRoute);
+app.use(superRoute);
+app.use(adminRoute);
+app.use(addreviewRoute);
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('App running on port 3000 ..');
