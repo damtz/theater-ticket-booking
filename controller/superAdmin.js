@@ -3,6 +3,8 @@ const app = express();
 const router = express.Router();
 const { connection } = require('../database');
 const multer = require('multer');
+const fs = require('fs');
+
 
 function ensuresuperadmin(req, res, next) {
   if (req.isAuthenticated() && req.user.role === 'super-admin') {
@@ -436,14 +438,31 @@ router.get(
   function (req, res) {
     const movieId = req.params.id;
 
-    const deleleQuerry = 'DELETE FROM movies WHERE id= ?';
-
-    connection.query(deleleQuerry, [movieId], (error, result) => {
+    // Retrieve the image filename for the movie before deleting it from the database
+    const getMovieImageQuery = 'SELECT image FROM movies WHERE id = ?';
+    connection.query(getMovieImageQuery, [movieId], (error, result) => {
       if (error) {
         console.log(error);
       } else {
-        req.flash('success', 'Movie deleted successfully!');
-        res.redirect('/super-movie');
+        const imageFileName = result[0].image;
+
+        // Delete the movie from the database
+        const deleteQuery = 'DELETE FROM movies WHERE id = ?';
+        connection.query(deleteQuery, [movieId], (error, result) => {
+          if (error) {
+            console.log(error);
+          } else {
+            // Delete the corresponding image file from the local storage
+            fs.unlink(`public/images/${imageFileName}`, (error) => {
+              if (error) {
+                console.log('Error deleting image file: ', error);
+              } else {
+                req.flash('success', 'Movie deleted successfully!');
+                res.redirect('/super-movie');
+              }
+            });
+          }
+        });
       }
     });
   }
