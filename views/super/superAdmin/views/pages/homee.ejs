@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hall Configuration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Kd8TZj5zwej/JI8MvhiBSvjN3pXyI+plQdFpspSoZdbsq1eX2aodScThRSVN4P8P9eWvHvkjjIMtoPzSEEBLcA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="/public/css/homee.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <main class="table">
+        <header class="header">
+            <div id="navbar">
+                <i class="fa fa-user" aria-hidden="true" onclick="toggleUserManagementPanel()"></i>
+            </div>
+        </header>
+        <section class="table__header">
+            <h1>Dashboard</h1>
+
+        </section>
+        <section class="table__body">
+            <section class="boxes">
+                <div class="box">
+                    <h3 class="tabletitle">Movie showing Today</h3>
+                    <div class="number"><b>2</b></div>
+                    <i class="fas fa-video  icon"></i>
+                </div>
+                <div class="box">
+                    <h3 class="tabletitle">Booking made Today</h3>
+                    <div class="number"><b>350</b></div>
+                    <i class="fa-solid fa-file-lines icon"></i>
+                </div>
+                <div class="box">
+                    <h3 class="tabletitle">Theater</h3>
+                    <div class="number">
+                        <b>3</b>
+                    </div>
+                    <i class="fas fa-tv icon"></i>
+                </div>
+            </section>
+            <section class="graphbox-row">
+                <div class="graphbox">
+                    <h5>Top 5 Movie based on Ticket Sold</h5>
+                    <canvas class="my-chart1" width="200" height="200"></canvas>
+                    <!-- 
+                        <canvas class="my-chart1" width="600" height="296" style="display: block; box-sizing: border-box; height: 370px; width: 751px;"></canvas>
+                     -->
+                </div>
+                <div class="graphbox">
+                    <h5>Ticket Sold for each Theater</h5>
+                    <div class="dropdown" style="top: 10px; right: 15px">
+                        <select id="timePeriodDropdown" onchange="updateChart2()">
+                  <option value="CityCinema">City Cinema</option>
+                  <option value="LagarTheater">Lagar Theater</option>
+                  <option value="TrowaTheater">Trowa Theater</option>
+                </select>
+                    </div>
+                    <canvas class="my-chart2" width="300" height="200"></canvas>
+                </div>
+            </section>
+
+            <!-- uydfgkhlj -->
+            <div class="user-management" id="userManagement">
+                <div class="close-btn">
+                    <i class="fas fa-times" onclick="toggleUserManagementPanel()"></i>
+                </div>
+                <h2>Username</h2>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    </main>
+
+    <script>
+        var popupContainer = document.getElementById("popupContainer");
+        var userManagement = document.getElementById("userManagement");
+
+        function openPopup() {
+            popupContainer.style.display = "block";
+        }
+
+        function closePopup() {
+            popupContainer.style.display = "none";
+        }
+
+        function toggleUserManagementPanel() {
+            userManagement.classList.toggle("open");
+        }
+        //
+        //
+        //
+        ////
+        /////
+        // Chart 1 data
+        const chartData1 = {
+            labels: ["Meto Pema", "The Cub", "Agay Zheom", "AP Bokto", "Bardo"],
+            data: [480, 420, 405, 390, 376],
+        };
+
+        const myChart1 = new Chart(document.querySelector(".my-chart1"), {
+            type: "bar",
+            data: {
+                labels: chartData1.labels,
+                datasets: [{
+                    label: "Movie Name",
+                    data: chartData1.data,
+                    backgroundColor: ["#5988e1"],
+                    borderWidth: 1,
+                }, ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Movie Names",
+                        },
+                        grid: {
+                            display: false,
+                        },
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: "Number of Ticket(s)",
+                        },
+                        beginAtZero: true,
+                    },
+                },
+                layout: {
+                    padding: 30,
+
+
+                },
+            },
+        });
+
+        // Chart 2 data
+        const chartData2 = {
+            labels: ["Ticket Sold", "Ticket Left"],
+            data: [600, 100], // Adjust these values as needed
+        };
+        //
+        //
+        // Function to update Chart 2 based on the selected time period
+        function updateChart2() {
+            const timePeriodDropdown =
+                document.getElementById("timePeriodDropdown");
+            const selectedTimePeriod = timePeriodDropdown.value;
+
+            // Modify chartData2.data based on the selected time period
+            // For example, you can have different revenue data for each time period
+            let updatedChartData;
+            switch (selectedTimePeriod) {
+                case "CityCinema":
+                    updatedChartData = [500, 200]; // Adjust the weekly revenue data
+                    break;
+                case "LagurTheater":
+                    updatedChartData = [600, 100]; // Adjust the monthly revenue data
+                    break;
+                case "TrowaTheater":
+                    updatedChartData = [650, 50]; // Adjust the yearly revenue data
+                    break;
+                default:
+                    updatedChartData = [700, 130];
+            }
+
+            // Update the chart data and re-render the chart
+            myChart2.data.datasets[0].data = updatedChartData;
+            myChart2.update();
+        }
+        //
+        //
+
+        const myChart2 = new Chart(document.querySelector(".my-chart2"), {
+            type: "doughnut", // Use "doughnut" for a donut chart
+            data: {
+                labels: chartData2.labels,
+                datasets: [{
+                    data: chartData2.data,
+                    backgroundColor: ["#395589 ", "#8294b5"], // Set the colors for the donut segments
+                    borderWidth: 0,
+                    borderColor: "#059669", // Set borderWidth to 0 for the inner circle
+                }, ],
+            },
+            options: {
+                responsive: true,
+                cutout: "65%", // Adjust this value to control the size of the inner circle
+                plugins: {
+                    legend: {
+                        position: "right",
+                        display: true,
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => {
+                                const label = context.label;
+                                const index = context.dataIndex;
+                                const value = context.raw;
+                                const hallName = ["City Cinema", "Lagar Theater", "Trowa Theater"];
+                                return `${hallName[index]}: ${value}`;
+                            },
+                        },
+                    },
+                },
+                layout: {
+                    padding: {
+                        top: 20, // Add desired top margin (adjust the value as needed)
+                        bottom: 20, // Add desired bottom margin (adjust the value as needed)
+                    },
+                },
+                maintainAspectRatio: false,
+
+            },
+        });
+    </script>
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="text-muted">&copy; 2023 FlexTix</p>
+        </div>
+    </footer>
+</body>
+
+</html>

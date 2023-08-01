@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0-beta2/css/all.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <link href="/public/css/hallmapping.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="body">
+        <nav class="side-bar">
+            <h2 class="u-name">FlickTix</h2>
+            <ul>
+                <li id="home">
+                    <a href="/"><i class="fa fa-th-large" aria-hidden="true"></i
+              ><span>Dashboard</span></a
+            >
+          </li>
+          <li>
+            <a href="./usermanagement">
+              <i class="fa fa-users" aria-hidden="true"></i>
+              <span>User Management</span>
+            </a>
+                </li>
+
+                <li>
+                    <a href="./hall">
+                        <i class="fas fa-chair seat-icon"> </i>
+                        <span>Hall Configuration</span></a>
+                </li>
+                <li>
+                    <a href="./movie">
+                        <i class="fa fa-film" aria-hidden="true"></i>
+                        <span>Movie Administration</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./hallmaping">
+                        <i class="fa-solid fa-landmark"></i>
+                        <span>Hall Mapping</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./booking">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        <span>Booking Details</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="section-1">
+            <%- include('bookingconfiguration') %>
+        </section>
+    </div>
+    <script>
+        // Add JavaScript to handle sidebar item clicks
+        document.addEventListener("DOMContentLoaded", function() {
+            const sidebarItems = document.querySelectorAll(".side-bar ul li");
+
+            sidebarItems.forEach((item) => {
+                item.addEventListener("click", function() {
+                    // Reset all items to default color
+                    sidebarItems.forEach((item) => {
+                        item.style.backgroundColor = "#3a3a3a";
+                        item.querySelector("a").style.color = "#eee";
+                        item.querySelector("i").style.color = "#eee";
+                    });
+
+                    // Change color of clicked item
+                    this.style.backgroundColor = "#FFE36D";
+                    this.querySelector("a").style.color = "#FFE36D";
+                    this.querySelector("i").style.color = "#FFE36D";
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

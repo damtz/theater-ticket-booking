@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hall Configuration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Kd8TZj5zwej/JI8MvhiBSvjN3pXyI+plQdFpspSoZdbsq1eX2aodScThRSVN4P8P9eWvHvkjjIMtoPzSEEBLcA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="/public/css/movieadministration.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        /* User management panel styles */
+        
+        .user-management {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #f4f4f4;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            transition: right 0.3s ease-in-out;
+        }
+        
+        .user-management.open {
+            right: 0;
+        }
+        
+        .user-management .close-btn {
+            text-align: right;
+        }
+        
+        .user-management ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+        
+        .user-management li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .user-management li:last-child {
+            border-bottom: none;
+        }
+        
+        .user-management a {
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .user-management a:hover {
+            color: #555;
+        }
+        
+        .user-management h2 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="table">
+        <header class="header">
+            <div id="navbar">
+                <i class="fa fa-user" aria-hidden="true" onclick="toggleUserManagementPanel()"></i>
+            </div>
+        </header>
+        <section class="table__header">
+            <h1>User Management</h1>
+            <div class="input-group">
+                <input type="search" placeholder="Search Data..." />
+                <i class="fa fa-search"></i>
+            </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>SI No <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>UserName</th>
+                        <th>Email</th>
+                        <th>User Role</th>
+                        <th>Movie Hall</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Naryeen</td>
+                        <td>narbdr81@gmail.com</td>
+                        <td>Admin</td>
+                        <td>Pema</td>
+                        <td>Thimphu</td>
+
+                        <td>
+                            <i class="fa fa-edit edit-icon" onclick="openEditPopup(0)"></i>
+                            <i class="fa fa-trash delete-icon" onclick="confirmDelete(0)"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Naryeen</td>
+                        <td>narbdr81@gmail.com</td>
+                        <td>Admin</td>
+                        <td>Pema</td>
+                        <td>Thimphu</td>
+
+                        <td>
+                            <i class="fa fa-edit edit-icon" onclick="openEditPopup(0)"></i>
+                            <i class="fa fa-trash delete-icon" onclick="confirmDelete(0)"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Naryeen</td>
+                        <td>narbdr81@gmail.com</td>
+                        <td>Admin</td>
+                        <td>Pema</td>
+                        <td>Thimphu</td>
+
+                        <td>
+                            <i class="fa fa-edit edit-icon" onclick="openEditPopup(0)"></i>
+                            <i class="fa fa-trash delete-icon" onclick="confirmDelete(0)"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Naryeen</td>
+                        <td>narbdr81@gmail.com</td>
+                        <td>Admin</td>
+                        <td>Pema</td>
+                        <td>Thimphu</td>
+
+                        <td>
+                            <i class="fa fa-edit edit-icon" onclick="openEditPopup(0)"></i>
+                            <i class="fa fa-trash delete-icon" onclick="confirmDelete(0)"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Naryeen</td>
+                        <td>narbdr81@gmail.com</td>
+                        <td>Admin</td>
+                        <td>Pema</td>
+                        <td>Thimphu</td>
+
+                        <td>
+                            <i class="fa fa-edit edit-icon" onclick="openEditPopup(0)"></i>
+                            <i class="fa fa-trash delete-icon" onclick="confirmDelete(0)"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Naryeen</td>
+                        <td>narbdr81@gmail.com</td>
+                        <td>Admin</td>
+                        <td>Pema</td>
+                        <td>Thimphu</td>
+
+                        <td>
+                            <i class="fa fa-edit edit-icon" onclick="openEditPopup(0)"></i>
+                            <i class="fa fa-trash delete-icon" onclick="confirmDelete(0)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <!-- Your existing HTML code -->
+
+        <div class="hall-container">
+            <button class="action-button" onclick="openPopup()">
+          ADD NEW USER
+        </button>
+            <!-- Remaining HTML code -->
+        </div>
+
+        <div class="popup-container" id="popupContainer">
+            <div class="popup-content">
+                <h2>User Management</h2>
+                <span class="cancel-icon" onclick="closePopup()">&times;</span>
+                <form class="formedit" id="editForm" action="#">
+                    <div class="input-group">
+                        <label for="username">User Name:</label>
+                        <input type="text" id="username" name="username" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <input type="text" id="email" name="email" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="userrole">User Role:</label>
+                        <input type="text" id="userrole" name="userrole" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="Moviehall">Movie Hall:</label>
+                        <select id="Moviehall" required>
+                <option value="">Select Hall</option>
+                <option value="Town">City Cinema</option>
+                <option value="Chabachu">Lugar Theater</option>
+                <!-- Add more options as needed -->
+              </select>
+                    </div>
+                </form>
+                <div class="action-buttons">
+                    <button type="submit">ADD NEW USER</button>
+                </div>
+            </div>
+        </div>
+        <!-- uydfgkhlj -->
+        <div class="user-management" id="userManagement">
+            <div class="close-btn">
+                <i class="fas fa-times" onclick="toggleUserManagementPanel()"></i>
+            </div>
+            <h2>Username</h2>
+            <ul>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </main>
+
+    <script>
+        var popupContainer = document.getElementById("popupContainer");
+        var userManagement = document.getElementById("userManagement");
+
+        function openPopup() {
+            popupContainer.style.display = "block";
+        }
+
+        function closePopup() {
+            popupContainer.style.display = "none";
+        }
+
+        function toggleUserManagementPanel() {
+            userManagement.classList.toggle("open");
+        }
+    </script>
+    <script src="/views/pages/booking.js"></script>
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="text-muted">&copy; 2023 FlexTix</p>
+        </div>
+    </footer>
+</body>
+
+</html>
