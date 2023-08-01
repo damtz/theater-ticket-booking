@@ -442,8 +442,7 @@ router.get(
     const getMovieImageQuery = 'SELECT image FROM movies WHERE id = ?';
     connection.query(getMovieImageQuery, [movieId], (error, result) => {
       if (error) {
-             req.flash('error', 'Cannot delete this movie');
-            res.redirect('/super-movie');      
+        console.log(error);
       } else {
         const imageFileName = result[0].image;
 
@@ -451,7 +450,8 @@ router.get(
         const deleteQuery = 'DELETE FROM movies WHERE id = ?';
         connection.query(deleteQuery, [movieId], (error, result) => {
           if (error) {
-            console.log(error);
+            req.flash('error', 'Cannot delete this movie');
+            res.redirect('/super-movie');         
           } else {
             // Delete the corresponding image file from the local storage
             fs.unlink(`public/images/${imageFileName}`, (error) => {
