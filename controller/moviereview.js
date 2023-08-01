@@ -93,7 +93,7 @@ router.post('/addReview', isLoggedin, ensureUser, function (req, res) {
       return;
     }
 
-    console.log('Review added successfully!');
+    req.flash('success','Review given successfully!');
     res.redirect('/');
   });
 });
