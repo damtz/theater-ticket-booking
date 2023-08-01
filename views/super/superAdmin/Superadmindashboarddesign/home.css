@@ -1,0 +1,157 @@
+/* stying for usermanagement */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px;
+    background: #fefefe;
+    color: #7b7b7b;
+    box-shadow: 0 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.header i {
+    font-size: 30px;
+    cursor: pointer;
+    color: #050505;
+    margin-right: 50px;
+}
+
+.header i:hover {
+    color: #127b8e;
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    justify-content: space-between;
+}
+
+.navbar {
+    background-color: #127b8e;
+    padding: 15px 30px;
+    color: #0e0d0d;
+}
+
+main.table {
+    margin-top: 0px;
+    height: 96vh;
+    background-color: #f6f6f6;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 0.4rem 0.8rem #0005;
+    /* overflow: hidden; */
+    /* width: 100%; */
+    overflow-x: auto;
+}
+
+.table__body {
+    width: 100%;
+    max-height: calc(89% - 1.6rem);
+    background-color: #f6f6f6;
+    margin: 0.8rem auto;
+    border-radius: 0.6rem;
+    overflow: auto;
+    overflow: overlay;
+}
+
+.user-management {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: right 0.3s ease-in-out;
+}
+
+.user-management.open {
+    right: 0;
+}
+
+.user-management .close-btn {
+    text-align: right;
+}
+
+.user-management ul {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0;
+}
+
+.user-management li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.user-management li:last-child {
+    border-bottom: none;
+}
+
+.user-management a {
+    text-decoration: none;
+    color: #333;
+}
+
+.user-management a:hover {
+    color: #555;
+}
+
+.user-management h2 {
+    margin-bottom: 20px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 400px;
+    width: 100%;
+    background: #f6f6f6;
+    color: #c8c8c8;
+    padding: 20px;
+    text-align: start;
+    box-shadow: 0 -2px 5px -2px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .header i {
+        margin-right: 20px;
+    }
+    .footer {
+        left: 0px;
+        right: 10px;
+        padding: 10px;
+    }
+    /* Additional styles for smaller screens */
+}
+
+@media (max-width: 576px) {
+    .header i {
+        font-size: 24px;
+        margin-right: 10px;
+    }
+    .footer {
+        left: 5px;
+        right: 5px;
+        padding: 5px;
+    }
+    /* Additional styles for even smaller screens */
+}

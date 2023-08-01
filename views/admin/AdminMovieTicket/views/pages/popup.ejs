@@ -1,0 +1,45 @@
+<!-- popup.ejs -->
+
+<div class="popup-content">
+    <div class="close-btn">
+        <button onclick="closePopup()"><i class="fas fa-times"></i></button>
+    </div>
+    <form id="addHallForm">
+        <!-- Form fields for adding a new hall -->
+        <div>
+            <label for="hallName">Hall Name:</label>
+            <input type="text" id="hallName" name="hallName" required />
+        </div>
+        <div>
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required />
+        </div>
+        <div>
+            <label for="normalCapacity">Normal Capacity:</label>
+            <input type="number" id="normalCapacity" name="normalCapacity" required />
+        </div>
+        <div>
+            <label for="normalRate">Normal Rate:</label>
+            <input type="number" id="normalRate" name="normalRate" required />
+        </div>
+        <div>
+            <label for="vipCapacity">VIP Capacity:</label>
+            <input type="number" id="vipCapacity" name="vipCapacity" required />
+        </div>
+        <div>
+            <label for="vipRate">VIP Rate:</label>
+            <input type="number" id="vipRate" name="vipRate" required />
+        </div>
+        <div>
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+        <option value="">Select Status</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+        </div>
+        <div class="action-buttons">
+            <button type="submit" onclick="addHall()">Save Hall</button>
+        </div>
+    </form>
+</div>

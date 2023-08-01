@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hall Mapping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Kd8TZj5zwej/JI8MvhiBSvjN3pXyI+plQdFpspSoZdbsq1eX2aodScThRSVN4P8P9eWvHvkjjIMtoPzSEEBLcA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="/public/css/movieadministration.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        /* User management panel styles */
+        
+        .user-management {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #f4f4f4;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            transition: right 0.3s ease-in-out;
+        }
+        
+        .user-management.open {
+            right: 0;
+        }
+        
+        .user-management .close-btn {
+            text-align: right;
+        }
+        
+        .user-management ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+        
+        .user-management li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .user-management li:last-child {
+            border-bottom: none;
+        }
+        
+        .user-management a {
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .user-management a:hover {
+            color: #555;
+        }
+        
+        .user-management h2 {
+            margin-bottom: 20px;
+        }
+        /* Your existing CSS styles */
+        /* Add the new CSS for Status options */
+        
+        #status option:hover {
+            background-color: #a3ffa3;
+            /* Hover color for active status */
+        }
+        
+        #status option[value="inactive"]:hover {
+            background-color: #ff9c9c;
+            /* Hover color for inactive status */
+        }
+    </style>
+</head>
+
+<body>
+    <main class="table">
+        <header class="header">
+            <div id="navbar">
+                <i class="fa fa-user" aria-hidden="true" onclick="toggleUserManagementPanel()"></i>
+            </div>
+        </header>
+        <section class="table__header">
+            <h1>Hall Mapping</h1>
+            <div class="input-group">
+                <input type="search" placeholder="Search Data..." />
+                <i class="fa fa-search"></i>
+            </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>SI No <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Movie Name</th>
+                        <th>Hall Name</th>
+                        <th>Screening Date</th>
+                        <th>Screening Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="rowId1">
+                        <td>1</td>
+                        <td>Nga Je Masong</td>
+                        <td>City Cinema</td>
+                        <td>12-07-2023</td>
+                        <td>6:30pm</td>
+                        <td>
+                            <i class="fa fa-edit edit-icon"></i>
+                            <i class="fa fa-trash delete-icon"></i>
+                        </td>
+                    </tr>
+                    <tr id="rowId1">
+                        <td>2</td>
+                        <td>Nga Je Masong</td>
+                        <td>City Cinema</td>
+                        <td>12-07-2023</td>
+                        <td>6:30pm</td>
+                        <td>
+                            <i class="fa fa-edit edit-icon"></i>
+                            <i class="fa fa-trash delete-icon"></i>
+                        </td>
+                    </tr>
+                    <tr id="rowId1">
+                        <td>3</td>
+                        <td>Nga Je Masong</td>
+                        <td>City Cinema</td>
+                        <td>12-07-2023</td>
+                        <td>6:30pm</td>
+                        <td>
+                            <i class="fa fa-edit edit-icon"></i>
+                            <i class="fa fa-trash delete-icon"></i>
+                        </td>
+                    </tr>
+                    <tr id="rowId1">
+                        <td>4</td>
+                        <td>Nga Je Masong</td>
+                        <td>City Cinema</td>
+                        <td>12-07-2023</td>
+                        <td>6:30pm</td>
+                        <td>
+                            <i class="fa fa-edit edit-icon"></i>
+                            <i class="fa fa-trash delete-icon"></i>
+                        </td>
+                    </tr>
+                    <tr id="rowId1">
+                        <td>5</td>
+                        <td>Nga Je Masong</td>
+                        <td>City Cinema</td>
+                        <td>12-07-2023</td>
+                        <td>6:30pm</td>
+                        <td>
+                            <i class="fa fa-edit edit-icon"></i>
+                            <i class="fa fa-trash delete-icon"></i>
+                        </td>
+                    </tr>
+                    <tr id="rowId1">
+                        <td>6</td>
+                        <td>Nga Je Masong</td>
+                        <td>City Cinema</td>
+                        <td>12-07-2023</td>
+                        <td>6:30pm</td>
+                        <td>
+                            <i class="fa fa-edit edit-icon"></i>
+                            <i class="fa fa-trash delete-icon"></i>
+                        </td>
+                    </tr>
+                    <tr id="rowId1">
+                        <td>7</td>
+                        <td>Nga Je Masong</td>
+                        <td>City Cinema</td>
+                        <td>12-07-2023</td>
+                        <td>6:30pm</td>
+                        <td>
+                            <i class="fa fa-edit edit-icon"></i>
+                            <i class="fa fa-trash delete-icon"></i>
+                        </td>
+                    </tr>
+                    <tr id="rowId1">
+                        <td>8</td>
+                        <td>Nga Je Masong</td>
+                        <td>City Cinema</td>
+                        <td>12-07-2023</td>
+                        <td>6:30pm</td>
+                        <td>
+                            <i class="fa fa-edit edit-icon"></i>
+                            <i class="fa fa-trash delete-icon"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="popup-container" id="popupContainer">
+            <div class="popup-content">
+                <h2>HALL MAPPING</h2>
+                <span class="cancel-icon" onclick="closePopup()">&times;</span>
+                <!--  -->
+                <!--  -->
+
+                <form id="editForm" action="#">
+                    <div>
+                        <input type="hidden" id="editIndex" name="editIndex" value="" />
+
+                        <div class="input-group">
+                            <label for="moviename">Movie Name:</label>
+                            <input type="text" id="moviename" name="moviename" required />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="input-group">
+                            <label for="hallname">Hall Name:</label>
+                            <select id="hallname" name="hallname" required>
+                  <option value="" selected disabled>Select Hall Name</option>
+                  <option value="citycinema">City Cinema</option>
+                  <option value="action">Towa Theater</option>
+                  <option value="comedy">Lugar Theater</option>
+                </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <input type="hidden" id="editIndex" name="editIndex" value="" />
+
+                        <div class="input-group">
+                            <label for="screeningdate">Screening Date:</label>
+                            <input type="date" id="screeningdate" name="screeningdate" required onchange="validateDate()" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <input type="hidden" id="editIndex" name="editIndex" value="" />
+
+                        <div class="input-group">
+                            <label for="screeningtime">Screening Time:</label>
+                            <input type="time" id="screeningtime" name="screeningtime" required />
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button type="submit">HALL MAPPING</button>
+                    </div>
+                </form>
+
+                <!-- <div class="action-buttons">
+            <button type="submit">HALL MAPPING</button>
+          </div> -->
+            </div>
+        </div>
+        <!-- for the right user side -->
+        <div class="user-management" id="userManagement">
+            <div class="close-btn">
+                <i class="fas fa-times" onclick="toggleUserManagementPanel()"></i>
+            </div>
+            <h2>Username</h2>
+            <ul>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </main>
+
+    <script>
+        var editIcons = document.querySelectorAll(".edit-icon");
+        var popupContainer = document.getElementById("popupContainer");
+        var editForm = document.getElementById("editForm");
+
+        editIcons.forEach(function(editIcon, index) {
+            editIcon.addEventListener("click", function() {
+                openPopup(index);
+            });
+        });
+
+        ///
+        ///
+        ///
+        ///
+        ///
+
+        // Function to open the popup for editing a hall and populate the form fields
+        function openEditPopup(index) {
+            // Set the form fields with the data of the selected hall
+            var editForm = document.getElementById("editForm");
+            editForm.moviename.value = hallData[index].moviename;
+            editForm.hallname.value = hallData[index].hallname;
+            editForm.screeningdate.value = hallData[index].screeningdate;
+            editForm.screeningtime.value = hallData[index].screeningtime;
+
+            // Store the index of the row being edited in the hidden input field
+            var editIndexInput = document.getElementById("editIndex");
+            editIndexInput.value = index;
+
+
+            openPopup();
+        }
+
+
+
+
+        // Add event listener to the form submission
+        var editForm = document.getElementById("editForm");
+        editForm.addEventListener("submit", handleFormSubmit);
+        //
+        //
+        //
+        //
+
+        //validate the date
+        function validateDate() {
+            var screeningDateInput = document.getElementById("screeningdate");
+            var selectedDate = new Date(screeningDateInput.value);
+            var currentDate = new Date();
+
+            if (selectedDate < currentDate) {
+                alert("Please select a date in the future.");
+                screeningDateInput.value = ""; // Clear the input field
+            }
+        }
+        ///
+        ///
+        /////
+        var editIcons = document.querySelectorAll(".edit-icon");
+        var popupContainer = document.getElementById("popupContainer");
+        var userManagement = document.getElementById("userManagement");
+
+        editIcons.forEach(function(editIcon, index) {
+            editIcon.addEventListener("click", function() {
+                openEditPopup(index);
+            });
+
+            var deleteIcon = editIcon.parentElement.querySelector(".delete-icon");
+            deleteIcon.addEventListener("click", function() {
+                showConfirmation(index);
+            });
+        });
+
+        // Function to show the confirmation dialog
+        function showConfirmation(rowId) {
+            const confirmDelete = confirm(
+                "Are you sure you want to delete this table row?"
+            );
+            if (confirmDelete) {
+                deleteTableRow(rowId);
+            } else {
+                // If user cancels, do nothing (row remains untouched)
+            }
+        }
+
+        // Function to delete the table row
+        function deleteTableRow(rowId) {
+            const tableRow = document.getElementById("rowId" + (rowId + 1));
+            tableRow.remove();
+
+            // If you want to remove the corresponding entry from the hallData array, you can use:
+            // hallData.splice(rowId, 1);
+        }
+
+        //
+        //
+        //
+        //
+        ///////
+        var popupContainer = document.getElementById("popupContainer");
+        var userManagement = document.getElementById("userManagement");
+
+        function openPopup() {
+            popupContainer.style.display = "block";
+        }
+
+        function closePopup() {
+            popupContainer.style.display = "none";
+        }
+
+        function toggleUserManagementPanel() {
+            userManagement.classList.toggle("open");
+        }
+    </script>
+    <script src="/views/pages/booking.js"></script>
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="text-muted">&copy; 2023 FlexTix</p>
+        </div>
+    </footer>
+</body>
+
+</html>
