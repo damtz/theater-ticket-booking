@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Footer</title>
-    <link rel="stylesheet" href="/public/user/assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
 </head>
 <body>
     <footer>
@@ -12,10 +12,11 @@
           <footer class="footer">
             <div class="container">
               <div class="row footer-container">
-                <div class="col-md-4">
+                <div class="col-md-4 justify-content-md-center">
                   <div class="footer-title text-white">
                     
-                    <a href="" class="logo"><img src="/public/images/logo.png" alt=""></a>
+                    <!-- <a href="" class="logo"><img src="./img/logo.png" alt=""></a> -->
+                    <img  onclick="location.href='/'" src="/public/images/logo.png" alt="">
                   </div>
                 </div>
   
@@ -31,7 +32,7 @@
                   <div class="footer-link">
                     <div class="footer-title text-white">
                       <a href="/new-releases" class="text-white" style="text-decoration: none">
-                        NewRelease</a
+                        New Release</a
                       >
                     </div>
                   </div>
@@ -44,26 +45,24 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4 d-flex justify-content-end">
-                  <div class="footer-social-links">
-                    <li>
-                      <a href="#">
-                        <i class="fab fa-facebook"></i>
-                      </a>
-                      <a href="#">
-                        <i class="fab fa-twitter"></i>
-                      </a>
-                      <a href="#">
-                        <i class="fab fa-instagram"></i>
-                      </a>
-                    </li>
-                  </div>
-                </div>
+    
+              <div class="col-md-4 footer-social-links d-flex justify-content-center justify-content-md-end">
+                <li class="d-flex justify-content-between" style="width: 40%;">
+                    <a href="#"><i class="fab fa-facebook" style="font-size: 30px;"></i></a>
+                    <a href="#"><i class="fab fa-twitter" style="font-size: 30px;"></i></a>
+                    <a href="#"><i class="fab fa-instagram" style="font-size: 30px;"></i></a>
+                </li>
+            </div>
+
+            
+         
+          
+            
               </div>
             </div>
             <div
               class="footer-bottom text-white d-flex justify-content-center mb-5">
-              Copyright © 2023, All Rights Reserved
+              Copyright © 2023 All Rights Reserved
             </div>
           </footer>
         </div>
