@@ -27,7 +27,7 @@ const createMovieHallsTable = `CREATE TABLE IF NOT EXISTS movie_halls (
   vip_capacity INT NOT NULL,
   normal_rate DECIMAL(10, 2) NOT NULL,
   vip_rate DECIMAL(10, 2) NOT NULL,
-  status BOOLEAN NOT NULL
+  status BOOLEAN NOT NULL DEFAULT 1
 )`;
 
 connection.query(createMovieHallsTable, (err) => {
