@@ -86,7 +86,7 @@ router.post('/add-hall', isLoggedin, function (req, res) {
       connection.query(insertQuery, values, (insertError, insertResults) => {
         if (insertError) {
           console.error('Error adding hall:', insertError);
-          req.flash('error', 'An error occurred while adding the hall.');
+          return req.flash('error', 'An error occurred while adding the hall.');
           res.redirect('/movieHalls');
         } else {
           req.flash('success', 'Hall added successfully.');
