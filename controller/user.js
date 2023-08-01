@@ -471,7 +471,7 @@ router.post('/reset-password', function (req, res) {
           from: process.env.auth_user,
           to: email,
           subject: 'FlickTix - Password Reset',
-          html: `Click the following link to reset your password: http://localhost:5000/Reset-password?token=${token}`,
+          html: `Click the following link to reset your password: http://10.70.91.60/Reset-password?token=${token}`,
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
