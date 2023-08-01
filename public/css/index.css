@@ -2,17 +2,14 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600&family=Open+Sans:wght@300&family=Roboto+Flex:wght@100;200;300&family=Roboto:wght@100;300;400;500&display=swap");
 
-body {
-  background-color: #eee;
-  font-family: "Inter", sans-serif;
-  background-color: #49484a;
-}
 
 
 body,
 html {
   height: 100%;
-  background-color: rgb(121, 119, 119);
+  background-color: #49484A;
+  font-family: "Inter", sans-serif;
+
 }
 
 .hero-banner {
@@ -44,12 +41,13 @@ html {
 color: white;
 font-size: 16px;
 padding: 12px 24px;
-border: 4px solid transparent;
+/* border: 4px solid transparent;
 border-image: linear-gradient(45deg, #FFE36D, #F7EFCB) 10;
 border-image-slice: 1;
 cursor: pointer;
 background-color: transparent;
-background-clip: padding-box;
+background-clip: padding-box; */
+border: 2px solid #ffe36d;
 }
 
 /* .gradient-border-button:hover{

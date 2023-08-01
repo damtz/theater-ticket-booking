@@ -71,6 +71,7 @@ nav .box input {
   font-weight: 500;
   transition: 0.8s;
   background: transparent;
+  color: black;
 }
 
 .box a .fas {
