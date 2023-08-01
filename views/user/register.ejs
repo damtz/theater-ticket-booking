@@ -72,7 +72,7 @@
               name="password"
             />
 
-            <button class="btn" onclick="showPassword()">
+            <button class="btn" type="button" onclick="showPassword()">
               <span class="fas fa-eye" style="color: #ffe36d"></span>
             </button>
           </div>
@@ -90,7 +90,7 @@
               name="confirmPassword"
             />
 
-            <button class="btn" onclick="showPassword()">
+            <button class="btn" type="button" onclick="showPassword()">
               <span class="fas fa-eye" style="color: #ffe36d"></span>
             </button>
           </div>
@@ -141,5 +141,21 @@
       integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
       crossorigin="anonymous"
     ></script>
+ <script>
+      function showPassword() {
+        const passwordInput = document.getElementById("pwd");
+        const eyeIcon = document.querySelector(".fa-eye");
+    
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          eyeIcon.classList.remove("fa-eye");
+          eyeIcon.classList.add("fa-eye-slash");
+        } else {
+          passwordInput.type = "password";
+          eyeIcon.classList.remove("fa-eye-slash");
+          eyeIcon.classList.add("fa-eye");
+        }
+      }
+    </script>
   </body>
 </html>
