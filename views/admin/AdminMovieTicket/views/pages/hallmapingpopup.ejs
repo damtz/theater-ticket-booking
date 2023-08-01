@@ -1,0 +1,156 @@
+<!-- hallmappingpopup.ejs -->
+
+<style>
+    .popup-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: 0 auto;
+        width: 90%;
+    }
+    
+    .popup-content label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    
+    .popup-content input[type="text"],
+    .popup-content input[type="date"],
+    .popup-content input[type="time"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+    
+    .popup-content .action-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .popup-content button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    
+    .popup-content button[type="submit"] {
+        background-color: #007bff;
+    }
+    
+    .popup-content button[type="submit"]:hover,
+    .popup-content button[type="submit"]:focus {
+        background-color: #0056b3;
+    }
+    
+    .popup-content button[type="submit"]:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+    
+    .popup-content .delete-btn {
+        background-color: #f44336;
+    }
+    
+    .popup-content .delete-btn:hover,
+    .popup-content .delete-btn:focus {
+        background-color: #d6291f;
+    }
+</style>
+
+<form id="addHallForm" enctype="multipart/form-data" action="/saveHall" method="POST">
+    <div>
+        <label for="movieName">Movie Name:</label>
+        <input type="text" id="movieName" name="movieName" required />
+    </div>
+    <div>
+        <label for="hallName">Hall Name:</label>
+        <input type="text" id="hallName" name="hallName" required />
+    </div>
+    <div>
+        <label for="screenDate">Screen Date:</label>
+        <input type="date" id="screenDate" name="screenDate" required />
+    </div>
+    <div>
+        <label for="screeningTime">Screening Time:</label>
+        <input type="time" id="screeningTime" name="screeningTime" required />
+    </div>
+    <div class="action-buttons">
+        <button type="submit">Save Mapping</button>
+        <button onclick="deleteHall()">Delete</button>
+    </div>
+</form>
+
+<script>
+    document
+        .getElementById("addHallForm")
+        .addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get the form values
+            var movieName = document.getElementById("movieName").value;
+            var hallName = document.getElementById("hallName").value;
+            var screenDate = document.getElementById("screenDate").value;
+            var screeningTime = document.getElementById("screeningTime").value;
+
+            // Create a new hall mapping object
+            var newHallMapping = {
+                movieName: movieName,
+                hallName: hallName,
+                screenDate: screenDate,
+                screeningTime: screeningTime,
+            };
+
+            // Add the new hall mapping to the hallConfigurations array
+            hallConfigurations.push(newHallMapping);
+
+            // Save the updated hallConfigurations to localStorage
+            localStorage.setItem("hallData", JSON.stringify(hallConfigurations));
+
+            // Update the table rows
+            updateTableRows();
+
+            // Close the popup
+            closePopup();
+
+            // Reset the form
+            document.getElementById("addHallForm").reset();
+        });
+
+    function deleteHall() {
+        var confirmDelete = confirm(
+            "Are you sure you want to delete this hall mapping?"
+        );
+        if (confirmDelete) {
+            // Get the index of the hall mapping from the table row
+            var index = Array.from(document.querySelectorAll("tbody tr")).indexOf(
+                this.parentNode.parentNode
+            );
+
+            // Remove the hall mapping from the hallConfigurations array
+            hallConfigurations.splice(index, 1);
+
+            // Save the updated hallConfigurations to localStorage
+            localStorage.setItem("hallData", JSON.stringify(hallConfigurations));
+
+            // Update the table rows
+            updateTableRows();
+
+            // Close the popup
+            closePopup();
+
+            // Reset the form
+            document.getElementById("addHallForm").reset();
+        }
+    }
+</script>

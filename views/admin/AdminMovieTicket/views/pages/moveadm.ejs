@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Administration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Kd8TZj5zwej/JI8MvhiBSvjN3pXyI+plQdFpspSoZdbsq1eX2aodScThRSVN4P8P9eWvHvkjjIMtoPzSEEBLcA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Kd8TZj5zwej/JI8MvhiBSvjN3pXyI+plQdFpspSoZdbsq1eX2aodScThRSVN4P8P9eWvHvkjjIMtoPzSEEBLcA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="/public/css/movieadministration.css" rel="stylesheet" type="text/css" />
+    <style>
+        .container {
+            border: 0px solid rgba(0, 0, 0, 0.11);
+            padding: 10px;
+            width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        
+        .controls-item {
+            display: inline-block;
+        }
+        
+        .btn {
+            margin: 1px;
+        }
+        
+        .btn:hover {
+            background-color: #0056b3;
+            border: 1px solid #0056b3;
+        }
+        
+        .page {
+            margin: 0 3px;
+            /* Add margin between buttons */
+        }
+        /*       */
+    </style>
+</head>
+
+<body>
+    <main class="table">
+        <header class="header">
+            <div id="navbar">
+                <i class="fa fa-user" aria-hidden="true" onclick="toggleUserManagementPanel()"></i>
+            </div>
+        </header>
+        <section class="table__header">
+            <h1>Movie Administration</h1>
+            <div class="input-group">
+                <input id="search-input" type="search" placeholder="Search Data..." />
+                <i class="fa fa-search"></i>
+            </div>
+        </section>
+        <section class="table__body">
+            <table class="table table-striped">
+                <tr class="bg-info">
+                    <th>SI No</th>
+                    <th>Movie Name</th>
+                    <th>Genre</th>
+                    <th>Status</th>
+                    <th>Duration</th>
+                    <th>Action</th>
+                </tr>
+
+                <tbody id="table-body"></tbody>
+            </table>
+            <div class="container">
+                <div id="pagination-wrapper"></div>
+            </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        </section>
+
+        <!-- for the right user side -->
+        <div class="user-management" id="userManagement">
+            <div class="close-btn">
+                <i class="fas fa-times" onclick="toggleUserManagementPanel()"></i>
+            </div>
+            <h2>Username</h2>
+            <ul>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </main>
+
+    <script></script>
+    <script src="/public/js/table.js"></script>
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="text-muted">&copy; 2023 FlexTix</p>
+        </div>
+    </footer>
+</body>
+
+</html>

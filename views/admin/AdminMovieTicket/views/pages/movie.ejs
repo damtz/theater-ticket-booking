@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Administration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="/public/css/movie.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="body">
+        <nav class="side-bar">
+            <h2 class="u-name">FlickTix</h2>
+            <ul>
+                <li id="home">
+                    <a href="/"><i class="fa fa-th-large" aria-hidden="true"></i
+              ><span>Dashboard</span></a
+            >
+          </li>
+         
+                <li>
+                    <a href="./movie">
+                        <i class="fa fa-film" aria-hidden="true"></i>
+                        <span>Movie Administration</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./hallmaping">
+                        <i class="fa-solid fa-landmark"></i>
+                        <span>Hall Mapping</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./booking">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        <span>Booking</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./report">
+                        <i class="far fa-file"></i>
+                        <span>Report</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="section-1">
+            <%- include('movieadministration') %>
+        </section>
+    </div>
+
+</body>
+
+</html>
