@@ -442,7 +442,8 @@ router.get(
     const getMovieImageQuery = 'SELECT image FROM movies WHERE id = ?';
     connection.query(getMovieImageQuery, [movieId], (error, result) => {
       if (error) {
-        console.log(error);
+             req.flash('error', 'Cannot delete this movie');
+            res.redirect('/super-movie');      
       } else {
         const imageFileName = result[0].image;
 
