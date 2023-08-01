@@ -92,7 +92,7 @@ connection.query(createHallMapping, (err) => {
   }
 });
 
-const createBooking = `CREATE TABLE IF NOT EXISTS Bookings (
+const createBooking = `CREATE TABLE IF NOT EXISTS bookings (
     booking_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
     hall_id INT,
