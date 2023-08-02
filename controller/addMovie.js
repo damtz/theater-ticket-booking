@@ -10,6 +10,7 @@ const isLoggedin = function (req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
+    req.flash('error','Yor are not Authorized..')
     res.redirect('/login');
   }
 };
