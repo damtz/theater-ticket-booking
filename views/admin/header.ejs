@@ -139,40 +139,42 @@
       <nav class="side-bar">
         <h2 class="u-name">FlickTix</h2>
         <ul>
-          <li>
+          <li class="<%= currentPage === 'aDashboard' ? 'active' : '' %>">
             <a href="/adashboard">
               <i class="fa fa-th-large" aria-hidden="true"></i>
               <span>Dashboard</span>
             </a>
           </li>
-
-          <li>
+        
+          <li class="<%= currentPage === 'adminMovieMapping' ? 'active' : '' %>">
             <a href="/adminMovieMapping">
               <i class="fa-solid fa-landmark"></i>
               <span>Hall Mapping</span>
             </a>
           </li>
-
-          <li>
+        
+          <li class="<%= currentPage === 'movie' ? 'active' : '' %>">
             <a href="/movie">
               <i class="fa fa-film" aria-hidden="true"></i>
               <span>Movie Administration</span>
             </a>
           </li>
-
-          <li>
+        
+          <li class="<%= currentPage === 'aBooking' ? 'active' : '' %>">
             <a href="/admin-booking">
               <i class="fa fa-book" aria-hidden="true"></i>
               <span>Booking Details</span>
             </a>
           </li>
-          <li>
+        
+          <li class="<%= currentPage === 'report' ? 'active' : '' %>">
             <a href="/report">
               <i class="far fa-file"></i>
               <span>Report</span>
             </a>
           </li>
         </ul>
+        
       </nav>
 
   
