@@ -35,6 +35,7 @@ router.get('/createMapping', isLoggedin, function (req, res) {
         movieHalls: movieHallsResult,
         smessage,
         emessage,
+        currentPage: 'mapping',
       });
     });
   });
