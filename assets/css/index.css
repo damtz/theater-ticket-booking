@@ -59,14 +59,7 @@ background-clip: padding-box;
 
 
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: normal;
-}
+
 /* =============================Herobanner=================================== */
 
 
@@ -110,7 +103,7 @@ h6 {
   height: 20rem;
 }
 .image-container .col-md-3 img {
-  height: 22rem;
+  height: 20rem;
   transition: transform 0.3s ease;
 }
 
