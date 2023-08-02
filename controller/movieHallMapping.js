@@ -31,7 +31,7 @@ function ensuresuperadmin(req, res, next) {
 }
 
 router.get('/createMapping', isLoggedin,ensuresuperadmin, function (req, res) {
-  const moviesQuery = 'SELECT id, title FROM movies';
+  const moviesQuery = 'SELECT id, title, status FROM movies';
   const movieHallsQuery = 'SELECT id, name FROM movie_halls';
   const smessage = req.flash('success');
   const emessage = req.flash('error');
@@ -183,7 +183,7 @@ function formatTime(time) {
 }
 
 router.get('/adminCreateMapping', isLoggedin,ensureadmin, function (req, res) {
-  const moviesQuery = 'SELECT id, title FROM movies';
+  const moviesQuery = 'SELECT id, title, status FROM movies';
   const movieHallsQuery = 'SELECT id, name FROM movie_halls';
   const smessage = req.flash('success');
   const emessage = req.flash('error');
