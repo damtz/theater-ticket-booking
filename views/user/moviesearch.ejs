@@ -39,6 +39,8 @@
               <% } else { %>
                 <% let count = 0; %>
                 <% movies.forEach(function(movie) { %>
+                 <% if (movie.status !== 'Closed') { %>
+
                   <div class="col-md-3">
                     <a href="/movie-details?movieId=<%= movie.id %>">
                       <img src="/images/<%= movie.image %>" alt="Image <%= count + 1 %>" class="p-3" />
@@ -49,7 +51,7 @@
                     </div>
                     <div class="image-container d-flex justify-content-between">
                   <% } %>
-                <% }); %>
+                <% }}); %>
             </div>
           </div>
           <div class="load-more d-flex justify-content-center">
