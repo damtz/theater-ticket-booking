@@ -14,6 +14,14 @@ const isLoggedin = function (req, res, next) {
     res.redirect('/login');
   }
 };
+function ensureuser(req, res, next) {
+  if (req.isAuthenticated() && req.user.role === 'user') {
+    // If the user is logged in and has the role "user," proceed to the next middleware or route handler
+    return next();
+  } else {
+    res.redirect('/login');
+  }
+}
 
 router.get('/addHall', isLoggedin, function (req, res) {
   const smessage = req.flash('success');
@@ -219,7 +227,7 @@ router.get('/movie-details', function (req, res) {
   });
 });
 
-router.get('/seat-availability', function (req, res) {
+router.get('/seat-availability', isLoggedin, ensureuser, function (req, res) {
   const hallId = req.query.hallId;
   const movieId = req.query.movieId;
   const selectedDate = new Date(req.query.date).toISOString().split('T')[0];
