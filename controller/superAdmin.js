@@ -136,6 +136,7 @@ router.get('/sdashboard', isLoggedin, ensuresuperadmin, function (req, res) {
                 ticketsData: ticketsResults,
                 topMovies: topMoviesResults,
                 smessage: successMessage,
+                currentPage: 'sdashboard',
               });
             }
           );
@@ -158,6 +159,7 @@ router.get('/movieHalls', isLoggedin, ensuresuperadmin, function (req, res) {
       halls: movieHalls,
       smessage: successMessage,
       emessage: errorMessages,
+      currentPage: 'movieHalls',
     });
   });
 });
@@ -175,7 +177,7 @@ router.get(
         console.log(error);
       } else {
         const hall = result[0];
-        res.render('super/hallUpdate', { hall: hall, currentUser: req.user });
+        res.render('super/hallUpdate', { hall: hall, currentUser: req.user, currentPage: 'movieHalls' });
       }
     });
   }
@@ -204,6 +206,7 @@ router.get('/user', isLoggedin, ensuresuperadmin, function (req, res) {
         Users,
         smessage: successMessage,
         emessage: errorMessage,
+        currentPage: 'user',
       });
       return;
     }
@@ -235,6 +238,7 @@ router.get('/user', isLoggedin, ensuresuperadmin, function (req, res) {
         Users,
         smessage: successMessage,
         emessage: errorMessage,
+        currentPage: 'user'
       });
     });
   });
@@ -330,6 +334,7 @@ router.get('/mapping', isLoggedin, ensuresuperadmin, function (req, res) {
       mappings: formattedResults,
       smessage: successMessage,
       emessage: errorMessage,
+      currentPage: 'mapping'
     });
   });
 });
@@ -358,6 +363,7 @@ router.get('/super-movie', ensuresuperadmin, function (req, res) {
       movies,
       smessage: successMessage,
       emessage: errorMessage,
+      currentPage: 'super-movie',
     });
   });
 });
@@ -377,7 +383,7 @@ router.get(
         return;
       }
       const movie = Movie[0];
-      res.render('super/editMovies', { movie, currentUser: req.user });
+      res.render('super/editMovies', { movie, currentUser: req.user, currentPage: 'super-movie', });
     });
   }
 );
@@ -427,6 +433,7 @@ router.get(
       currentUser: req.user,
       smessage: successMessage,
       emessage: errorMessage,
+      currentPage: 'super-movie',
     });
   }
 );
@@ -538,6 +545,7 @@ router.get(
             movies,
             movieHalls,
             currentUser: req.user,
+            currentPage: 'mapping',
           });
         });
       });
