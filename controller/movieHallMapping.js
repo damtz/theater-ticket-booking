@@ -146,6 +146,7 @@ router.get('/adminMovieMapping', isLoggedin, function (req, res) {
       mappings: formattedResults,
       smessage: successMessage,
       emessage: errorMessage,
+      currentPage: 'adminMovieMapping',
     });
   });
 });
@@ -185,6 +186,7 @@ router.get('/adminCreateMapping', isLoggedin, function (req, res) {
         movieHalls: movieHallsResult,
         smessage,
         emessage,
+        currentPage: 'adminMovieMapping',
       });
     });
   });
