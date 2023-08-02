@@ -18,7 +18,7 @@ const isLoggedin = function (req, res, next) {
 router.get('/addHall', isLoggedin, function (req, res) {
   const smessage = req.flash('success');
   const emessage = req.flash('error');
-  res.render('super/addHall', { smessage, emessage, currentUser: req.user });
+  res.render('super/addHall', { smessage, emessage, currentUser: req.user, currentPage: 'movieHalls' });
 });
 
 const error = [];
