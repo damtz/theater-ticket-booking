@@ -39,46 +39,6 @@
                   </tbody>
                 </table>
               </div>
-
-            </div>
-
-            <h1>Movie Report</h1>
-
-            <!-- Display the top two most watched movies -->
-            <h2>Top Two Movies</h2>
-            <% topTwoMovies.forEach((movie) => { %>
-            <p><%= movie %></p>
-            <% }) %>
-            
-            <!-- Display the movie data -->
-            <h2>Movie Data</h2>
-            <div class="pr-4 pl-4" style="padding-bottom: 100px">
-            <div class="table-scroll-container">
-              <table id="myTable" class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>SI No <span class="icon-arrow">&UpArrow;</span></th>
-                    <th>Movie Title</th>
-                    <th>Ticket Count</th>
-                    <th>Revenue</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% let SlNO = 1; %>
-                  <!-- Initialize the slNo variable outside the loop -->
-                  <% movieData.forEach((movie) => { %>
-                    <tr>
-                      <td><%= SlNO %></td>
-                      <td><%= movie.movie_title %></td>
-                      <td><%= movie.count %></td>
-                      <td><%= movie.revenue %></td>
-                    </tr>
-                  <% SlNO++; %>
-                  <!-- Increment the slNo for the next iteration -->
-                  <% }) %>
-                </tbody>
-              </table>
-            </div>
             </div>
           </section>
         </main>
