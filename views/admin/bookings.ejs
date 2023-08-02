@@ -12,8 +12,6 @@
                       <th style="padding: 15px 10px;">SI No <span class="icon-arrow">&UpArrow;</span></th>
                       <th>Movie Name</th>
                       <th>Booked By</th>
-                      <th>Hall Name</th>
-                      <th>Location</th>
                       <th>Booking Date</th>
                       <th>Time</th>
                       <th>Seat No.</th>
@@ -29,8 +27,6 @@
                           <td style="padding: 15px 10px;"><%= booking.booking_id %></td>
                           <td><%= booking.movie_title %></td>
                           <td><%= booking.username %></td>
-                          <td><%= booking.hall_name %></td>
-                          <td><%= booking.hall_location %></td>
                           <td>
                             <%= new Date(booking.screening_date).toLocaleDateString("en-US", {
                             weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %>
