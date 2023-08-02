@@ -10,11 +10,21 @@ const isLoggedin = function (req, res, next) {
     req.currentUser = req.user;
     next();
   } else {
+    req.flash('error','Yor are not Authorized..')
     res.redirect('/login');
   }
 };
+function ensuresuperadmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.role === 'super-admin') {
+    // If the user is logged in and has the role "user," proceed to the next middleware or route handler
+    return next();
+  } else {
+    req.flash('error','Yor are not Authorized..')
+    res.redirect('/login');
+  }
+}
 
-router.get('/addUser', isLoggedin, (req, res) => {
+router.get('/addUser', isLoggedin,ensuresuperadmin, (req, res) => {
   // Fetch theater data from the database
   const theaterQuery = 'SELECT * FROM movie_halls';
   const smessage = req.flash('success');
@@ -114,7 +124,7 @@ router.post('/add-admin', isLoggedin, (req, res) => {
 });
 
 // GET route to render the user update form
-router.get('/userUpdate/:id', isLoggedin, function (req, res) {
+router.get('/userUpdate/:id', isLoggedin,ensuresuperadmin, function (req, res) {
   const userId = req.params.id;
 
   const userQuery = `SELECT * from users where id = ${userId}`;
@@ -142,7 +152,7 @@ router.get('/userUpdate/:id', isLoggedin, function (req, res) {
   });
 });
 
-router.post('/userUpdate/:id', isLoggedin, function (req, res) {
+router.post('/userUpdate/:id', isLoggedin,ensuresuperadmin, function (req, res) {
   const userId = req.params.id;
   console.log(userId);
   const { username, email, assignedTheater } = req.body;
@@ -164,7 +174,7 @@ router.post('/userUpdate/:id', isLoggedin, function (req, res) {
   });
 });
 
-router.get('/userDelete/:id', isLoggedin, function (req, res) {
+router.get('/userDelete/:id', isLoggedin,ensuresuperadmin, function (req, res) {
   const userId = req.params.id;
 
   const deleleQuerry = 'DELETE FROM users WHERE id= ?';
