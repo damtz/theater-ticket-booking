@@ -30,6 +30,7 @@ router.get('/addUser', isLoggedin, (req, res) => {
       smessage,
       emessage,
       currentUser: req.user,
+      currentPage: 'user',
     });
   });
 });
@@ -136,7 +137,7 @@ router.get('/userUpdate/:id', isLoggedin, function (req, res) {
       }
 
       // Render the editUser template with the user and theaters data
-      res.render('super/editUser', { user, theaters, currentUser: req.user });
+      res.render('super/editUser', { user, theaters, currentUser: req.user,  currentPage: 'user', });
     });
   });
 });
