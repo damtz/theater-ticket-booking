@@ -9,7 +9,7 @@
                 <table id="myTable" class="table table-striped">
                   <thead>
                     <tr>
-                      <th>SI No <span class="icon-arrow">&UpArrow;</span></th>
+                      <th style="padding: 15px 10px;">SI No <span class="icon-arrow">&UpArrow;</span></th>
                       <th>Hall Name</th>
                       <th>Location</th>
                       <th>Movie Title</th>
@@ -24,7 +24,7 @@
                     <!-- Initialize the slNo variable outside the loop -->
                     <% movieHallMapping.forEach((booking) => { %>
                       <tr>
-                        <td><%= slNo %></td>
+                        <td style="padding: 15px 10px;"><%= slNo %></td>
                         <td><%= booking.hall_name %></td>
                         <td><%= booking.location %></td>
                         <td><%= booking.movie_title %></td>
