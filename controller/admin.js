@@ -163,6 +163,7 @@ router.get('/adashboard', isLoggedin, ensureadmin, function (req, res) {
             topMoviesData, // Pass the top 5 movies data to the view
             todayScreening,
             smessage,
+            currentPage: 'aDashboard',
           });
         });
       });
@@ -215,6 +216,7 @@ router.get('/admin-booking', isLoggedin, ensureadmin, function (req, res) {
       bookings: formattedResults,
       smessage,
       emessage,
+      currentPage: 'aBooking',
     });
   });
 });
@@ -595,6 +597,7 @@ router.get('/report', isLoggedin, ensureadmin, function (req, res) {
           movieData: sortedMovieData,
           smessage,
           emessage,
+          currentPage: 'report',
         });
       });
     }
@@ -635,6 +638,7 @@ router.get('/movie', isLoggedin, ensureadmin, function (req, res) {
       smessage,
       emessage,
       currentUser: req.user,
+      currentPage: 'movie',
     });
   });
 });
@@ -654,7 +658,7 @@ router.get(
         return;
       }
       const movie = Movie[0];
-      res.render('admin/editMovies', { movie, currentUser: req.user });
+      res.render('admin/editMovies', { movie, currentPage: 'movie', currentUser: req.user });
     });
   }
 );
@@ -800,6 +804,7 @@ router.get(
             movies,
             movieHalls,
             currentUser: req.user,
+            currentPage: 'adminMovieMapping',
           });
         });
       });
