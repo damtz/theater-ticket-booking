@@ -88,6 +88,7 @@ router.get('/admin-addMovie', isLoggedin, function (req, res) {
     smessage: successMessage,
     emessage: errorMessage,
     currentUser: req.user,
+     currentPage: 'movie',
   });
 });
 
