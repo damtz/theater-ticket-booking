@@ -7,11 +7,30 @@ const isLoggedin = function (req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
+    req.flash('error','Yor are not Authorized..')
     res.redirect('/login');
   }
 };
+function ensureadmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.role === 'admin') {
+    // If the user is logged in and has the role "user," proceed to the next middleware or route handler
+    return next();
+  } else {
+    req.flash('error','Yor are not Authorized..')
+    res.redirect('/login');
+  }
+}
+function ensuresuperadmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.role === 'super-admin') {
+    // If the user is logged in and has the role "user," proceed to the next middleware or route handler
+    return next();
+  } else {
+    req.flash('error','Yor are not Authorized..')
+    res.redirect('/login');
+  }
+}
 
-router.get('/createMapping', isLoggedin, function (req, res) {
+router.get('/createMapping', isLoggedin,ensuresuperadmin, function (req, res) {
   const moviesQuery = 'SELECT id, title FROM movies';
   const movieHallsQuery = 'SELECT id, name FROM movie_halls';
   const smessage = req.flash('success');
@@ -105,7 +124,7 @@ router.post('/movie-hall-mapping', isLoggedin, (req, res) => {
 });
 
 //For Super Admin //
-router.get('/adminMovieMapping', isLoggedin, function (req, res) {
+router.get('/adminMovieMapping', isLoggedin,ensureadmin, function (req, res) {
   const hallId = req.user.assigned_theater_id;
   const query = `
     SELECT mhm.*, movies.title AS movie_name, movie_halls.name AS hall_name
@@ -163,7 +182,7 @@ function formatTime(time) {
   return formattedTime;
 }
 
-router.get('/adminCreateMapping', isLoggedin, function (req, res) {
+router.get('/adminCreateMapping', isLoggedin,ensureadmin, function (req, res) {
   const moviesQuery = 'SELECT id, title FROM movies';
   const movieHallsQuery = 'SELECT id, name FROM movie_halls';
   const smessage = req.flash('success');
@@ -218,7 +237,7 @@ router.post('/movie-mapping', isLoggedin, (req, res) => {
   res.send('Data inserted into movie_hall_mapping table!');
 });
 
-router.post('/adminCreateMapping', isLoggedin, (req, res) => {
+router.post('/adminCreateMapping', isLoggedin,ensureadmin, (req, res) => {
   const { movieId, screeningDates, screeningTime } = req.body;
   const movieHallId = req.user.assigned_theater_id;
   const insertQuery =
