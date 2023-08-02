@@ -34,7 +34,7 @@ function ensureadmin(req, res, next) {
     // If the user is logged in and has the role "user," proceed to the next middleware or route handler
     return next();
   } else {
-    // If the user is not logged in or doesn't have the role "user," redirect to the desired route (e.g., home page)
+    req.flash('error','Yor are not Authorized..')
     res.redirect('/login');
   }
 }
@@ -42,6 +42,7 @@ const isLoggedin = function (req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
+    req.flash('error','Yor are not Authorized..')
     res.redirect('/login');
   }
 };
