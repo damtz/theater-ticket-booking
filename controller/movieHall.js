@@ -11,6 +11,7 @@ const isLoggedin = function (req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
+    req.flash('error','Yor are not Authorized..')
     res.redirect('/login');
   }
 };
@@ -19,6 +20,7 @@ function ensureuser(req, res, next) {
     // If the user is logged in and has the role "user," proceed to the next middleware or route handler
     return next();
   } else {
+    req.flash('error','Yor are not Authorized..')
     res.redirect('/login');
   }
 }
