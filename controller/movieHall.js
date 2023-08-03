@@ -24,8 +24,17 @@ function ensureuser(req, res, next) {
     res.redirect('/login');
   }
 }
+function ensuresuperadmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.role === 'super-admin') {
+    // If the user is logged in and has the role "user," proceed to the next middleware or route handler
+    return next();
+  } else {
+    req.flash('error','Yor are not Authorized..')
+    res.redirect('/login');
+  }
+}
 
-router.get('/addHall', isLoggedin, function (req, res) {
+router.get('/addHall', isLoggedin, ensuresuperadmin, function (req, res) {
   const smessage = req.flash('success');
   const emessage = req.flash('error');
   res.render('super/addHall', { smessage, emessage, currentUser: req.user, currentPage: 'movieHalls' });
@@ -60,7 +69,7 @@ const error = [];
 //   }
 // );
 
-router.post('/add-hall', isLoggedin, function (req, res) {
+router.post('/add-hall', isLoggedin, ensuresuperadmin,  function (req, res) {
   const {
     name,
     location,
