@@ -117,10 +117,6 @@
   background-color: #f1f1f1;
 }
 
-.table {
-  /* Add padding-right to create space on the right */
-  padding-right: 55px;
-}
 
 .graphcontainer {
   position: relative;
