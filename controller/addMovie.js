@@ -14,10 +14,28 @@ const isLoggedin = function (req, res, next) {
     res.redirect('/login');
   }
 };
+function ensuresuperadmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.role === 'super-admin') {
+    // If the user is logged in and has the role "user," proceed to the next middleware or route handler
+    return next();
+  } else {
+    req.flash('error','Yor are not Authorized..')
+    res.redirect('/login');
+  }
+}
+function ensureadmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.role === 'admin') {
+    // If the user is logged in and has the role "user," proceed to the next middleware or route handler
+    return next();
+  } else {
+    req.flash('error','Yor are not Authorized..')
+    res.redirect('/login');
+  }
+}
 
 const errorMessage = [];
 
-router.get('/addMovie', isLoggedin, function (req, res) {
+router.get('/addMovie', isLoggedin, ensureadmin, function (req, res) {
   const query = 'SELECT * FROM movie_halls';
 
   connection.query(query, (error, results) => {
@@ -49,6 +67,7 @@ const upload = multer({ storage: storage });
 router.post(
   '/super-addMovie',
   isLoggedin,
+  ensuresuperadmin,
   upload.single('image'),
   function (req, res) {
     const { movieTitle, summary, casts, status, genre, duration } = req.body;
@@ -82,7 +101,7 @@ router.post(
   }
 );
 
-router.get('/admin-addMovie', isLoggedin, function (req, res) {
+router.get('/admin-addMovie', isLoggedin, ensureadmin, function (req, res) {
   const successMessage = req.flash('success');
   const errorMessage = req.flash('error');
   res.render('admin/addMovie', {
@@ -96,6 +115,7 @@ router.get('/admin-addMovie', isLoggedin, function (req, res) {
 router.post(
   '/admin-addMovie',
   isLoggedin,
+  ensureadmin,
   upload.single('image'),
   function (req, res) {
     const { movieTitle, summary, casts, status, genre, duration } = req.body;
