@@ -529,6 +529,24 @@ input[type='number']:focus {
   border: 2px solid #ffe36d; /* Yellow border color on focus */
 }
 
+@media screen and (max-width: 768px) {
+  .hall-form {
+    max-width: 100%; /* Adjust the maximum width to fit the screen */
+    padding: 10px; /* Reduce padding on mobile */
+    margin-bottom: 10px; /* Reduce margin on mobile */
+  }
+
+  /* Adjust styles for input rows on mobile */
+  .input-row {
+    flex-direction: column; /* Change to vertical layout on mobile */
+  }
+
+  .input-row div {
+    margin-right: 0; /* Remove right margin on mobile */
+    margin-bottom: 10px; /* Add bottom margin on mobile */
+  }
+}
+
 /* Button styles with hover effect */
 button[type='submit'] {
   padding: 10px 20px;
