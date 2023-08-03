@@ -13,7 +13,7 @@
                 <% }) %></select
               ><br />
 
-              <label for="movieHallId">Movie Hall:</label>
+              <label for="movieHallId" style="margin-top: 10px;">Movie Hall:</label>
               <select id="movieHallId" name="movieHallId" required>
                 <option value="<%= mapping.movie_hall_id %>">Select a Movie Hall</option>
                 <% movieHalls.forEach(function(movieHall) { %>
@@ -23,7 +23,7 @@
                 <% }) %></select
               ><br />
 
-              <label for="screeningDates"><%= mapping.screening_date %>:</label>
+              <label for="screeningDates" style="margin-top: 10px;">Date(<%= mapping.screening_date %>)</label>
               <select
                 id="screeningDates"
                 name="screeningDates"
@@ -39,7 +39,7 @@
                 <% } %></select
               ><br />
 
-              <label for="screeningTime"><%= mapping.screening_time %>:</label>
+              <label for="screeningTime" style="margin-top: 10px;">Time(<%= mapping.screening_time %>)</label>
               <input
                 type="time"
                 id="screeningTime"
@@ -47,7 +47,7 @@
                 required
               /><br />
 
-              <button type="submit" style="color: #828282">Update Mapping</button>
+              <button type="submit" style="color: #828282; margin-top: 15px" >Update Mapping</button>
             </form>
           </section>
         </main>
