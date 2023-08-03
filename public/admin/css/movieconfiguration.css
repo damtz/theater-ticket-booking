@@ -466,7 +466,7 @@ tbody td.active {
 @media (max-width: 768px) {
   /* Reduce font size and adjust table layout for small screens */
   #myTable {
-    font-size: 12px;
+    font-size: 14px;
   }
   #myTable th,
   #myTable td {
