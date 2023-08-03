@@ -88,40 +88,48 @@
       <!-- =================================Booking the seat accronding to hall==================================== -->
             
       <div class="container">
-      <div class="row">
-        <% halls.forEach((hall) => { %>
-              <div class="col hall-1">
-                <div class="custom-card">
+        <div class="row">
+          <% halls.forEach((hall) => { %>
+            <div class="col hall-1">
+              <div class="custom-card">
                 <h6 class="text-white mt-3">
                   <span class="movie-title">Screening Date and time:</span>
                   <select style="width: 150px;" name="screening" onchange="redirectToSeatAvailability(this)">
                     <option value="" disabled selected>Select Date</option>
-                    <% hall.screenings.forEach((screening) => { %>
-                    <option
-                      value="/seat-availability?hallId=<%= hall.id %>&movieId=<%= movie.id %>&date=<%= screening.screening_date %>&time=<%= screening.screening_time %>"
-                    >
+                    <% hall.screenings.forEach((screening) => {
+                      const screeningDate = new Date(screening.screening_date);
+                      const today = new Date();
+                      // Check if the screening date is today or in the future
+                      if (screeningDate >= today || screeningDate.toDateString() === today.toDateString()) {
+                    %>
+                    <option value="/seat-availability?hallId=<%= hall.id %>&movieId=<%= movie.id %>&date=<%= screening.screening_date %>&time=<%= screening.screening_time %>">
                       <%= screening.screening_date.toLocaleDateString("en-US", {
-                        weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %> <%= formatTime(screening.screening_time) %>
+                        weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'
+                      }) %> <%= formatTime(screening.screening_time) %>
                     </option>
-                    <% }) %>
+                    <% }
+                    }) %>
                   </select>
                 </h6>
-                 
+      
                 <h6 class="text-white mt-3 ">
                   <span class="movie-title">Screening Hall:</span>
-                  <%= hall.name %>               
-                 </h6>
-
+                  <%= hall.name %>
+                </h6>
+      
                 <h6 class="text-white mt-3 ">
                   <span class="movie-title">Location:</span>
-                  <%= hall.location %>                </h6>
+                  <%= hall.location %>
+                </h6>
                 <div class="container mb-4">
-          </div>
-          </div>
-          </div>
-          <% }) %>
+                  <!-- Additional content for each hall can be placed here if needed -->
+                </div>
               </div>
             </div>
+          <% }) %>
+        </div>
+      </div>
+      
             </div>
 
 
