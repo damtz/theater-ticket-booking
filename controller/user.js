@@ -451,9 +451,8 @@ router.post('/reset-password', function (req, res) {
     }
     const emailCount = results[0].count;
     if (emailCount === 0) {
-      res.render('user/forgot-password', {
-        errorMessage: 'Invalid email address.',
-      });
+      req.flash('error','Invalid email address');
+      res.redirect('/forgot-password');
     } else {
       // Generate a unique token and store it in the database
       const token = generateToken(); // Call the generateToken() function here
