@@ -17,9 +17,11 @@
               <select id="movieHallId" name="movieHallId" required>
                 <option value="<%= mapping.movie_hall_id %>">Select a Movie Hall</option>
                 <% movieHalls.forEach(function(movieHall) { %>
-                <option value="<%= movieHall.id %>">
-                  <%= movieHall.name %>
-                </option>
+                  <% if (movieHall.status !== 0) { %>
+                    <option value="<%= movieHall.id %>">
+                      <%= movieHall.name %>
+                    </option>
+                  <% } %>
                 <% }) %></select
               ><br />
 
