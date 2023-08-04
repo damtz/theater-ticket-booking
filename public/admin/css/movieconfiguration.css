@@ -556,6 +556,7 @@ button[type='submit'] {
   border-radius: 4px;
   background: linear-gradient(to right, #ffe36d, #eef6ee);
   border-image-slice: 1;
+  margin-top: 20px;
 }
 
 button[type='submit']:hover {
