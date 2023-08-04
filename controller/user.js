@@ -198,43 +198,6 @@ const authenticateUser = (req, res, next) => {
 // Register the middleware before defining your routes
 app.use(authenticateUser);
 
-// router.post('/login', function (req, res) {
-//   const email = req.body.email;
-
-//   const userQuery = 'SELECT * FROM users WHERE email = ?';
-//   connection.query(userQuery, [email], (error, results) => {
-//     if (error) {
-//       req.flash('error', 'Error validating user.');
-//       res.redirect('/login');
-//     } else {
-//       // Check if any user was found
-//       if (results && results.length > 0) {
-//         const user = results[0];
-//         if (user.role == 'super-admin') {
-//           passport.authenticate('local')(req, res, function () {
-//             req.flash('success', 'Logged in successfully as Super Admin.');
-//             res.redirect('/sdashboard');
-//           });
-//         } else if (user.role == 'admin') {
-//           passport.authenticate('local')(req, res, function () {
-//             req.flash('success', 'Logged in successfully as Admin.');
-//             res.redirect('adashboard');
-//           });
-//         } else {
-//           passport.authenticate('local')(req, res, function () {
-//             req.flash('success', 'Logged in successfully.');
-//             res.redirect('/');
-//           });
-//         }
-//       } else {
-//         // No user found for the given email, display error message
-//         req.flash('error', 'Invalid user credentials.');
-//         res.redirect('/login');
-//       }
-//     }
-//   });
-// });
-
 router.post('/login', function (req, res) {
   const email = req.body.email;
   const password = req.body.password; // Get the password provided by the user
