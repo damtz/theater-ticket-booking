@@ -139,7 +139,7 @@
     }
 
     const nameInput = document.getElementById('name');
-    const namePattern = /^[A-Za-z]+$/;
+    const namePattern = /^[A-Za-z ]+$/;
 
     if (!namePattern.test(nameInput.value)) {
       showError(nameInput, 'Only characters are allowed');
