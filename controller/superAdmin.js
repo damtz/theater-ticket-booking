@@ -202,6 +202,21 @@ router.get('/user', isLoggedin, ensuresuperadmin, function (req, res) {
     // Check if theaterIds array is empty
     if (theaterIds.length === 0) {
       // No theaterIds found, directly render the page with the user data
+      Users.forEach((user) => {
+        if (user.created_at instanceof Date) {
+          user.created_at = user.created_at.toLocaleString('en-US', {
+            timeZone: 'UTC', // Change to your desired timezone if needed
+            weekday: 'short',
+            month: 'short',
+            day: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+          });
+        }
+      });
+
       res.render('super/users', {
         currentUser: req.user,
         Users,
@@ -228,10 +243,23 @@ router.get('/user', isLoggedin, ensuresuperadmin, function (req, res) {
         theaterMap[theater.id] = theater;
       });
 
-      // Add theater details to each user object
+      // Add theater details to each user object and format created_at date
       Users.forEach((user) => {
         const theaterId = user.assigned_theater_id;
         user.theater = theaterMap[theaterId];
+
+        if (user.created_at instanceof Date) {
+          user.created_at = user.created_at.toLocaleString('en-US', {
+            timeZone: 'Asia/Thimphu', // Change to your desired timezone if needed
+            weekday: 'short',
+            month: 'short',
+            day: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+          });
+        }
       });
 
       res.render('super/users', {
@@ -239,7 +267,7 @@ router.get('/user', isLoggedin, ensuresuperadmin, function (req, res) {
         Users,
         smessage: successMessage,
         emessage: errorMessage,
-        currentPage: 'user'
+        currentPage: 'user',
       });
     });
   });
