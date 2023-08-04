@@ -71,8 +71,8 @@ router.post('/add-admin', isLoggedin, (req, res) => {
     }
 
     const insertUserQuery =
-      'INSERT INTO users (username, email, role, password, assigned_theater_id) VALUES (?, ?, ?, ?, ?)';
-    const values = [username, email, 'admin', hashedPassword, assignedTheater];
+      'INSERT INTO users (username, email, role, password, assigned_theater_id, created_at) VALUES (?, ?, ?, ?, ?, ?)';
+    const values = [username, email, 'admin', hashedPassword, assignedTheater,  new Date()];
     connection.query(insertUserQuery, values, (error, results) => {
       if (error) {
         console.error('Error inserting user:', error);
