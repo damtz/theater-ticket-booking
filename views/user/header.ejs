@@ -190,7 +190,7 @@
                 <form method="GET" action="/search">
                   <div class="Search-bar">
                   <div class="box">
-                    <input type="text" name="search" id="search" placeholder="Search....." class="text-white">
+                    <input type="text" name="search" id="search" placeholder="Search.....">
                      <button style="background: transparent; border: transparent;" type="submit"><i class="fas fa-search" style="color: #ffe36d;"></i></button>
                     </a>
                   </div>
@@ -375,15 +375,41 @@
               </nav>
         
         <!-- javascript to make side menu appear -->
- <script>
-  function openNav() {
-    document.getElementById("sidenav").style.width = "50%";
-  }
-  function closeNav() {
-    document.getElementById("sidenav").style.width = "0%";
-  }
-</script>
-
+        <script>
+          function openNav() {
+            const sideNav = document.getElementById('sidenav');
+            sideNav.style.width = '50%';
+          }
+        
+          function closeNav() {
+            const sideNav = document.getElementById('sidenav');
+            sideNav.style.width = '0%';
+          }
+        
+          function handleResize() {
+            const sideNav = document.getElementById('sidenav');
+            const menubtn = document.querySelector('.menubtn');
+            const windowWidth = window.innerWidth;
+        
+            if (windowWidth < 900) {
+              sideNav.style.width = '0%';
+              menubtn.style.display = 'flex';
+            } else {
+              sideNav.style.width = '50%';
+              menubtn.style.display = 'none';
+            }
+          }
+        
+          document.addEventListener('DOMContentLoaded', function () {
+            const menubtn = document.querySelector('.menubtn');
+            menubtn.style.display = 'flex';
+        
+            handleResize();
+          });
+        
+          window.addEventListener('resize', handleResize);
+        </script>
+        
     </nav>
 
   </body>
