@@ -207,7 +207,7 @@ router.post('/add-admin', isLoggedin, ensuresuperadmin, (req, res) => {
             ' and password: ' +
             randomPassword +
             '<br> To reset your password, click the link below:<br>' +
-            '<a href="http://localhost:5000/Reset-password?token=' +
+            '<a href="http://10.70.91.60/Reset-password?token=' +
             randomToken +
             '">Reset Password</a>' +
             '<br> Thank you.</a>',
