@@ -36,13 +36,14 @@
             <% if (movies.length === 0) { %>
               <p style="color:white;">No movies found.</p>
             <% } else { %>
-              <% let count = 0; %>
+              <% let counter = 0; %>
               <% movies.forEach(function(movie) { %>
                <% if (movie.status !== 'Closed') { %>
 
               <div class="col-md-6 col-lg-3 col-6 movie-item"  data-genre="<%= movie.genre %>">
-                <img src="/images/<%= movie.image %>" alt="" class="img-fluid">
-                
+                <a href="/movie-details?movieId=<%= movie.id %>">
+                <img src="/images/<%= movie.image %>" alt="Image <%= counter + 1 %>" class="img-fluid">
+                  </a>
               </div>
               <% counter++; if (counter === 4) {counter = 0; %>
             
@@ -60,6 +61,7 @@
               SEE LESS
             </button>
           </div>
+          <% } %>
         </div>
       </section>
       
