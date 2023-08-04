@@ -14,6 +14,8 @@
                       <th>Email</th>
                       <th>Movie Hall</th>
                       <th>Location</th>
+                      <th>Role</th>
+                      <th>Created_At</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -28,6 +30,8 @@
                       <td><%= user.email %></td>
                       <td><%= user.theater.name %></td>
                       <td><%= user.theater.location %></td>
+                      <td><%= user.role %></td>
+                      <td><%= user.created_at %></td>
                       <td>
                         <a href="/userUpdate/<%= user.id %>"> <i class="fa fa-edit"></i></a>
                         <a href="/userDelete/<%= user.id %>"><i class="fa fa-trash delete-icon"></i></a>
