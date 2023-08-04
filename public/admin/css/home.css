@@ -117,6 +117,10 @@
   background-color: #f1f1f1;
 }
 
+.table {
+  /* Add padding-right to create space on the right */
+  padding-right: 0px;
+}
 
 .graphcontainer {
   position: relative;
@@ -144,7 +148,7 @@
 /* Responsive styles for .graphcontainer h5 */
 @media (max-width: 768px) {
   .graphcontainer h5 {
-    font-size: 18px; /* Adjust the font size for smaller screens */
+    font-size: 16px; /* Adjust the font size for smaller screens */
   }
 }
 
@@ -333,6 +337,7 @@
   .graphbox h5 {
     font-size: 14px;
   }
+
   .multiple {
     margin: 15px;
     padding: 5px;
@@ -379,12 +384,7 @@
   .graphbox h5 {
     font-size: 16px;
   }
-  .dropdown {
-    margin-top: 20px;
-    width: 10px;
-    height: 25px;
-    font-size: 10px;
-  }
+
   .header i {
     margin-right: 20px;
   }
