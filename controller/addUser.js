@@ -47,14 +47,105 @@ router.get('/addUser', isLoggedin,ensuresuperadmin, (req, res) => {
 
 const bcrypt = require('bcrypt');
 
-router.post('/add-admin', isLoggedin, (req, res) => {
+// router.post('/add-admin', isLoggedin, (req, res) => {
+//   const { username, email, assignedTheater } = req.body;
+
+//   const randomPassword = generateRandomPassword();
+//   console.log('Password:', randomPassword);
+
+//   const hashedPassword = bcrypt.hashSync(randomPassword, 10);
+
+//   const userQuery = 'SELECT * FROM users WHERE email = ?';
+//   connection.query(userQuery, [email], (error, results) => {
+//     if (error) {
+//       console.error('Error validating user:', error);
+//       return res.status(500).send('Internal Server Error');
+//     }
+
+//     if (results.length > 0) {
+//       req.flash(
+//         'error',
+//         'Email already exists. Please try with different Email.'
+//       );
+//       return res.redirect('/addUser'); // Return here to stop further execution
+//     }
+
+//     const insertUserQuery =
+//       'INSERT INTO users (username, email, role, password, assigned_theater_id, created_at) VALUES (?, ?, ?, ?, ?, ?)';
+//     const values = [username, email, 'admin', hashedPassword, assignedTheater,  new Date()];
+//     connection.query(insertUserQuery, values, (error, results) => {
+//       if (error) {
+//         console.error('Error inserting user:', error);
+//         return res.status(500).send('Internal Server Error');
+//       }
+
+//       const theaterQuery = 'SELECT name FROM movie_halls WHERE id = ?';
+//       connection.query(theaterQuery, [assignedTheater], (error, results) => {
+//         if (error) {
+//           console.error('Error fetching theater:', error);
+//           return res.status(500).send('Internal Server Error');
+//         }
+
+//         if (results.length === 0) {
+//           return res.status(404).send('Assigned theater not found');
+//         }
+
+//         const theaterName = results[0].name;
+
+//         var mailOptions = {
+//           from: process.env.auth_user,
+//           to: req.body.email,
+//           subject: 'FlickTix - Admin Registration',
+//           html:
+//             'from: ' +
+//             process.env.auth_user +
+//             ', <h3>Hello ' +
+//             req.body.username +
+//             ' You are assigned as admin for ' +
+//             theaterName +
+//             ' with email: ' +
+//             req.body.email +
+//             ' and password: ' +
+//             randomPassword +
+//             '<br> Thank you.</a>',
+//         };
+
+//         transporter.sendMail(mailOptions, function (error, info) {
+//           if (error) {
+//             console.log('Email error:', error);
+//           } else {
+//             req.flash('success', 'Admin added successfully.');
+//             res.redirect('/user');
+//           }
+//         });
+//       });
+//     });
+//   });
+// });
+// Function to generate a random token
+function generateToken() {
+  // Generate a random string of characters for the token
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let token = '';
+  for (let i = 0; i < 20; i++) {
+    token += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return token;
+}
+
+// Add-admin route
+router.post('/add-admin', isLoggedin, ensuresuperadmin, (req, res) => {
   const { username, email, assignedTheater } = req.body;
 
   const randomPassword = generateRandomPassword();
   console.log('Password:', randomPassword);
 
+  const randomToken = generateToken(); // Generate random token
+
   const hashedPassword = bcrypt.hashSync(randomPassword, 10);
 
+  // Check if the email already exists in the database
   const userQuery = 'SELECT * FROM users WHERE email = ?';
   connection.query(userQuery, [email], (error, results) => {
     if (error) {
@@ -65,14 +156,22 @@ router.post('/add-admin', isLoggedin, (req, res) => {
     if (results.length > 0) {
       req.flash(
         'error',
-        'Email already exists. Please try with different Email.'
+        'Email already exists. Please try with a different Email.'
       );
-      return res.redirect('/addUser'); // Return here to stop further execution
+      return res.redirect('/addUser');
     }
 
+    // Insert the new user with the generated token
     const insertUserQuery =
-      'INSERT INTO users (username, email, role, password, assigned_theater_id, created_at) VALUES (?, ?, ?, ?, ?, ?)';
-    const values = [username, email, 'admin', hashedPassword, assignedTheater,  new Date()];
+      'INSERT INTO users (username, email, role, password, assigned_theater_id, reset_token) VALUES (?, ?, ?, ?, ?, ?)';
+    const values = [
+      username,
+      email,
+      'admin',
+      hashedPassword,
+      assignedTheater,
+      randomToken,
+    ];
     connection.query(insertUserQuery, values, (error, results) => {
       if (error) {
         console.error('Error inserting user:', error);
@@ -94,19 +193,23 @@ router.post('/add-admin', isLoggedin, (req, res) => {
 
         var mailOptions = {
           from: process.env.auth_user,
-          to: req.body.email,
+          to: email,
           subject: 'FlickTix - Admin Registration',
           html:
             'from: ' +
             process.env.auth_user +
             ', <h3>Hello ' +
-            req.body.username +
+            username +
             ' You are assigned as admin for ' +
             theaterName +
             ' with email: ' +
-            req.body.email +
+            email +
             ' and password: ' +
             randomPassword +
+            '<br> To reset your password, click the link below:<br>' +
+            '<a href="http://localhost:5000/Reset-password?token=' +
+            randomToken +
+            '">Reset Password</a>' +
             '<br> Thank you.</a>',
         };
 
@@ -120,6 +223,18 @@ router.post('/add-admin', isLoggedin, (req, res) => {
         });
       });
     });
+
+    // Automatically clear the token after 24 hours
+    setTimeout(() => {
+      const clearQuery = `UPDATE users SET reset_token = NULL WHERE email = ?`;
+      connection.query(clearQuery, [email], (error, results) => {
+        if (error) {
+          console.error('Error executing the query: ', error);
+        } else {
+          console.log('Token cleared successfully.');
+        }
+      });
+    }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
   });
 });
 
