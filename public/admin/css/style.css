@@ -224,40 +224,6 @@ button[type='submit']:hover {
   color: red;
 }
 
-/* 
-footer {
-    background: #f6f6f6;
-    color: #c8c8c8;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 -2px 5px -2px rgba(0, 0, 0, 0.3);
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-}
-
-.text-muted {
-    margin-top: 30px;
-    margin-bottom: 50px;
-}
-
-@media screen and (min-width: 768px) {
-    footer {
-        text-align: start;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.3);
-    }
-    .text-muted {
-        flex-basis: 100%;
-        margin-top: 10px;
-    }
-} */
-
 .admin-form {
   width: 300px;
   margin: 20px auto;
