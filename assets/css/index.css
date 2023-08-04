@@ -134,7 +134,7 @@ h6 {
 /* ===============Movie List======================= */
 
 .col-md-6 img {
-  height: 22rem;
+  height: 18rem;
   transition: transform 0.3s ease;
 }
 
@@ -223,7 +223,7 @@ h6 {
 /* Custom CSS for smaller screens (between 576px and 991.98px) */
 @media (max-width: 991.98px) {
   .col-md-6 img {
-    height: 18rem;
+    height: 14rem;
     transition: transform 0.3s ease;
   }
 
