@@ -17,7 +17,7 @@ body {
 /* ===============Movie List======================= */
 
 .col-md-6 img {
-  height: 22rem;
+  height: 18rem;
   transition: transform 0.3s ease;
 }
 
