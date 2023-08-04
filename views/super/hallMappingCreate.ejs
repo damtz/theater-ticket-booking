@@ -20,7 +20,7 @@
               <select id="movieHallId" name="movieHallId" required>
                 <option value="">Select a Movie Hall</option>
                 <% movieHalls.forEach(function(movieHall) { %>
-                 <% if (movieHall.status !== 1) { %>
+                 <% if (movieHall.status !== 0) { %>
                     <option value="<%= movieHall.id %>">
                       <%= movieHall.name %>
                     </option>
