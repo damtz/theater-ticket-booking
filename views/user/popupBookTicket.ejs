@@ -16,7 +16,7 @@
         <p>Are you sure want to book the tickets?</p>
 
         <div class="button-container">
-          <button type="button" onclick="location.href='/'">CANCEL</button>
+          <button type="button" onclick="goBack()">CANCEL</button>
           <button type="submit" onclick="closePopup()">CONFIRM</button>
         </div>
       </div>
@@ -31,6 +31,9 @@
       function closePopup() {
         popup.classList.remove("open-popup");
       }
+    function goBack() {
+            history.go(-1);
+          }
     </script>
   </body>
 </html>
