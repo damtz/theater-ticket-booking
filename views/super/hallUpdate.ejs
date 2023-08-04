@@ -120,7 +120,7 @@
       // Validate name input to allow only characters
       function validateNameInput(event) {
         const inputElement = event.target;
-        const namePattern = /^[A-Za-z]+$/;
+        const namePattern = /^[A-Za-z ]+$/;
         if (!namePattern.test(inputElement.value)) {
           showError(inputElement, 'Only characters are allowed');
         } else {
