@@ -1,5 +1,11 @@
 <%- include('header') %>
-
+      <style>
+        .error-message {
+          color: red;
+          font-size: 12px;
+          margin-top: 5px;
+        }
+      </style>
           <section class="table__header">
             <h3>Hall Configuration</h3>
           </section>
@@ -8,6 +14,7 @@
               action="/hallUpdate/<%= hall.id %>"
               method="POST"
               class="hall-form"
+              id="form"
             >
               <div class="input-row">
                 <div>
@@ -18,10 +25,6 @@
                     name="name"
                     value="<%= hall.name %>"
                   />
-                  <p style="color: red">
-                    <%= (typeof errors !== "undefined" && typeof errors.name !==
-                    "undefined") ? errors.name.msg : "" %>
-                  </p>
                 </div>
                 <div>
                   <label for="location">Location:</label>
@@ -35,10 +38,6 @@
                     <option value="Wangdue">Wangdue</option>
                     <option value="Trashigang">Trashigang</option>
                   </select>
-                  <p style="color: red">
-                    <%= (typeof errors !== "undefined" && typeof errors.location
-                    !== "undefined") ? errors.location.msg : "" %>
-                  </p>
                 </div>
               </div>
               <div class="input-row">
@@ -88,16 +87,107 @@
                   <option value="1">Active</option>
                   <option value="0">Inactive</option>
                 </select>
-                <p style="color: red">
-                  <%= (typeof errors !== "undefined" && typeof errors.location
-                  !== "undefined") ? errors.location.msg : "" %>
-                </p>
               </div>
-              <button type="submit" style="color: black">Update Now</button>
+              <button type="submit">Update Now</button>
             </form>
           </section>
         </main>
       </section>
     </div>
+
+    <script>
+      // Helper function to show an error message
+      function showError(inputElement, message) {
+        const errorElement = inputElement.parentElement.querySelector('.error-message');
+        if (errorElement) {
+          errorElement.textContent = message;
+        } else {
+          const newErrorElement = document.createElement('p');
+          newErrorElement.classList.add('error-message');
+          newErrorElement.textContent = message;
+          inputElement.parentElement.appendChild(newErrorElement);
+        }
+      }
+    
+      // Helper function to remove the error message
+      function removeError(inputElement) {
+        const errorElement = inputElement.parentElement.querySelector('.error-message');
+        if (errorElement) {
+          errorElement.remove();
+        }
+      }
+    
+      // Validate name input to allow only characters
+      function validateNameInput(event) {
+        const inputElement = event.target;
+        const namePattern = /^[A-Za-z]+$/;
+        if (!namePattern.test(inputElement.value)) {
+          showError(inputElement, 'Only characters are allowed');
+        } else {
+          removeError(inputElement);
+        }
+      }
+    
+      // Validate input when the user types in the input field
+      function validateInput(event) {
+        const inputElement = event.target;
+        const value = Number(inputElement.value);
+       
+        if (value < 0) {
+          showError(inputElement, 'Value cannot be negative');
+         
+        } else {
+          removeError(inputElement);
+        }
+        
+      }
+    
+      // Prevent form submission and display errors on submit
+      const form = document.getElementById('form'); // Replace 'your-form-id' with the actual ID of your form
+    
+      form.addEventListener('submit', function (event) {
+        const numberInputs = form.querySelectorAll('input[type="number"]');
+        let hasError = false;
+    
+        numberInputs.forEach((input) => {
+          const value = Number(input.value);
+    
+          if (value < 0) {
+            showError(input, 'Value cannot be negative');
+            hasError = true;
+          } else {
+            removeError(input);
+          }
+        });
+    
+        if (hasError) {
+          event.preventDefault(); // Prevent form submission
+        }
+    
+        const nameInput = document.getElementById('name');
+        const namePattern = /^[A-Za-z]+$/;
+    
+        if (!namePattern.test(nameInput.value)) {
+          showError(nameInput, 'Only characters are allowed');
+          hasError = true;
+        } else {
+          removeError(nameInput);
+        }
+    
+        if (hasError) {
+          event.preventDefault(); // Prevent form submission
+        }
+      });
+    
+      // Add input event listeners to the number input elements
+      const numberInputs = document.querySelectorAll('input[type="number"]');
+      numberInputs.forEach((input) => {
+        input.addEventListener('input', validateInput);
+      });
+    
+      // Add input event listener to the name input field
+      const nameInput = document.getElementById('name');
+      nameInput.addEventListener('input', validateNameInput);
+    </script>
   </body>
 </html>
