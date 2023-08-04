@@ -259,11 +259,25 @@ footer {
 } */
 
 .admin-form {
-  width: 300px;
+  width: 600px;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+/* Apply responsive styles for screens with a maximum width of 768px or less */
+@media screen and (max-width: 768px) {
+  .admin-form {
+    padding: 8px;
+  }
+}
+
+/* Apply responsive styles for screens with a maximum width of 576px or less */
+@media screen and (max-width: 576px) {
+  .admin-form {
+    max-width: 90%;
+  }
 }
 
 .admin-form label {
