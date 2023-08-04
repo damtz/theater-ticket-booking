@@ -16,25 +16,59 @@ body {
 
 /* ===============Movie List======================= */
 
-.image-container {
-  display: flex;
-  justify-content: start;
-}
-
-.image-container img {
-  width: 15rem;
-  height: auto;
-}
-
-.image-container .col-md-3 img {
+.col-md-6 img {
   height: 22rem;
   transition: transform 0.3s ease;
 }
 
-.image-container .col-md-3:hover img {
+.col-md-6 {
+  position: relative;
+}
+
+.col-md-6 .book-now {
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 50px;
+  width: 150px;
+  background-color: transparent;
+  border: solid 2px #ffe36d;
+  border-radius: 10px;
+  color: #fff;
+}
+
+
+ .col-md-6 .rate-us {
+  display: none;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 40px;
+  width: 100px;
+  background-color: transparent;
+  border: solid 2px #ffe36d;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+}
+
+ .col-md-6:hover img {
   transform: scale(1.2);
 }
 
+ .col-md-6:hover button {
+  display: block;
+}
+
+ .book-now:hover {
+  background-color: #ffe36d;
+}
+ .rate-us:hover {
+  background-color: #ffe36d;
+}
 .load-more .btn {
   width: 150px;
   height: 50px;
@@ -48,6 +82,9 @@ body {
   background: linear-gradient(to right, #ffe36d 10%, rgba(0, 0, 0, 0) 60%);
 }
 
+.more-content {
+  display: none;
+}
 
 /* ==========================================Responsivness for mobile========================================= */
 
