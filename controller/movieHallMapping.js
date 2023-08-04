@@ -68,7 +68,7 @@ router.post('/movie-hall-mapping', isLoggedin, ensuresuperadmin, (req, res) => {
   // Create a function to check if the data already exists in the table
   const checkDataExists = (date) => {
     const query =
-      'SELECT COUNT(*) as count FROM movie_hall_mapping WHERE movie_hall_id = ? AND screening_date = ? AND screening_time = ?';
+      'SELECT COUNT(*) as count FROM movie_hall_mapping WHERE movie_hall_id = ? AND screening_date = ?';
     const values = [movieHallId, date, screeningTime];
 
     return new Promise((resolve, reject) => {
@@ -93,7 +93,7 @@ router.post('/movie-hall-mapping', isLoggedin, ensuresuperadmin, (req, res) => {
       if (dataExists) {
         // Data already exists, return an error
         return Promise.reject(
-          'Mapping for selected date already exists. Please select a different date.'
+          'Mapping for selected date and hall already exists. Please select a different date/hall.'
         );
       } else {
         // Data does not exist, insert the new entry
@@ -237,7 +237,7 @@ router.post('/movie-mapping', isLoggedin, (req, res) => {
   res.send('Data inserted into movie_hall_mapping table!');
 });
 
-router.post('/adminCreateMapping', isLoggedin,ensureadmin, (req, res) => {
+router.post('/adminCreateMapping', isLoggedin, ensureadmin, (req, res) => {
   const { movieId, screeningDates, screeningTime } = req.body;
   const movieHallId = req.user.assigned_theater_id;
   const insertQuery =
@@ -246,7 +246,7 @@ router.post('/adminCreateMapping', isLoggedin,ensureadmin, (req, res) => {
   // Create a function to check if the data already exists in the table
   const checkDataExists = (date) => {
     const query =
-      'SELECT COUNT(*) as count FROM movie_hall_mapping WHERE movie_hall_id = ? AND screening_date = ? AND screening_time = ?';
+      'SELECT COUNT(*) as count FROM movie_hall_mapping WHERE movie_hall_id = ? AND screening_date = ?';
     const values = [movieHallId, date, screeningTime];
 
     return new Promise((resolve, reject) => {
@@ -271,7 +271,7 @@ router.post('/adminCreateMapping', isLoggedin,ensureadmin, (req, res) => {
       if (dataExists) {
         // Data already exists, return an error
         return Promise.reject(
-          'Mapping for selected date already exists. Please select a different date.'
+          'Mapping for selected date and hall already exists. Please select a different date/hall.'
         );
       } else {
         // Data does not exist, insert the new entry
