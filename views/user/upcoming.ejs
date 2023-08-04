@@ -38,8 +38,9 @@
               if (movie.status !== 'Closed') {
            %>
               <div class="col-md-6 col-lg-3 col-6 movie-item"  data-genre="<%= movie.genre %>">
+                <a href="/movie-details?movieId=<%= movie.id %>">
                 <img src="/images/<%= movie.image %>" alt="" class="img-fluid">
-                
+                </a>
               </div>
               <% counter++; if (counter === 4) {counter = 0; %>
             
