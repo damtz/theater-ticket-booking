@@ -482,6 +482,7 @@ tbody td.active {
 
 /* Flexbox styles for responsive layout */
 
+/* Styles for the form */
 .hall-form {
   display: flex;
   flex-direction: column;
@@ -500,6 +501,7 @@ tbody td.active {
   border-bottom: 1px solid #d5d5d5; /* Gray border color at the bottom of each div */
 }
 
+/* Styles for input rows */
 .input-row {
   display: flex;
   justify-content: space-between;
@@ -511,6 +513,7 @@ tbody td.active {
   margin-right: 10px;
 }
 
+/* Styles for input elements */
 input[type='text'],
 select,
 input[type='email'],
@@ -529,6 +532,7 @@ input[type='number']:focus {
   border: 2px solid #ffe36d; /* Yellow border color on focus */
 }
 
+/* Media query for mobile devices with screen width up to 768px */
 @media screen and (max-width: 768px) {
   .hall-form {
     max-width: 100%; /* Adjust the maximum width to fit the screen */
@@ -556,8 +560,6 @@ button[type='submit'] {
   border-radius: 4px;
   background: linear-gradient(to right, #ffe36d, #eef6ee);
   border-image-slice: 1;
-  margin-top: 20px;
-  color: #828282;
 }
 
 button[type='submit']:hover {
