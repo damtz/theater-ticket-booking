@@ -46,7 +46,8 @@ const createUserTable = `CREATE TABLE IF NOT EXISTS users (
   password VARCHAR(255) NOT NULL,
   reset_token VARCHAR(255),
   assigned_theater_id INT,
-  FOREIGN KEY (assigned_theater_id) REFERENCES movie_halls(id)
+  FOREIGN KEY (assigned_theater_id) REFERENCES movie_halls(id),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )`;
 
 connection.query(createUserTable, (err) => {
