@@ -60,7 +60,7 @@ router.get('/createMapping', isLoggedin,ensuresuperadmin, function (req, res) {
   });
 });
 
-router.post('/movie-hall-mapping', isLoggedin, (req, res) => {
+router.post('/movie-hall-mapping', isLoggedin, ensuresuperadmin, (req, res) => {
   const { movieId, movieHallId, screeningDates, screeningTime } = req.body;
   const insertQuery =
     'INSERT INTO movie_hall_mapping (movie_id, movie_hall_id, screening_date, screening_time) VALUES (?, ?, ?, ?)';
@@ -68,8 +68,8 @@ router.post('/movie-hall-mapping', isLoggedin, (req, res) => {
   // Create a function to check if the data already exists in the table
   const checkDataExists = (date) => {
     const query =
-      'SELECT COUNT(*) as count FROM movie_hall_mapping WHERE movie_id = ? AND movie_hall_id = ? AND screening_date = ? AND screening_time = ?';
-    const values = [movieId, movieHallId, date, screeningTime];
+      'SELECT COUNT(*) as count FROM movie_hall_mapping WHERE movie_hall_id = ? AND screening_date = ? AND screening_time = ?';
+    const values = [movieHallId, date, screeningTime];
 
     return new Promise((resolve, reject) => {
       connection.query(query, values, (error, results) => {
