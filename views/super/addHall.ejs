@@ -1,13 +1,20 @@
 <%- include('header') %>
+<style>
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+</style>
           <section class="table__header">
             <h3>Hall Configuration</h3>
           </section>
           <section class="table__body">
-            <form action="/add-hall" method="POST" class="hall-form">
+            <form action="/add-hall" method="POST" class="hall-form" id="form">
               <div class="input-row">
                 <div>
                   <label for="name">Name:</label>
-                  <input type="text" id="name" name="name" />
+                  <input type="text" id="name" name="name" required/>
                   <p style="color: red">
                     <%= (typeof errors !== "undefined" && typeof errors.name !==
                     "undefined") ? errors.name.msg : "" %>
@@ -36,21 +43,22 @@
                     type="number"
                     id="normal_capacity"
                     name="normal_capacity"
+                    required
                   />
                 </div>
                 <div>
                   <label for="vip_capacity">VIP Capacity:</label>
-                  <input type="number" id="vip_capacity" name="vip_capacity" />
+                  <input type="number" id="vip_capacity" name="vip_capacity" required/>
                 </div>
               </div>
               <div class="input-row">
                 <div>
                   <label for="normal_rate">Normal Rate:</label>
-                  <input type="number" id="normal_rate" name="normal_rate" />
+                  <input type="number" id="normal_rate" name="normal_rate" required/>
                 </div>
                 <div>
                   <label for="vip_rate">VIP Rate:</label>
-                  <input type="number" id="vip_rate" name="vip_rate" />
+                  <input type="number" id="vip_rate" name="vip_rate" required/>
                 </div>
               </div>
               <button type="submit" style="color: #828282">Add Movie Hall</button>
@@ -60,5 +68,102 @@
       </section>
     </div>
 <%- include('alert') %>
+
+<script>
+  // Helper function to show an error message
+  function showError(inputElement, message) {
+    const errorElement = inputElement.parentElement.querySelector('.error-message');
+    if (errorElement) {
+      errorElement.textContent = message;
+    } else {
+      const newErrorElement = document.createElement('p');
+      newErrorElement.classList.add('error-message');
+      newErrorElement.textContent = message;
+      inputElement.parentElement.appendChild(newErrorElement);
+    }
+  }
+
+  // Helper function to remove the error message
+  function removeError(inputElement) {
+    const errorElement = inputElement.parentElement.querySelector('.error-message');
+    if (errorElement) {
+      errorElement.remove();
+    }
+  }
+
+  // Validate name input to allow only characters
+  function validateNameInput(event) {
+    const inputElement = event.target;
+    const namePattern = /^[A-Za-z]+$/;
+    if (!namePattern.test(inputElement.value)) {
+      showError(inputElement, 'Only characters are allowed');
+    } else {
+      removeError(inputElement);
+    }
+  }
+
+  // Validate input when the user types in the input field
+  function validateInput(event) {
+    const inputElement = event.target;
+    const value = Number(inputElement.value);
+   
+    if (value < 0) {
+      showError(inputElement, 'Value cannot be negative');
+     
+    } else {
+      removeError(inputElement);
+    }
+    
+  }
+
+  // Prevent form submission and display errors on submit
+  const form = document.getElementById('form'); // Replace 'your-form-id' with the actual ID of your form
+
+  form.addEventListener('submit', function (event) {
+    const numberInputs = form.querySelectorAll('input[type="number"]');
+    let hasError = false;
+
+    numberInputs.forEach((input) => {
+      const value = Number(input.value);
+
+      if (value < 0) {
+        showError(input, 'Value cannot be negative');
+        hasError = true;
+      } else {
+        removeError(input);
+      }
+    });
+
+    if (hasError) {
+      event.preventDefault(); // Prevent form submission
+    }
+
+    const nameInput = document.getElementById('name');
+    const namePattern = /^[A-Za-z]+$/;
+
+    if (!namePattern.test(nameInput.value)) {
+      showError(nameInput, 'Only characters are allowed');
+      hasError = true;
+    } else {
+      removeError(nameInput);
+    }
+
+    if (hasError) {
+      event.preventDefault(); // Prevent form submission
+    }
+  });
+
+  // Add input event listeners to the number input elements
+  const numberInputs = document.querySelectorAll('input[type="number"]');
+  numberInputs.forEach((input) => {
+    input.addEventListener('input', validateInput);
+  });
+
+  // Add input event listener to the name input field
+  const nameInput = document.getElementById('name');
+  nameInput.addEventListener('input', validateNameInput);
+</script>
+
+
   </body>
 </html>
