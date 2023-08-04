@@ -29,40 +29,36 @@
         <h4 class="text-white p-4">New Release</h4>
       </div>
 
-      <!-- ===============================movie list========================================== -->
-      <div class="container movie-list">
-        <div class="row d-flex">
-          <div class="col-md-12">
-            <div class="image-container d-flex justify-content-between">
-              <% if (movies.length === 0) { %>
-                <p style="color:white;">No new releases found.</p>
-              <% } else { %>
-                <% let count = 0; %>
-                <% movies.forEach(function(movie) { %>
-                  <div class="col-md-3">
-                    <a href="/movie-details?movieId=<%= movie.id %>">
-                      <img src="/images/<%= movie.image %>" alt="Image <%= count + 1 %>" class="p-3" />
-                    </a>
-                  </div>
-                  <% count++; %>
-                  <% if (count % 4 === 0) { %>
-                    </div>
-                    <div class="image-container d-flex justify-content-between">
-                  <% } %>
-                <% }); %>
-            </div>
+      <!-- ===============================New release========================================== -->
+      <section>
+        <div class="container ">
+          <div class="row g-4">
+            <%let counter = 0; movies.reverse().forEach(function(movie) {
+              // Add a condition to check if the movie status is not "closed"
+              if (movie.status !== 'Closed') {
+           %>
+              <div class="col-md-6 col-lg-3 col-6 movie-item"  data-genre="<%= movie.genre %>">
+                <img src="/images/<%= movie.image %>" alt="" class="img-fluid">
+                
+              </div>
+              <% counter++; if (counter === 4) {counter = 0; %>
+            
+          </div>
+          <div class="row mt-4 g-4"> 
+              <% } 
+            }});
+             %>
+          </div>
+          <div class="load-more d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary mt-4" id="more-button">
+              LOAD MORE
+            </button>
+            <button type="button" class="btn btn-secondary mt-4" id="less-button" style="display: none">
+              SEE LESS
+            </button>
           </div>
         </div>
-        <div class="load-more d-flex justify-content-center">
-          <button type="button" class="btn btn-secondary mt-4" id="more-button">
-            LOAD MORE
-          </button>
-          <button type="button" class="btn btn-secondary mt-4" id="less-button" style="display: none;">
-            SEE LESS
-          </button>
-        </div>
-        <% } %>
-      </div>
+      </section>
       
 
 
@@ -87,21 +83,22 @@
       });
     </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Script for loading -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener('DOMContentLoaded', function () {
     const moviesPerRow = 4;
     let moviesToShow = 4; // Show 4 movies initially
-    const moreButton = document.getElementById("more-button");
-    const lessButton = document.getElementById("less-button");
-    const movieItems = document.querySelectorAll(".movie-list .col-md-3");
+    const moreButton = document.getElementById('more-button');
+    const lessButton = document.getElementById('less-button');
+    const movieItems = document.querySelectorAll('.col-md-6.col-lg-3.col-6'); // Updated class name
 
     // Function to toggle the visibility of movie items
     function toggleMovieItems() {
       movieItems.forEach((item, index) => {
         if (index < moviesToShow) {
-          item.style.display = "flex";
+          item.style.display = 'flex';
         } else {
-          item.style.display = "none";
+          item.style.display = 'none';
         }
       });
     }
@@ -110,17 +107,17 @@
     toggleMovieItems();
 
     function showMoreButton() {
-      moreButton.style.display = "inline-block";
-      lessButton.style.display = "none";
+      moreButton.style.display = 'inline-block';
+      lessButton.style.display = 'none';
     }
 
     function showLessButton() {
-      moreButton.style.display = "none";
-      lessButton.style.display = "inline-block";
+      moreButton.style.display = 'none';
+      lessButton.style.display = 'inline-block';
     }
 
     // Load more button functionality
-    moreButton.addEventListener("click", function () {
+    moreButton.addEventListener('click', function () {
       moviesToShow += moviesPerRow; // Increase the count by moviesPerRow
       toggleMovieItems();
 
@@ -131,7 +128,7 @@
     });
 
     // See less button functionality
-    lessButton.addEventListener("click", function () {
+    lessButton.addEventListener('click', function () {
       moviesToShow = 4; // Show 4 movies initially
       toggleMovieItems();
       showMoreButton();
