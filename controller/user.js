@@ -108,7 +108,12 @@ router.get('/up-coming', function (req, res) {
 });
 
 router.get('/register', function (req, res) {
-  res.render('user/register', { currentUser: req.user });
+  const successMessages = req.flash('success');
+  const errorMessages = req.flash('error');
+  res.render('user/register', { 
+    emessage: errorMessages,
+    smessage: successMessages,
+    currentUser: req.user });
 });
 
 router.get('/login', function (req, res) {
@@ -152,7 +157,7 @@ router.post('/register', registerValidation, function (req, res) {
             'error',
             'Email Already Exists! Please use a different email.'
           );
-          res.redirect('/login');
+          res.redirect('/register');
         } else {
           const query = `INSERT INTO users (username, email, password, role) VALUES ('${name}', '${email}', '${hashedPassword}', 'user')`;
           connection.query(query, (error, results) => {
