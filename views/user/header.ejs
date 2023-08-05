@@ -70,7 +70,10 @@
           width: 80px;
           margin-left: 40px;
         }
-        
+
+.active{
+color:#ffe36d;
+}
         
         
           .nav .Search-bar {
@@ -200,7 +203,7 @@
                 <form method="GET" action="/search">
                   <div class="Search-bar">
                   <div class="box">
-                    <input type="text" name="search" id="search" placeholder="Search.....">
+                    <input type="text" name="search" id="search" placeholder="Search....." class="text-white">
                      <button style="background: transparent; border: transparent;" type="submit"><i class="fas fa-search" style="color: #ffe36d;"></i></button>
                     </a>
                   </div>
@@ -210,9 +213,9 @@
                 <span class="menubtn" onclick="openNav()" style="color: #ffe36d;">&#9776;</span>
                 <div class="navLinks">
                   <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/new-releases">New Release</a></li>
-                    <li><a href="/up-coming">UpComing</a></li>
+                    <li><a href="/" class="nav_link">Home</a></li>
+                    <li><a href="/new-releases" class="nav_link">New Release</a></li>
+                    <li><a href="/up-coming" class="nav_link">UpComing</a></li>
         
                     <% if(currentUser){ %>
                     <li><div class="navbar-item dropdown has-divider">
@@ -308,9 +311,9 @@
               <div class="sideNav" id="sidenav" >
                 <a href="#" class="closeBtn" onclick="closeNav()"> &#10006;</a>
                 <a href="/"><img src="/public/images/logo.png" alt=""></a>
-                <a href="/"><h6>Home</h6></a>
-                <a href="/new-releases"><h6>New Release</h6></a>
-                <a href="/up-coming"><h6>Up Coming</h6></a>
+                <a href="/" class="nav_link"><h6>Home</h6></a>
+                <a href="/new-releases" class="nav_link"><h6>New Release</h6></a>
+                <a href="/up-coming"  class="nav_link"><h6>Up Coming</h6></a>
         
                 <% if(currentUser){ %>
                 <div class="navbar-item dropdown has-divider d-flex justify-content-start">
