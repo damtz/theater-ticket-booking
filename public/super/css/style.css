@@ -4,17 +4,6 @@ body {
   padding: 0px;
 }
 
-.header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 15px 30px;
-  background: #fefefe;
-  color: #050505;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  /* Add box shadow */
-}
-
 .u-name b {
   color: #050505;
 }
