@@ -285,7 +285,7 @@ router.get('/seat-availability', isLoggedin, ensureuser, function (req, res) {
 
           const bookedSeats = bookingsResults.map((row) => row.seat_number);
 
-          res.render('user/seatAvailability', {
+          return res.render('user/seatAvailability', {
             currentUser: req.user,
             movie: movieResults[0],
             hall: hallResults[0],
@@ -299,5 +299,6 @@ router.get('/seat-availability', isLoggedin, ensureuser, function (req, res) {
     });
   });
 });
+
 
 module.exports = router;
