@@ -68,6 +68,7 @@
       color: #fff;
     }
 
+      
     .dropbtn {
       background-color: #ffffff;
       color: white;
@@ -109,12 +110,14 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
-
+    
       /* Add New User button styles */
       .add-user-button-container {
         text-align: right; /* Align the button to the right side */
         margin-top: 20px;
       }
+
+
 
       .add-user-button {
         padding: 10px 20px;
@@ -135,6 +138,40 @@
       .add-user-button:hover {
         background: linear-gradient(to right, #eef6ee, #ffe36d);
       }
+
+            /* Center the "Welcome Super-admin" text horizontally and vertically */
+            .centered-container {
+              display: flex;
+              justify-content: center; /* Center horizontally */
+              align-items: center; /* Center vertically */
+              /* Set the container height for vertical centering */
+            }
+      
+            /* Style the "Welcome Super-admin" text */
+            .centered-container h5 {
+              margin: 0;
+              font-size: 18px;
+              font-weight: bold;
+            }
+      
+      
+            /* Responsive styles using media queries */
+            @media screen and (max-width: 768px) {
+              .header {
+                /* Adjust the padding and font size for smaller screens */
+                padding: 5px;
+              }
+              
+              .centered-container {
+                /* Remove height to allow content to adjust vertically */
+                height: auto;
+              }
+              
+              .centered-container h5 {
+                /* Adjust the font size for smaller screens */
+                font-size: 14px;
+              }
+            }
     </style>
   </head>
 
@@ -142,7 +179,7 @@
     <div class="body">
       <nav class="side-bar">
         <h2 class="u-name">FlickTix</h2>
-       <ul>
+        <ul>
           <li class="<%= currentPage === 'aDashboard' ? 'active' : '' %>" onclick="window.location.href='/adashboard';">
             <a href="/adashboard">
               <i class="fa fa-th-large" aria-hidden="true"></i>
@@ -180,11 +217,11 @@
         </ul>
         
       </nav>
-
   
       <section class="section-1">
         <main class="table">
           <header class="header">
+            <div class="centered-container"><h5>Welcome Admin</h5></div>
             <div class="dropdown">
               <button class="dropbtn"><i class="fa fa-user"></i></button>
               <div class="dropdown-content">
