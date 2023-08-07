@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
   user: 'root',
   password: 'Damber123.',
   database: 'movie_booking',
-  connectionLimit: 10,
+  // connectionLimit: 10,
 });
 
 connection.connect((err) => {
