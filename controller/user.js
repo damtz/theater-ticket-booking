@@ -130,11 +130,15 @@ const error = [];
 
 router.post('/register', registerValidation, function (req, res) {
   try {
+    const successMessages = req.flash('success');
+    const errorMessages = req.flash('error');
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       var errMsg = errors.mapped();
       var inputData = matchedData(req);
       res.render('user/register', {
+        emessage: errorMessages,
+        smessage: successMessages,
         errors: errMsg,
         inputData: inputData,
         error: error,
