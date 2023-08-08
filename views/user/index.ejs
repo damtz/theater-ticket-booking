@@ -224,12 +224,11 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-      // JavaScript and jQuery to handle genre filtering
       $(document).ready(function () {
         $('#genre').on('change', function () {
           const selectedGenre = $(this).val();
 
-          // Show all movies if "All Genres" is selected, otherwise, filter movies by the selected genre
+    
           $('.movie-item').each(function () {
             const movieGenre = $(this).data('genre');
             if (selectedGenre === '' || movieGenre === selectedGenre) {
@@ -260,7 +259,7 @@
         const lessButton = document.getElementById('less-button');
         const movieItems = document.querySelectorAll('.movie-list .col-md-3');
 
-        // Function to toggle the visibility of movie items
+       
         function toggleMovieItems() {
           movieItems.forEach((item, index) => {
             if (index < moviesToShow) {
@@ -271,7 +270,7 @@
           });
         }
 
-        // Show/hide movie items on initial load
+      
         toggleMovieItems();
 
         function showMoreButton() {
@@ -284,18 +283,18 @@
           lessButton.style.display = 'inline-block';
         }
 
-        // Load more button functionality
+        
         moreButton.addEventListener('click', function () {
           moviesToShow += moviesPerRow; // Increase the count by moviesPerRow
           toggleMovieItems();
 
-          // Check if there are more movies to show
+        
           if (moviesToShow >= movieItems.length) {
             showLessButton();
           }
         });
 
-        // See less button functionality
+    
         lessButton.addEventListener('click', function () {
           moviesToShow = 4; // Show 4 movies initially
           toggleMovieItems();
