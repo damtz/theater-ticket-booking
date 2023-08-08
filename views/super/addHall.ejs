@@ -43,22 +43,23 @@
                     type="number"
                     id="normal_capacity"
                     name="normal_capacity"
+                    min="1"
                     required
                   />
                 </div>
                 <div>
                   <label for="vip_capacity">VIP Capacity:</label>
-                  <input type="number" id="vip_capacity" name="vip_capacity" required/>
+                  <input type="number" id="vip_capacity" name="vip_capacity" min="1" required/>
                 </div>
               </div>
               <div class="input-row">
                 <div>
                   <label for="normal_rate">Normal Rate:</label>
-                  <input type="number" id="normal_rate" name="normal_rate" required/>
+                  <input type="number" id="normal_rate" name="normal_rate" min="1" required/>
                 </div>
                 <div>
                   <label for="vip_rate">VIP Rate:</label>
-                  <input type="number" id="vip_rate" name="vip_rate" required/>
+                  <input type="number" id="vip_rate" name="vip_rate" min="1" required/>
                 </div>
               </div>
               <button type="submit" style="color: #828282">Add Movie Hall</button>
