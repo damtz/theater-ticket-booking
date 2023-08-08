@@ -1,5 +1,4 @@
-
-    const navLinkEls = document.querySelectorAll('.nav__link');
+const navLinkEls = document.querySelectorAll('.nav__link');
 
     // Check if there's a previously stored active link
     const activeLink = localStorage.getItem('activeLink');
@@ -31,5 +30,4 @@
         // Navigate to the clicked link
         window.location.href = navLinkEl.getAttribute('href');
       });
-    });
-  
+    })
