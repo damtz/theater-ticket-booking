@@ -140,48 +140,69 @@
     </div>
 
     <!-- ====================================Genre selection================================ -->
-
-  <form action="">
-    <section class="p-5">
-      <div class="container">
-        <div class="d-flex justify-content-lg-end justify-content-sm-center">
-          <select id="genre" class="dropdown-genre" name="genre">
-            <option value="">ALL Genres</option>
-            <option value="action">Action</option>
-            <option value="drama">Drama</option>
-            <option value="romance">Romance</option>
-            <option value="comedy">Comedy</option>
-            <option value="horror">Horror</option>
-          </select>
-        </div>
+    <form action="">
+  <section class="p-5">
+    <div class="container">
+      <div class="d-flex justify-content-lg-end justify-content-sm-center">
+        <select id="genre" class="dropdown-genre" name="genre">
+          <option value="">ALL Genres</option>
+          <option value="action">Action</option>
+          <option value="drama">Drama</option>
+          <option value="romance">Romance</option>
+          <option value="comedy">Comedy</option>
+          <option value="horror">Horror</option>
+        </select>
       </div>
-    </section>
-  </form>
-    <!-- ===============================movie list========================================== -->
-  
+    </div>
+  </section>
+</form>
+
+<!-- ===============================movie list========================================== -->
 <section>
-  <div class="container ">
+  <div class="container">
     <div class="row g-4">
-      <%let counter = 0; movies.reverse().forEach(function(movie) {
+      <% let counter = 0; %>
+      <% const genreMovies = {}; %>
+      
+      <% movies.reverse().forEach(function(movie) {
         // Add a condition to check if the movie status is not "closed"
         if (movie.status !== 'Closed') {
-     %>
-        <div class="col-md-6 col-lg-3 col-6 movie-item"  data-genre="<%= movie.genre %>">
-          <img src="/images/<%= movie.image %>" alt="" class="img-fluid">
-          <button onclick="location.href='/movie-details?movieId=<%= movie.id %>'" class="book-now">
-            BOOK NOW
-          </button>
-          <button onclick="location.href='/movie/<%= movie.id %>'" class="rate-us">
-            RATE US
-          </button>
-        </div>
-        <% counter++; if (counter === 4) {counter = 0; %>
-      
+          if (!genreMovies[movie.genre]) {
+            genreMovies[movie.genre] = [];
+          }
+          genreMovies[movie.genre].push(movie);
+        }
+      }); %>
+
+      <% Object.keys(genreMovies).forEach(function(genre) {
+        const moviesOfGenre = genreMovies[genre];
+        
+        moviesOfGenre.forEach(function(movie, index) {
+          if ((counter + 0) % 4 === 0 && counter !== 0) {
+      %>
+  
     </div>
-    <div class="row mt-4 g-4"> 
-        <% } 
-      }});
-       %>
+    <div class="row mt-4 g-4">
+  
+      <% counter = 0;
+          }
+      %>
+
+      <div class="col-md-6 col-lg-3 col-6 movie-item" data-genre="<%= genre %>">
+        <img src="/images/<%= movie.image %>" alt="" class="img-fluid">
+        <button onclick="location.href='/movie-details?movieId=<%= movie.id %>'" class="book-now">
+          BOOK NOW
+        </button>
+        <button onclick="location.href='/movie/<%= movie.id %>'" class="rate-us">
+          RATE US
+        </button>
+      </div>
+
+      <% counter++; 
+        });
+      });
+      %>
+      
     </div>
     <div class="load-more d-flex justify-content-center">
       <button type="button" class="btn btn-secondary mt-4" id="more-button">
@@ -192,7 +213,10 @@
       </button>
     </div>
   </div>
-</section> 
+</section>
+
+
+
     <!-- =========================================image============================================ -->
 
     <section class="text-light py-5">
