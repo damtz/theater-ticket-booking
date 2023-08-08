@@ -20,7 +20,9 @@
                 <select id="assignedTheater" name="assignedTheater" required>
                   <option value="<%= user.assigned_theater_id %>" selected>Select a Theater</option>
                   <% theaters.forEach(function(theater) { %>
+                    <% if (theater.status !== 0) { %>
                   <option value="<%= theater.id %>"><%= theater.name %></option>
+                  <% } %>
                   <% }) %>
                 </select>
               </div>
