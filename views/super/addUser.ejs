@@ -21,7 +21,9 @@
                   <option value="" disabled selected>Select a Theater</option>
                   <!-- Populate the theater options dynamically from the database -->
                   <% theaters.forEach(function(theater) { %>
+                    <% if (theater.status !== 0) { %>
                   <option value="<%= theater.id %>"><%= theater.name %></option>
+                  <% } %>
                   <% }) %>
                 </select>
               </div>
