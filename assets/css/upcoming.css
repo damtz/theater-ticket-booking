@@ -106,7 +106,7 @@ body {
   }
   
   .image-container .col-md-3 img {
-    height: 15rem;
+    height: 14rem;
     width: 10rem;
     transition: transform 0.3s ease;
   }
