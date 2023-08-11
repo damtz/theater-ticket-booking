@@ -7,7 +7,7 @@
 [Visit Our Website](http://10.70.91.60/) 💚
 
 ## Status of the Project :telescope:
-* Our team have completed working on House Rent Price Prediction.
+* Our team have completed working on Movie Ticket Booking Management System.
 
 ## Languages and Tools used
 <p align="center">
